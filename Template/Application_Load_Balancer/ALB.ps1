@@ -1,16 +1,22 @@
-#connect AWS
-aws configure
-AWS Access Key ID
-AWS Secret Access Key
-Default region name (e.g., us-east-1)
-Default output format (e.g., json)
+#connect AWS, uncomment below lines
+#aws configure
+#AWS Access Key ID
+#AWS Secret Access Key
+#Default region name (e.g., us-east-1)
+#Default output format (e.g., json)
 
 
 #aws vpc detail
 $VPC = (aws ec2 describe-vpcs --filters "Name=isDefault,Values=true" --query "Vpcs[0].VpcId" --output text)
 
 #create key manually
-aws ec2 create-key-pair --key-name key1 --query "KeyMaterial" --output text > MyKeyPair.pem
+try {
+    aws ec2 describe-key-pairs --key-names $keyName | Out-Null
+    Write-Output "Key pair $keyName already exists. Skipping creation."
+} catch {
+    aws ec2 create-key-pair --key-name key1 --query "KeyMaterial" --output text > MyKeyPair.pem
+    Write-Output "Key pair created and saved to $($pwd.path)\MyKeyPair.pem"
+}
 
 #save ip
 $IPADD = (Invoke-RestMethod -Uri "https://checkip.amazonaws.com").Trim()
@@ -79,6 +85,8 @@ $WEBRULEARN = (aws elbv2 describe-rules --listener-arn $LISTARN --query 'Rules[0
 
 #browse website
 Start-Process http://$ALBDNS
+
+start-sleep 30
 
 #DELETE EVERYTHING
 aws elbv2 delete-rule --rule-arn $VIDRULEARN; start-sleep -Seconds 5
