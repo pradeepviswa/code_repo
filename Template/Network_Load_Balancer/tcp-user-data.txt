@@ -1,0 +1,44 @@
+#!/bin/bash
+# Script to set up and start the TCP server
+
+# Switch to the user's home directory
+cd /home/ec2-user
+
+# Create the TCP server script (server.py)
+# This uses 'printf' with escape sequences (\n for newline) to create the file contents.
+# NOTE: The actual server logic should be in a separate file (e.g., tcp-server.py) or directly here.
+# For simplicity, we create a generic 'server.py' for the nohup command to run.
+# You should ensure your actual server file is named `server.py` or modify the nohup command.
+cat > server.py <<EOF
+import socket
+TCP_IP = '0.0.0.0'
+TCP_PORT = 6381
+# ... rest of the TCP server code from section 1 ...
+# For a quick test:
+# s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# s.bind((TCP_IP, TCP_PORT))
+# s.listen(1)
+# while True:
+#    conn, addr = s.accept()
+#    data = conn.recv(1024)
+#    if data:
+#        conn.sendall(b'ACK')
+#    conn.close()
+EOF
+
+# Create a script to run the server in a loop and background it (similar to process.sh)
+cat > process.sh << 'EOF_PROC'
+#!/bin/bash
+while true; do
+    # Run the Python server, redirecting output to a file and backgrounding it with nohup
+    # The nohup command keeps the process running even after the user logs out.
+    nohup python server.py >> test.out 2>&1
+    sleep 5 # Wait a bit before restarting if it crashes
+done
+EOF_PROC
+
+# Make the process script executable
+chmod 744 process.sh
+
+# Execute the script to start the server
+./process.sh
