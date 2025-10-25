@@ -1,0 +1,142 @@
+#connect AWS
+aws configure
+AWS Access Key ID
+AWS Secret Access Key
+Default region name (e.g., us-east-1)
+Default output format (e.g., json)
+
+
+#aws vpc detail
+aws ec2 describe-vpcs
+$VPC= "vpc-05ab720213b63e7a4"
+or
+$VPC = (aws ec2 describe-vpcs --filters "Name=isDefault,Values=true" --query "Vpcs[0].VpcId" --output text)
+
+#create key manually
+aws ec2 create-key-pair --key-name key1 --query "KeyMaterial" --output text > MyKeyPair.pem
+
+#save ip
+curl https://checkip.amazonaws.com
+$IPADD="223.233.80.69"
+or
+$IPADD=$(curl https://checkip.amazonaws.com).content
+
+#create security group
+aws ec2 create-security-group --group-name MySecGrp --description "my lab sec group"
+$SGID="sg-05b649203463da989"
+or
+$SGID = (aws ec2 create-security-group --group-name MySecGrp --description "my lab sec group" --query 'GroupId' --output text)
+
+#open ports for ec2 interface
+aws ec2 authorize-security-group-ingress --group-id $SGID --protocol tcp --port  22 --cidr $IPADD/32
+aws ec2 authorize-security-group-ingress --group-id $SGID --protocol tcp --port  80 --cidr 0.0.0.0/0
+
+#create subnet
+aws ec2 create-subnet --vpc-id $VPC --availability-zone-id use1-az1 --cidr-block 172.31.128.0/20
+$AZ1SUB="subnet-017ce1730abff61f9"
+
+aws ec2 create-subnet --vpc-id $VPC --availability-zone-id use1-az2 --cidr-block 172.31.192.0/20
+$AZ2SUB="subnet-00d642bd62e26aaf1"
+
+or
+
+$AZ1SUB = (aws ec2 create-subnet --vpc-id $VPC --availability-zone-id use1-az1 --cidr-block 172.31.128.0/20 --query 'Subnet.SubnetId' --output text)
+$AZ2SUB = (aws ec2 create-subnet --vpc-id $VPC --availability-zone-id use1-az2 --cidr-block 172.31.192.0/20 --query 'Subnet.SubnetId' --output text)
+
+#create ec2 instance - 2 for VID and 2 for WEB
+aws ec2 run-instances --image-id ami-0341d95f75f311023  --instance-type t2.micro --count 1 --subnet-id $AZ1SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://user-data-vid1.txt
+$VIDSERVER1= "i-06c0342d40ea6ab03"
+
+aws ec2 run-instances --image-id ami-0341d95f75f311023  --instance-type t2.micro --count 1 --subnet-id $AZ2SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://user-data-vid2.txt
+$VIDSERVER2="i-01ebdd2c7ca399829"
+
+aws ec2 run-instances --image-id ami-0341d95f75f311023  --instance-type t2.micro --count 1 --subnet-id $AZ1SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://user-data-web1.txt
+$WEBSERVER1="i-02362f127fa222ac4"
+
+aws ec2 run-instances --image-id ami-0341d95f75f311023  --instance-type t2.micro --count 1 --subnet-id $AZ2SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://user-data-web2.txt
+$WEBSERVER2="i-0aa31b7d82c30fda9"
+
+or
+
+$VIDSERVER1 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ1SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://user-data-vid1.txt --query 'Instances[0].InstanceId' --output text)
+$VIDSERVER2 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ2SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://user-data-vid2.txt --query 'Instances[0].InstanceId' --output text)
+$WEBSERVER1 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ1SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://user-data-web1.txt --query 'Instances[0].InstanceId' --output text)
+$WEBSERVER2 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ2SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://user-data-web2.txt --query 'Instances[0].InstanceId' --output text)
+
+#create tags for ec2 instances
+aws ec2 create-tags --resources $VIDSERVER1 --tags Key="Name",Value="Video 1"
+aws ec2 create-tags --resources $VIDSERVER2 --tags Key="Name",Value="Video 2"
+aws ec2 create-tags --resources $WEBSERVER1 --tags Key="Name",Value="Web 1"
+aws ec2 create-tags --resources $WEBSERVER2 --tags Key="Name",Value="Web 2"
+
+#create application load balancer
+aws elbv2 create-load-balancer --name MyALB --subnets $AZ1SUB $AZ2SUB --security-group $SGID
+$ALBARN="arn:aws:elasticloadbalancing:us-east-1:368045272920:loadbalancer/app/MyALB/891faf1c1c3faa6b"
+$ALBDNS="MyALB-985552527.us-east-1.elb.amazonaws.com"
+or
+$ALBARN = (aws elbv2 create-load-balancer --name MyALB --subnets $AZ1SUB $AZ2SUB --security-groups $SGID --query 'LoadBalancers[0].LoadBalancerArn' --output text)
+$ALBDNS = (aws elbv2 describe-load-balancers --load-balancer-arns $ALBARN --query 'LoadBalancers[0].DNSName' --output text)
+
+#create target groups
+
+aws elbv2 create-target-group --name VideoTargets --protocol HTTP --port 80 --vpc-id $VPC
+$VIDTGARN="arn:aws:elasticloadbalancing:us-east-1:368045272920:targetgroup/VideoTargets/c260b0a940b0f13b"
+aws elbv2 create-target-group --name WebTargets --protocol HTTP --port 80 --vpc-id $VPC
+$WEBTGARN="arn:aws:elasticloadbalancing:us-east-1:368045272920:targetgroup/WebTargets/c6ac7b12fb6fee0f"
+or
+$VIDTGARN = (aws elbv2 create-target-group --name VideoTargets --protocol HTTP --port 80 --vpc-id $VPC --query 'TargetGroups[0].TargetGroupArn' --output text)
+$WEBTGARN = (aws elbv2 create-target-group --name WebTargets --protocol HTTP --port 80 --vpc-id $VPC --query 'TargetGroups[0].TargetGroupArn' --output text)
+
+#register target groups
+
+aws elbv2 register-targets --target-group-arn $VIDTGARN --targets Id=$VIDSERVER1 Id=$VIDSERVER2
+aws elbv2 register-targets --target-group-arn $WEBTGARN --targets Id=$WEBSERVER1 Id=$WEBSERVER2
+
+
+#create listener for target group
+aws elbv2 create-listener --load-balancer-arn $ALBARN --protocol HTTP --port 80 --default-actions Type=forward,TargetGroupArn=$WEBTGARN 
+$LISTARN= "arn:aws:elasticloadbalancing:us-east-1:368045272920:listener/app/MyALB/6c25f7923363f89d/55b2e7df5c0fc4cc"
+
+or
+
+$LISTARN = (aws elbv2 create-listener --load-balancer-arn $ALBARN --protocol HTTP --port 80 --default-actions Type=forward,TargetGroupArn=$WEBTGARN --query 'Listeners[0].ListenerArn' --output text)
+
+#check health of target group
+aws elbv2 describe-target-health --target-group-arn $VIDTGARN
+aws elbv2 describe-target-health --target-group-arn $WEBTGARN
+
+#path based routing rule
+
+aws elbv2 create-rule --listener-arn $LISTARN --priority 5 --conditions file://condition.json --action Type=forward,TargetGroupArn=$VIDTGARN
+
+
+#copy ARNs of listener rule
+aws elbv2 describe-rules --listener-arn $LISTARN
+$VIDRULEARN="arn:aws:elasticloadbalancing:us-east-1:368045272920:listener-rule/app/MyALB/891faf1c1c3faa6b/72cfeb44db9c02ac/620a8988c24ebe62"
+$WEBRULEARN="arn:aws:elasticloadbalancing:us-east-1:368045272920:listener-rule/app/MyALB/891faf1c1c3faa6b/72cfeb44db9c02ac/4c5025234b10be13"
+or
+$VIDRULEARN = (aws elbv2 describe-rules --listener-arn $LISTARN --query 'Rules[0].RuleArn' --output text)
+$WEBRULEARN = (aws elbv2 describe-rules --listener-arn $LISTARN --query 'Rules[0].RuleArn' --output text)
+
+#browse website
+echo $ALBDNS
+Start-Process "http://MyALB-499551580.us-east-1.elb.amazonaws.com"
+
+#DELETE EVERYTHING
+aws elbv2 delete-rule --rule-arn $VIDRULEARN
+aws elbv2 delete-rule --rule-arn $WEBRULEARN
+aws elbv2 delete-listener --listener-arn $LISTARN
+aws elbv2 delete-target-group --target-group-arn $VIDTGARN
+aws elbv2 delete-target-group --target-group-arn $WEBTGARN
+aws elbv2 delete-load-balancer --load-balancer-arn $ALBARN
+aws ec2 terminate-instances --instance-ids $VIDSERVER1 $VIDSERVER2 $WEBSERVER1 $WEBSERVER2
+aws ec2 delete-subnet --subnet-id $AZ1SUB
+aws ec2 delete-subnet --subnet-id $AZ2SUB
+aws ec2 delete-security-group --group-id $SGID
+
+
+
+
+
+
+
