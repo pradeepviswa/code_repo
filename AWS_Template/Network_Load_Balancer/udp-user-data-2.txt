@@ -1,0 +1,29 @@
+ #!/bin/bash
+yum update -y
+yum install -y python3
+yum install -y nmap-ncat
+
+cd /home/ec2-user
+
+# Create a UDP server
+cat > udp_server.py << 'EOF'
+#!/usr/bin/env python3
+import socket
+
+HOST = "0.0.0.0"
+PORT = 6380
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.bind((HOST, PORT))
+print(f"UDP server listening on {HOST}:{PORT}", flush=True)
+
+while True:
+    data, addr = sock.recvfrom(1024)
+    print(f"Received from {addr}: {data.decode()}", flush=True)
+    sock.sendto(b"Hello from UDP server!", addr)
+EOF
+
+chmod +x udp_server.py
+
+# Run server in background
+nohup python3 /home/ec2-user/udp_server.py > /home/ec2-user/udp_server.log 2>&1 &

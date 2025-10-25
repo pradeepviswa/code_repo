@@ -1,0 +1,40 @@
+#!/bin/bash
+# Update packages and install Python
+yum update -y
+yum install -y python3
+yum install -y nmap-ncat
+
+cd /home/ec2-user
+
+# Create TCP server script
+cat > tcp_server.py << 'EOF'
+#!/usr/bin/env python3
+import socket
+
+HOST = "0.0.0.0"
+PORT = 6381
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.bind((HOST, PORT))
+sock.listen(5)
+print(f"TCP server listening on {HOST}:{PORT}", flush=True)
+
+while True:
+    conn, addr = sock.accept()
+    print(f"TCP connection from {addr}", flush=True)
+    try:
+        data = conn.recv(1024)
+        if data:
+            print(f"Received: {data.decode()}", flush=True)
+            conn.sendall(b"Hello from TCP server 2!")
+    except Exception as e:
+        print("Error:", e, flush=True)
+    finally:
+        conn.close()
+EOF
+
+# Make it executable
+chmod +x tcp_server.py
+
+# Run TCP server in background
+nohup python3 /home/ec2-user/tcp_server.py > /home/ec2-user/tcp_server.log 2>&1 &
