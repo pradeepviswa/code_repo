@@ -28,10 +28,10 @@ $AZ2SUB = (aws ec2 create-subnet --vpc-id $VPC --availability-zone-id use1-az2 -
 
 
 #create ec2 instance - 2 for VID and 2 for WEB
-$TCPSERVER1 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ1SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://tcp-user-data.txt --query 'Instances[0].InstanceId' --output text)
-$TCPSERVER2 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ2SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://tcp-user-data.txt --query 'Instances[0].InstanceId' --output text)
-$UDPSERVER1 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ1SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://udp-user-data.txt --query 'Instances[0].InstanceId' --output text)
-$UDPSERVER2 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ2SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://udp-user-data.txt --query 'Instances[0].InstanceId' --output text)
+$TCPSERVER1 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ1SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://tcp-user-data-1.txt --query 'Instances[0].InstanceId' --output text)
+$TCPSERVER2 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ2SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://tcp-user-data-2.txt --query 'Instances[0].InstanceId' --output text)
+$UDPSERVER1 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ1SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://udp-user-data-1.txt --query 'Instances[0].InstanceId' --output text)
+$UDPSERVER2 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ2SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://udp-user-data-2.txt --query 'Instances[0].InstanceId' --output text)
 
 #create tags for ec2 instances
 aws ec2 create-tags --resources $TCPSERVER1 --tags Key="Name",Value="TCPSERVER1"
@@ -72,7 +72,7 @@ import socket
 nlbdns = '$NLBDNS'.strip()   # remove any leading/trailing whitespace
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.settimeout(2)
-s.connect((nlbdns, 6381))
+s.connect(('$NLBDNS', 6381))
 s.sendall(b'ping')
 data = s.recv(1024)
 print('Reply:', data.decode())
@@ -89,7 +89,7 @@ import socket
 nlbdns = '$NLBDNS'.strip()   # remove any leading/trailing whitespace
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.settimeout(2)
-s.sendto(b'ping', (nlbdns, 6380))
+s.sendto(b'ping', ($NLBDNS, 6380))
 data, addr = s.recvfrom(1024)
 print('Reply:', data.decode())
 s.close()
@@ -104,8 +104,9 @@ aws elbv2 delete-target-group --target-group-arn $TCPTGARN; start-sleep -Seconds
 aws elbv2 delete-target-group --target-group-arn $UDPTGARN; start-sleep -Seconds 5
 aws elbv2 delete-load-balancer --load-balancer-arn $NLBARN; start-sleep -Seconds 5
 aws ec2 terminate-instances --instance-ids $TCPSERVER1 $TCPSERVER2 $UDPSERVER1 $UDPSERVER2; start-sleep -Seconds 20
+aws elbv2 delete-rule --rule-arn $TCPRULEARN; start-sleep -Seconds 5
+aws elbv2 delete-rule --rule-arn $UDPRULEARN; start-sleep -Seconds 5
 aws ec2 delete-security-group --group-id $SGID; start-sleep -Seconds 5
 aws ec2 delete-subnet --subnet-id $AZ1SUB; start-sleep -Seconds 2
 aws ec2 delete-subnet --subnet-id $AZ2SUB; start-sleep -Seconds 2
-aws elbv2 delete-rule --rule-arn $TCPRULEARN; start-sleep -Seconds 5
-aws elbv2 delete-rule --rule-arn $UDPRULEARN; start-sleep -Seconds 5
+

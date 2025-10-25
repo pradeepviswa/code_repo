@@ -26,7 +26,7 @@ while True:
         data = conn.recv(1024)
         if data:
             print(f"Received: {data.decode()}", flush=True)
-            conn.sendall(b"Hello from TCP server!")
+            conn.sendall(b"Hello from TCP server 1!")
     except Exception as e:
         print("Error:", e, flush=True)
     finally:
