@@ -1,0 +1,27 @@
+#!/bin/bash
+# Script to set up and start the UDP server
+
+# Switch to the user's home directory
+cd /home/ec2-user
+
+# Create the UDP server script (server.py)
+# As before, this creates a generic 'server.py' for the python command to run.
+# You should ensure your actual server file is named `server.py` or modify the python command.
+cat > server.py <<EOF
+import socket
+UDP_IP = '0.0.0.0'
+UDP_PORT = 6380
+# ... rest of the UDP server code from section 2 ...
+# For a quick test:
+# sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+# sock.bind((UDP_IP, UDP_PORT))
+# while True:
+#    data, addr = sock.recvfrom(1024)
+#    sock.sendto(b'ACK', addr)
+EOF
+
+# Run the Python server and redirect its output to a log file
+# NOTE: This runs the script directly, which will block the rest of the user data execution.
+# For a production/robust setup, you would typically run it in the background using `&` or `nohup`.
+# Following the screenshot, we run it directly, logging output to log.txt.
+python server.py > log.txt 2>&1 &
