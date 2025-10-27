@@ -4,6 +4,7 @@ aws configure
 
 
 #create key manually
+$keyName ="key1"
 aws ec2 create-key-pair --key-name $keyName --query "KeyMaterial" --output text > key1.pem
 
 
@@ -33,6 +34,16 @@ $TCPSERVER2 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance
 $UDPSERVER1 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ1SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://udp-user-data-1.txt --query 'Instances[0].InstanceId' --output text)
 $UDPSERVER2 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ2SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://udp-user-data-2.txt --query 'Instances[0].InstanceId' --output text)
 
+
+# Wait until all instances are running
+aws ec2 wait instance-running --instance-ids $TCPSERVER1 $TCPSERVER2 $UDPSERVER1 $UDPSERVER2
+
+# Capture public IPs
+$TCPSERVER1_IP = (aws ec2 describe-instances --instance-ids $TCPSERVER1 --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
+$TCPSERVER2_IP = (aws ec2 describe-instances --instance-ids $TCPSERVER2 --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
+$UDPSERVER1_IP = (aws ec2 describe-instances --instance-ids $UDPSERVER1 --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
+$UDPSERVER2_IP = (aws ec2 describe-instances --instance-ids $UDPSERVER2 --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
+
 #create tags for ec2 instances
 aws ec2 create-tags --resources $TCPSERVER1 --tags Key="Name",Value="TCPSERVER1"
 aws ec2 create-tags --resources $TCPSERVER2 --tags Key="Name",Value="TCPSERVER2"
@@ -43,6 +54,7 @@ aws ec2 create-tags --resources $UDPSERVER2 --tags Key="Name",Value="UDPSERVER2"
 # for tcp: sudo ss -tulnp | grep 6381
 # for udp: ps aux | grep udp_server.py
 #          sudo ss -u -l -n | grep 6380
+
 
 #create network load balancer
 $NLBARN = (aws elbv2 create-load-balancer --name MyNLB --type network --subnets $AZ1SUB $AZ2SUB --security-groups $SGID --query 'LoadBalancers[0].LoadBalancerArn' --output text)
@@ -65,36 +77,43 @@ $TCPRULEARN = (aws elbv2 describe-rules --listener-arn $TCPLISTARN --query 'Rule
 $UDPRULEARN = (aws elbv2 describe-rules --listener-arn $UDPLISTARN --query 'Rules[0].RuleArn' --output text)
 
 
-
 #TEST TCP
+
+#test tcp connection locally
+$con = $TCPSERVER1_IP
+$con = $TCPSERVER2_IP
+$con = $NLBDNS
+
+$connect = $con
 python3 -c "
 import socket
 nlbdns = '$NLBDNS'.strip()   # remove any leading/trailing whitespace
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.settimeout(2)
-s.connect(('$NLBDNS', 6381))
+s.connect(('$connect', 6381))
 s.sendall(b'ping')
 data = s.recv(1024)
 print('Reply:', data.decode())
 s.close()
 "
-
-
-Test-NetConnection -ComputerName $NLBDNS -Port 6381
-
+Test-NetConnection -ComputerName $connect -Port 6381
 
 # TEST UDP
+#tect udp locally
+$con = $UDPSERVER1_IP
+$con = $UDPSERVER2_IP
+$con = $NLBDNS
+
+$connect = $con
 python3 -c "
 import socket
-nlbdns = '$NLBDNS'.strip()   # remove any leading/trailing whitespace
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.settimeout(2)
-s.sendto(b'ping', ($NLBDNS, 6380))
+s.sendto(b'ping', ('$connect', 6380))
 data, addr = s.recvfrom(1024)
 print('Reply:', data.decode())
 s.close()
 "
-
 
 
 #DELETE EVERYTHING
@@ -103,7 +122,8 @@ aws elbv2 delete-listener --listener-arn $UDPLISTARN; start-sleep -Seconds 5
 aws elbv2 delete-target-group --target-group-arn $TCPTGARN; start-sleep -Seconds 5
 aws elbv2 delete-target-group --target-group-arn $UDPTGARN; start-sleep -Seconds 5
 aws elbv2 delete-load-balancer --load-balancer-arn $NLBARN; start-sleep -Seconds 5
-aws ec2 terminate-instances --instance-ids $TCPSERVER1 $TCPSERVER2 $UDPSERVER1 $UDPSERVER2; start-sleep -Seconds 20
+aws ec2 terminate-instances --instance-ids $TCPSERVER1 $TCPSERVER2 $UDPSERVER1 $UDPSERVER2
+aws ec2 wait instance-terminated --instance-ids $TCPSERVER1 $TCPSERVER2 $UDPSERVER1 $UDPSERVER2
 aws elbv2 delete-rule --rule-arn $TCPRULEARN; start-sleep -Seconds 5
 aws elbv2 delete-rule --rule-arn $UDPRULEARN; start-sleep -Seconds 5
 aws ec2 delete-security-group --group-id $SGID; start-sleep -Seconds 5

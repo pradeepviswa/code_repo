@@ -39,6 +39,15 @@ $VIDSERVER2 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance
 $WEBSERVER1 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ1SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://user-data-web1.txt --query 'Instances[0].InstanceId' --output text)
 $WEBSERVER2 = (aws ec2 run-instances --image-id ami-0341d95f75f311023 --instance-type t2.micro --count 1 --subnet-id $AZ2SUB --key-name key1 --security-group-ids $SGID --associate-public-ip-address --user-data file://user-data-web2.txt --query 'Instances[0].InstanceId' --output text)
 
+# Wait until all instances are running
+aws ec2 wait instance-running --instance-ids $TCPSERVER1 $TCPSERVER2 $UDPSERVER1 $UDPSERVER2
+
+# Capture public IPs
+$TCPSERVER1_IP = (aws ec2 describe-instances --instance-ids $TCPSERVER1 --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
+$TCPSERVER2_IP = (aws ec2 describe-instances --instance-ids $TCPSERVER2 --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
+$UDPSERVER1_IP = (aws ec2 describe-instances --instance-ids $UDPSERVER1 --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
+$UDPSERVER2_IP = (aws ec2 describe-instances --instance-ids $UDPSERVER2 --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
+
 #create tags for ec2 instances
 aws ec2 create-tags --resources $VIDSERVER1 --tags Key="Name",Value="Video 1"
 aws ec2 create-tags --resources $VIDSERVER2 --tags Key="Name",Value="Video 2"
@@ -95,7 +104,8 @@ aws elbv2 delete-listener --listener-arn $LISTARN; start-sleep -Seconds 5
 aws elbv2 delete-target-group --target-group-arn $VIDTGARN; start-sleep -Seconds 5
 aws elbv2 delete-target-group --target-group-arn $WEBTGARN; start-sleep -Seconds 5
 aws elbv2 delete-load-balancer --load-balancer-arn $ALBARN; start-sleep -Seconds 5
-aws ec2 terminate-instances --instance-ids $VIDSERVER1 $VIDSERVER2 $WEBSERVER1 $WEBSERVER2; start-sleep -Seconds 20
+aws ec2 terminate-instances --instance-ids $VIDSERVER1 $VIDSERVER2 $WEBSERVER1 $WEBSERVER2
+aws ec2 wait instance-terminated --instance-ids $TCPSERVER1 $TCPSERVER2 $UDPSERVER1 $UDPSERVER2
 aws ec2 delete-subnet --subnet-id $AZ1SUB; start-sleep -Seconds 2
 aws ec2 delete-subnet --subnet-id $AZ2SUB; start-sleep -Seconds 2
 aws ec2 delete-security-group --group-id $SGID; start-sleep -Seconds 5
