@@ -1,7 +1,9 @@
- #!/bin/bash
+#!/bin/bash
+set -e  # Exit on any error
+
+# Update system and install dependencies
 yum update -y
-yum install -y python3
-yum install -y nmap-ncat
+yum install -y python3 nmap-ncat
 
 cd /home/ec2-user
 
@@ -19,11 +21,15 @@ print(f"UDP server listening on {HOST}:{PORT}", flush=True)
 
 while True:
     data, addr = sock.recvfrom(1024)
-    print(f"Received from {addr}: {data.decode()}", flush=True)
-    sock.sendto(b"Hello from UDP server!", addr)
+    print(f"Received message from {addr}: {data.decode()}", flush=True)
+    sock.sendto(b"Hello from UDP server 2!", addr)
 EOF
 
 chmod +x udp_server.py
 
-# Run server in background
+# Run the UDP server in the background
 nohup python3 /home/ec2-user/udp_server.py > /home/ec2-user/udp_server.log 2>&1 &
+
+# Confirm server process
+sleep 3
+ss -u -l -n | grep 6380 || echo "UDP server not detected listening on port 6380"
