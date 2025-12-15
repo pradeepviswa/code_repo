@@ -1,0 +1,19 @@
+---
+- name: copy a file in /tmp/data.txt
+  template:
+    src: my_template.j2
+    dest: /tmp/data.txt
+    owner: root
+    group: root
+    mode: '0644'
+  vars:
+    userName: "Pradeep"
+    qual: "MCA"
+
+- name: register content of file /tmp/data.txt in variable 'data_file'
+  ansible.builtin.command: cat /tmp/data.txt
+  register: data_file
+
+- name: print value of variable 'data_file'
+  debug:
+    var: data_file.stdout_lines
