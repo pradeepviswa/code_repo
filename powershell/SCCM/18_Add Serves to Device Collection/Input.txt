@@ -1,0 +1,15 @@
+ABN-WAE-APP-D03
+ABN-WAE-APP-D04
+ABN-WAE-WCC-D03
+ABN-WAE-WCC-D04
+ABN-WAE-EEM-D01
+ABN-WAE-EEM-D02
+abn-wae-ida-d01
+ABN-WAE-SQL-01
+ABN-WAE-SQL-02
+abn-wae-fw-01
+abn-wae-fw-02
+abn-wae-fw-03
+abn-wae-fw-04
+abn-wae-fw-05
+abn-wae-fw-06

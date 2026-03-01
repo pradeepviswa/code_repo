@@ -1,0 +1,7 @@
+abn-ohd-xen-d02.custhsp.tzghosting.net
+abn-ohd-fxi-d04.custhsp.tzghosting.net
+abn-ohd-fxi-d03.custhsp.tzghosting.net
+abn-ohd-fhg-d01.custhsp.tzghosting.net
+abn-ohd-was-d03.custhsp.tzghosting.net
+abn-ohd-app-d02.custhsp.tzghosting.net
+abn-ohd-app-d01.custhsp.tzghosting.net

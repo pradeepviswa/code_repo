@@ -1,0 +1,181 @@
+Server,Discovered_In_SCCM,Clietn_Installed,Active_in_SCCM,LastActiveTime,Domain
+CSN-DMZ-SSO-03.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+CSN-DMZ-SSO-02.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+CSN-DMZ-SSO-01.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+CSN-DMZ-SSO-04.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+CSN-DMZ-SSO-05.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+CSN-DMZ-SSO-06.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+CSN-DMZ-SSO-07.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+CSN-DMZ-SSO-08.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+CSN-SLB-IHM-02.slb.tzghosting.net,Yes,False,False,,slb.tzghosting.net
+CSN-AET-DC-03.AET.tzghosting.net,Yes,False,False,,AET.tzghosting.net
+CSN-TZG-QLK-01.AET.tzghosting.net,Yes,False,False,,AET.tzghosting.net
+CSN-LAC-WEB-01.lac.tzghosting.net,Yes,False,False,,lac.tzghosting.net
+CSN-LAC-APP-48.lac.tzghosting.net,Yes,False,False,,lac.tzghosting.net
+CSN-BRI-XEN-10.bri.tzghosting.net,Yes,True,True,05/23/2018 16:31:29,bri.tzghosting.net
+CSN-KMH-WEB-02.kmh.tzghosting.net,Yes,False,False,,kmh.tzghosting.net
+CSN-AAH-DC-02.AAH.tzghosting.net,Yes,False,False,,AAH.tzghosting.net
+CSN-AAH-APP-02.AAH.tzghosting.net,Yes,False,False,,AAH.tzghosting.net
+CSN-STJ-XEN-01.QIC.tzghosting.net,Decom
+CSN-STJ-XEN-03.QIC.tzghosting.net,Decom
+CSN-STJ-XEN-04.QIC.tzghosting.net,Decom
+CSN-AVC-DFS-01.avc.tzghosting.net,Yes,True,True,05/10/2018 08:28:46,avc.tzghosting.net
+csn-csf-adc-t03.csfwindom.net,Yes,False,False,,csfwindom.net.
+CSN-CWH-APP-03.CWH.tzghosting.net,Yes,False,False,,CWH.tzghosting.net
+CSN-CWH-SQL-03.CWH.tzghosting.net,Yes,False,False,,CWH.tzghosting.net
+CSN-TPZ-APP-31.tpz.tzghosting.net,Yes,True,True,04/05/2018 14:28:06,tpz.tzghosting.net
+CSN-BCN-HPA-57.bcn.tzghosting.net,Yes,True,True,07/22/2018 08:00:23,bcn.tzghosting.net
+CSN-BCN-HPA-78.bcn.tzghosting.net,Yes,True,True,07/25/2018 14:52:35,bcn.tzghosting.net
+CSN-THF-EFTP-07.custft.tzghosting.net,Yes,False,False,,custft.tzghosting.net
+CSN-SDB-DFS-02.SDB.tzghosting.net,Yes,True,True,04/16/2018 05:19:48,SDB.tzghosting.net
+CSN-OOB-NTA-01.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+CSN-TZG-SQL-35.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+CSN-MHH-HPA-78.mhh.tzghosting.net,Yes,True,True,08/16/2018 08:09:22,mhh.tzghosting.net
+CSN-MHH-HPA-79.mhh.tzghosting.net,Yes,True,True,08/16/2018 08:20:19,mhh.tzghosting.net
+CSN-MHH-HPA-81.mhh.tzghosting.net,Yes,True,True,08/16/2018 08:06:21,mhh.tzghosting.net
+CSN-MHH-HPA-80.mhh.tzghosting.net,Yes,True,True,08/16/2018 07:45:14,mhh.tzghosting.net
+CSN-OHD-WEB-08.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+CSN-OHD-WEB-10.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+CSN-OHD-WEB-12.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+CSN-OHD-WEB-09.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+CSN-OHD-WEB-11.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+CSN-OHD-WEB-15.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+CSN-OHD-WEB-14.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+CSN-DMZ-QBE-01.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+CSN-OHD-WEB-18.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+CSN-OHD-WEB-19.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+CSN-OHD-WEB-22.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+CSN-OHD-WEB-23.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+CSN-OHD-WEB-24.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+CSN-TXC-SQL-09.custhsp.tzghosting.net,Yes,True,True,08/16/2018 08:01:49,custhsp.tzghosting.net
+CSN-EXT-ROOT-01.trizetto.net,Yes,False,False,,trizetto.net.
+CSN-EXT-ROOT-02.trizetto.net,Yes,False,False,,trizetto.net.
+CSN-AET-DC-02.AET.tzghosting.net,Yes,False,False,,AET.tzghosting.net
+CSN-AET-DFS-01.AET.tzghosting.net,Yes,False,False,,AET.tzghosting.net
+CSN-HSN-WEB-01.hsn.tzghosting.net,Yes,False,False,,hsn.tzghosting.net
+CSN-FBS-XEN-02.QIC.tzghosting.net,Decom
+CSN-RSO-XEN-03.QIC.tzghosting.net,Decom
+CSN-SCM-XEN-01.QIC.tzghosting.net,Decom
+CSN-SCM-XEN-02.QIC.tzghosting.net,Decom
+CSN-SIP-XEN-02.QIC.tzghosting.net,Decom
+CSN-STJ-XEN-02.QIC.tzghosting.net,Decom
+CSN-QCA-WEB-13.qca.tzghosting.net,Yes,False,False,,qca.tzghosting.net
+CSN-THD-DC-01.tzghsp.net,Yes,False,False,,tzghsp.net.
+CSN-THD-DC-02.tzghsp.net,Yes,False,False,,tzghsp.net.
+CSN-THD-DC-03.tzghsp.net,Yes,False,False,,tzghsp.net.
+CSN-COV-SQL-02.cust.tzghsp.net,Yes,False,False,,cust.tzghsp.net
+CSN-DMS-WEB-TST.cust.tzghsp.net,Yes,True,True,08/16/2018 08:06:12,cust.tzghsp.net
+CSN-DMS-APP-TST.cust.tzghsp.net,Yes,True,True,08/16/2018 08:06:33,cust.tzghsp.net
+CSN-CSF-CWI-02.csfwindom.net,Decom
+CSN-CSF-CWI-01.csfwindom.net,Decom
+CSN-CVH-ZDC-01.cvh.tzghosting.net,Yes,False,False,,cvh.tzghosting.net
+CSN-CVH-ZDC-02.cvh.tzghosting.net,Yes,False,False,,cvh.tzghosting.net
+CSN-TPZ-FXI-06.tpz.tzghosting.net,Yes,True,True,07/07/2018 06:52:25,tpz.tzghosting.net
+CSN-AMS-APP-01.ams.tzghosting.net,Yes,False,False,,ams.tzghosting.net
+CSN-EMB-WAS-11.EMB.tzghosting.net,Yes,False,False,,EMB.tzghosting.net
+CSN-EMB-SQL-17.EMB.tzghosting.net,Yes,False,False,,EMB.tzghosting.net
+csn-thf-eftp-08.custft.tzghosting.net,Yes,False,False,,custft.tzghosting.net
+CSN-GHS-DC-01.GHS.tzghosting.net,Yes,False,False,,GHS.tzghosting.net
+CSN-GHS-DC-02.GHS.tzghosting.net,Yes,False,False,,GHS.tzghosting.net
+CSN-GHS-DFS-01.GHS.tzghosting.net,Yes,False,False,,GHS.tzghosting.net
+CSN-EMS-OMW-D01.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+CSN-EXC-XEN-01.QIC.tzghosting.net,Decom
+CSN-PLC-XEN-03.QIC.tzghosting.net,Decom
+ABN-OIM-APP-T03.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+ABN-SVC-WAS-01.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+ABN-DMZ-SSO-01.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+ABN-DMZ-SSO-02.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+ABN-DMZ-SSO-03.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+ABN-SVC-SSO-05.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+ABN-SVC-SSO-06.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+ABN-SVC-APP-07.services.tzghosting.net,Yes,True,True,08/16/2018 05:35:03,services.tzghosting.net
+ABN-OHD-APP-D19.custhsp.tzghosting.net,Yes,True,True,07/04/2018 08:24:20,custhsp.tzghosting.net
+ABN-TZG-BIZ-T04.custhsp.tzghosting.net,Yes,False,False,,custhsp.tzghosting.net
+ABN-QIC-SQL-T03.custhsp.tzghosting.net,Yes,True,True,08/23/2018 05:19:41,custhsp.tzghosting.net
+ABN-EXT-ROOT-02.trizetto.net,Yes,False,False,,trizetto.net.
+ABN-EXT-ROOT-01.trizetto.net,Yes,False,False,,trizetto.net.
+ABN-UI03-WEB-02.demo.tzghosting.net,Yes,True,True,05/19/2018 19:02:42,demo.tzghosting.net
+ABN-UI03-FHG-02.demo.tzghosting.net,Yes,True,True,06/05/2018 14:49:35,demo.tzghosting.net
+ABN-CMB-APP-D12.cmb.tzghosting.net,Yes,False,False,,cmb.tzghosting.net
+ABN-AET-DC-01.AET.tzghosting.net,Yes,False,False,,AET.tzghosting.net
+ABN-AET-DFS-01.AET.tzghosting.net,Yes,False,False,,AET.tzghosting.net
+ABN-AET-DC-02.AET.tzghosting.net,Yes,False,False,,AET.tzghosting.net
+ABN-BRI-WEB-T11.bri.tzghosting.net,Yes,False,False,,bri.tzghosting.net
+ABN-HSN-WEB-T01.hsn.tzghosting.net,Yes,False,False,,hsn.tzghosting.net
+ABN-KMH-WEB-01.kmh.tzghosting.net,Yes,False,False,,kmh.tzghosting.net
+ABN-SHP-SQL-D02.shp.tzghosting.net,Yes,True,True,07/28/2018 08:14:36,shp.tzghosting.net
+ABN-AAH-DC-01.AAH.tzghosting.net,Yes,False,False,,AAH.tzghosting.net
+ABN-AAH-DC-02.AAH.tzghosting.net,Yes,False,False,,AAH.tzghosting.net
+ABN-AAH-DFS-01.AAH.tzghosting.net,Yes,False,False,,AAH.tzghosting.net
+ABN-OHD-WEB-01.ohd.tzghosting.net,Yes,False,False,,ohd.tzghosting.net
+ABN-ILS-SQL-T03.ils.tzghosting.net,Yes,False,False,,ils.tzghosting.net
+ABN-QCA-WEB-T05.qca.tzghosting.net,Yes,False,False,,qca.tzghosting.net
+ABN-AVC-DFS-01.avc.tzghosting.net,Yes,True,True,05/10/2018 08:02:04,avc.tzghosting.net
+ABN-THD-DC-01.tzghsp.net,Yes,False,False,,tzghsp.net.
+ABN-THD-DC-02.tzghsp.net,Yes,False,False,,tzghsp.net.
+ABN-TPZ-APP-T30.topaz.tpzhsp.net,Yes,True,True,08/16/2018 05:58:43,topaz.tpzhsp.net
+ABN-TPZ-XEN-T82.topaz.tpzhsp.net,Yes,True True,True True,07/26/2018 09:22:02 08/16/2018 05:54:09,topaz.tpzhsp.net
+ABN-CWH-APP-D02.CWH.tzghosting.net,Yes,False,False,,CWH.tzghosting.net
+ABN-CWH-APP-T02.CWH.tzghosting.net,Yes,False,False,,CWH.tzghosting.net
+ABN-CWH-SQL-D02.CWH.tzghosting.net,Yes,False,False,,CWH.tzghosting.net
+ABN-SPH-BIZ-T01.SPH.tzghosting.net,Yes,False,False,,SPH.tzghosting.net
+ABN-VPH-APP-T08.VPH.tzghosting.net,Yes,True True,True True,08/16/2018 06:13:37 08/16/2018 05:57:11,VPH.tzghosting.net
+ABN-VPH-APP-T17.VPH.tzghosting.net,Yes,False,False,,VPH.tzghosting.net
+ABN-CMC-XEN-D01.CMC.tzghosting.net,Yes,True,True,05/10/2018 15:32:11,CMC.tzghosting.net
+ABN-EMB-WEB-02.EMB.tzghosting.net,Yes,False,False,,EMB.tzghosting.net
+ABN-EMB-SQL-01.EMB.tzghosting.net,Yes,False,False,,EMB.tzghosting.net
+ABN-EMB-WEB-03.EMB.tzghosting.net,Yes,False,False,,EMB.tzghosting.net
+ABN-EMB-CAE-T15.EMB.tzghosting.net,Yes,True,True,07/08/2018 15:53:32,EMB.tzghosting.net
+ABN-EMB-WEB-05.EMB.tzghosting.net,Yes,False,False,,EMB.tzghosting.net
+ABN-EMB-WEB-06.EMB.tzghosting.net,Yes,False,False,,EMB.tzghosting.net
+ABN-EMB-WEB-07.EMB.tzghosting.net,Yes,False,False,,EMB.tzghosting.net
+ABN-THF-EFTP-07.custft.tzghosting.net,Yes,True,True,04/15/2018 14:32:47,custft.tzghosting.net
+ABN-THF-EFTP-08.custft.tzghosting.net,Yes,False,False,,custft.tzghosting.net
+ABN-SDB-APP-P01.SDB.tzghosting.net,Yes,False,False,,SDB.tzghosting.net
+ABN-THR-QXI-D01.THR.tzghosting.net,Yes,False,False,,THR.tzghosting.net
+ABN-THR-QXI-D02.THR.tzghosting.net,Yes,False,False,,THR.tzghosting.net
+ABN-GHS-DC-02.GHS.tzghosting.net,Yes,False,False,,GHS.tzghosting.net
+ABN-GHS-DFS-01.GHS.tzghosting.net,Yes,False,False,,GHS.tzghosting.net
+ABN-UI03-APP-29.demo.tzghosting.net,Yes,True,True,08/16/2018 05:46:31,demo.tzghosting.net
+ABN-UI03-SQL-06.demo.tzghosting.net,Yes,True,True,08/16/2018 06:20:30,demo.tzghosting.net
+ABN-UI03-HUB-01.demo.tzghosting.net,Yes,True,True,08/16/2018 06:00:20,demo.tzghosting.net
+ABN-UI03-SQL-10.demo.tzghosting.net,Yes,True,True,08/16/2018 05:55:22,demo.tzghosting.net
+ABN-UI03-BIZ-03.demo.tzghosting.net,Yes,True,True,08/16/2018 06:14:35,demo.tzghosting.net
+ABN-UI03-SQL-20.demo.tzghosting.net,Yes,True,True,08/16/2018 05:34:40,demo.tzghosting.net
+ABN-UI03-SQL-22.demo.tzghosting.net,Yes,True,True,08/16/2018 06:20:54,demo.tzghosting.net
+ABN-UI03-IHM-07.demo.tzghosting.net,Yes,True,True,08/16/2018 05:52:28,demo.tzghosting.net
+ABN-UI03-IHM-08.demo.tzghosting.net,Yes,True,True,08/16/2018 06:04:41,demo.tzghosting.net
+ABN-UI03-APP-19.demo.tzghosting.net,Yes,True,True,08/16/2018 06:03:23,demo.tzghosting.net
+ABN-UI03-TOM-05.demo.tzghosting.net,Yes,True,True,08/16/2018 06:18:23,demo.tzghosting.net
+ABN-UI03-TOM-09.demo.tzghosting.net,Yes,True,True,08/16/2018 06:00:16,demo.tzghosting.net
+ABN-UI03-TOM-11.demo.tzghosting.net,Yes,True,True,08/16/2018 05:59:39,demo.tzghosting.net
+ABN-UI03-TOM-07.demo.tzghosting.net,Yes,True,True,08/16/2018 05:35:57,demo.tzghosting.net
+ABN-UI03-APP-04.demo.tzghosting.net,Yes,True,True,08/16/2018 05:58:15,demo.tzghosting.net
+ABN-UI03-APP-23.demo.tzghosting.net,Yes,True,True,08/16/2018 05:34:00,demo.tzghosting.net
+ABN-UI03-APP-22.demo.tzghosting.net,Yes,True,True,08/16/2018 06:12:07,demo.tzghosting.net
+ABN-B01-IHM-T04.b01.tzghosting.net,Yes,False,False,,b01.tzghosting.net
+ABN-CVH-ZDC-01.cvh.tzghosting.net,Yes,False,False,,cvh.tzghosting.net
+abn-xat-adc-02.lhp.tzghosting.net,Yes,False,False,,lhp.tzghosting.net
+ABN-MHP-APP-T05.MHP.tzghosting.net,Yes,True,True,04/26/2018 02:07:46,MHP.tzghosting.net
+ABN-TZF-WEB-T03.SAAS.tzghosting.net,Yes,False,False,,SAAS.tzghosting.net
+ABN-PRH-DC-01.PRH.tzghosting.net,Yes,False,False,,PRH.tzghosting.net
+ABN-HDV-WAS-S01.HDV.tzghosting.net,Yes,False,False,,HDV.tzghosting.net
+ABN-HDV-WAS-S02.HDV.tzghosting.net,Yes,False,False,,HDV.tzghosting.net
+ABN-GHS-DC-01.GHS.tzghosting.net,Yes,False,False,,GHS.tzghosting.net
+ABN-SVC-SQL-07.services.tzghosting.net,Yes,True,True,04/26/2018 09:59:59,services.tzghosting.net
+ABN-SVC-SQL-22.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+ABN-SVC-SQL-23.services.tzghosting.net,Yes,True,True,07/10/2018 15:06:58,services.tzghosting.net
+ABN-SVC-MAH-01.services.tzghosting.net,Yes,False,False,,services.tzghosting.net
+ABN-HDV-WEB-01.HDV.tzghosting.net,Yes,True,True,08/16/2018 06:05:52,HDV.tzghosting.net
+ABN-HDV-WAS-T03.HDV.tzghosting.net,Yes,True,True,05/24/2018 06:07:25,HDV.tzghosting.net
+ABN-HDV-APP-C01.HDV.tzghosting.net,No
+ABN-HDV-WEB-R01.HDV.tzghosting.net,Yes,True,True,05/24/2018 05:04:03,HDV.tzghosting.net
+ABN-HDV-WAS-T02.HDV.tzghosting.net,Yes,True,True,05/24/2018 05:07:43,HDV.tzghosting.net
+ABN-HDV-XEN-F01.HDV.tzghosting.net,No
+ABN-UI03-DC-03.demo.tzghosting.net,Yes,False,False,,demo.tzghosting.net
+ABN-TPZ-XEN-T11.topaz.tpzhsp.net,Yes,False,False,,topaz.tpzhsp.net
+ABN-PRH-DC-02.PRH.tzghosting.net,Yes,False,False,,PRH.tzghosting.net
+ABN-HDV-IHM-D01.HDV.tzghosting.net,Yes,True,True,01/18/2018 13:05:02,HDV.tzghosting.net
+ABN-HDV-IHM-T01.HDV.tzghosting.net,Yes,False,False,,HDV.tzghosting.net
+ABN-OTS-SQL-99.OTS.tzghosting.net,Yes,True,True,07/28/2018 21:40:50,OTS.tzghosting.net
+ABN-SDB-APP-P02.SDB.tzghosting.net,Yes,False,False,,SDB.tzghosting.net

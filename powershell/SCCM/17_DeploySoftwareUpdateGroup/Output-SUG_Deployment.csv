@@ -1,0 +1,5 @@
+DeploymentName,DeviceCollection,AvailableTime, DeadLineTime,Status
+SUG-Sep-2018 on DEMO Non Prod Servers,DEMO Non Prod Servers,09/17/2018 02:00:00,09/21/2018 21:05:00,Deployed
+SUG-SepRem-2018 on DEMO Non Prod Servers,DEMO Non Prod Servers,09/17/2018 02:00:00,09/21/2018 21:05:00,Deployed
+SUG-Sep-2018 on Windows 7 Prod Servers,Windows 7 Prod Servers,09/17/2018 04:00:00,09/21/2018 21:05:00,Deployed
+SUG-SepRem-2018 on Windows 7 Prod Servers,Windows 7 Prod Servers,09/17/2018 04:00:00,09/21/2018 21:05:00,Deployed

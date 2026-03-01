@@ -1,0 +1,99 @@
+Server,SCCM_Status,OS
+ABN-OIM-APP-T03.services.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-SVC-SQL-07.services.tzghosting.net,Ping Failed
+ABN-SVC-WAS-01.services.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-DMZ-SSO-01.services.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-DMZ-SSO-02.services.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-DMZ-SSO-03.services.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-SVC-SQL-22.services.tzghosting.net,Ping Failed
+ABN-SVC-SQL-23.services.tzghosting.net,Ping Failed
+ABN-SVC-MAH-01.services.tzghosting.net,Ping Failed
+ABN-SVC-SSO-05.services.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Enterprise 
+ABN-SVC-SSO-06.services.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Enterprise 
+ABN-SVC-APP-07.services.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-OHD-APP-D19.custhsp.tzghosting.net,Installed,Microsoft® Windows Server® 2008 Standard 
+ABN-TZG-BIZ-T04.custhsp.tzghosting.net,Installed,Microsoft® Windows Server® 2008 Standard 
+ABN-QIC-SQL-T03.custhsp.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Enterprise 
+ABN-EXT-ROOT-02.trizetto.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-EXT-ROOT-01.trizetto.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-UI03-WEB-02.demo.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-UI03-FHG-02.demo.tzghosting.net,Installed,Microsoft Windows Server 2016 Standard
+ABN-UI03-DC-03.demo.tzghosting.net,Unable to establish remote session
+ABN-UI03-APP-29.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-SQL-06.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-HUB-01.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-SQL-10.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-BIZ-03.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-SQL-20.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-SQL-22.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-IHM-07.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-IHM-08.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-APP-19.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-TOM-05.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-TOM-09.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-TOM-11.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-TOM-07.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-APP-04.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-APP-23.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-UI03-APP-22.demo.tzghosting.net,Missing,Microsoft Windows Server 2016 Standard
+ABN-CMB-APP-D12.cmb.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-AET-DC-01.AET.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-AET-DFS-01.AET.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-AET-DC-02.AET.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-BRI-WEB-T11.bri.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-HSN-WEB-T01.hsn.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-KMH-WEB-01.kmh.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-SHP-SQL-D02.shp.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-AAH-DC-01.AAH.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-AAH-DC-02.AAH.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-AAH-DFS-01.AAH.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-OHD-WEB-01.ohd.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-ILS-SQL-T03.ils.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-B01-IHM-T04.b01.tzghosting.net,Missing,Microsoft Windows Server 2008 R2 Standard 
+ABN-QCA-WEB-T05.qca.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-AVC-DFS-01.avc.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-THD-DC-01.tzghsp.net,Installed,Microsoft Windows Server 2008 R2 Enterprise 
+ABN-THD-DC-02.tzghsp.net,Installed,Microsoft Windows Server 2008 R2 Enterprise 
+ABN-TPZ-APP-T30.topaz.tpzhsp.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-TPZ-XEN-T82.topaz.tpzhsp.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-TPZ-XEN-T11.topaz.tpzhsp.net,Unable to establish remote session
+ABN-CVH-ZDC-01.cvh.tzghosting.net,Missing,Microsoft Windows Server 2008 R2 Standard 
+ABN-CWH-APP-D02.CWH.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-CWH-APP-T02.CWH.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-CWH-SQL-D02.CWH.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-SPH-BIZ-T01.SPH.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+abn-xat-adc-02.lhp.tzghosting.net,Missing,
+ABN-VPH-APP-T08.VPH.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-VPH-APP-T17.VPH.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-CMC-XEN-D01.CMC.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-MHP-APP-T05.MHP.tzghosting.net,Missing,Microsoft Windows Server 2008 R2 Enterprise 
+ABN-EMB-WEB-02.EMB.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-EMB-SQL-01.EMB.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-EMB-WEB-03.EMB.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-EMB-CAE-T15.EMB.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-EMB-WEB-05.EMB.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-EMB-WEB-06.EMB.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-EMB-WEB-07.EMB.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Standard 
+ABN-TZF-WEB-T03.SAAS.tzghosting.net,Missing,Microsoft Windows Server 2012 R2 Standard
+ABN-PRH-DC-02.PRH.tzghosting.net,Unable to establish remote session
+ABN-PRH-DC-01.PRH.tzghosting.net,Missing,Microsoft Windows Server 2012 R2 Standard
+ABN-HDV-IHM-D01.HDV.tzghosting.net,Unable to establish remote session
+ABN-HDV-WEB-01.HDV.tzghosting.net,Ping Failed
+ABN-HDV-WAS-T03.HDV.tzghosting.net,Ping Failed
+ABN-HDV-APP-C01.HDV.tzghosting.net,Ping Failed
+ABN-HDV-IHM-T01.HDV.tzghosting.net,Unable to establish remote session
+ABN-HDV-WEB-R01.HDV.tzghosting.net,Ping Failed
+ABN-HDV-WAS-T02.HDV.tzghosting.net,Ping Failed
+ABN-HDV-WAS-S01.HDV.tzghosting.net,Missing,Microsoft Windows Server 2012 R2 Standard
+ABN-HDV-WAS-S02.HDV.tzghosting.net,Missing,Microsoft Windows Server 2012 R2 Standard
+ABN-HDV-XEN-F01.HDV.tzghosting.net,Ping Failed
+ABN-OTS-SQL-99.OTS.tzghosting.net,Unable to establish remote session
+ABN-THF-EFTP-07.custft.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-THF-EFTP-08.custft.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-SDB-APP-P01.SDB.tzghosting.net,Installed,Microsoft Windows Server 2008 R2 Enterprise 
+ABN-SDB-APP-P02.SDB.tzghosting.net,Unable to establish remote session
+ABN-THR-QXI-D01.THR.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-THR-QXI-D02.THR.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-GHS-DC-01.GHS.tzghosting.net,Missing,Microsoft Windows Server 2012 R2 Standard
+ABN-GHS-DC-02.GHS.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard
+ABN-GHS-DFS-01.GHS.tzghosting.net,Installed,Microsoft Windows Server 2012 R2 Standard

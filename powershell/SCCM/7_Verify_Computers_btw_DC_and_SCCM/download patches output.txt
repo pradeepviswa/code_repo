@@ -1,0 +1,453 @@
+PS E:\AdminTools\SCCM_Script\5_Download_Patches> E:\AdminTools\SCCM_Script\6_Add_Patches_to_SUG\Add_Patches_to_SUG.ps1
+Please wait. Fetching list of Existing Packages:
+Package-2016
+Package-2017
+Package-Sep-2017
+Package-Aug-2017
+Package-Oct-2017
+Package-VAScan
+Package-Nov-2017
+Package-Dec-2017
+Package-Jan-2018
+KB4056898
+Package-Feb-2018
+Enter Package Name. This package will be used if patch download is pending: Package-Feb-2018
+Ok Valid package name. Moving to next step.
+In progress
+'SUG-Feb-2018' SUG not found. Created It
+Downloading..... 	 '' 	 '' in Package 'Package-Feb-2018'
+'' 	 '3114874' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '3114874' in Package 'Package-Feb-2018'
+'' 	 '3114874' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '3114874' in Package 'Package-Feb-2018'
+'' 	 '3172459' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '3172459' in Package 'Package-Feb-2018'
+'' 	 '3172459' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '3172459' in Package 'Package-Feb-2018'
+'' 	 '4011143' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4011143' in Package 'Package-Feb-2018'
+'' 	 '4011686' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4011686' in Package 'Package-Feb-2018'
+'' 	 '4011690' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4011690' in Package 'Package-Feb-2018'
+'' 	 '4011690' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4011690' in Package 'Package-Feb-2018'
+'' 	 '4011707' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4011707' in Package 'Package-Feb-2018'
+'' 	 '4011707' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4011707' in Package 'Package-Feb-2018'
+'' 	 '4034044' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4034044' in Package 'Package-Feb-2018'
+'' 	 '4058165' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4058165' in Package 'Package-Feb-2018'
+'' 	 '4073079' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4073079' in Package 'Package-Feb-2018'
+'' 	 '4073080' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4073080' in Package 'Package-Feb-2018'
+'' 	 '4074587' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4074587' in Package 'Package-Feb-2018'
+'' 	 '4074587' 	 Added to 'SUG-Feb-2018'
+4074589 Not Required. Adding all available patches now. Count is: 1
+Downloading..... 	 '' 	 '4074587' in Package 'Package-Feb-2018'
+'' 	 '4074589' 	 Added to 'SUG-Feb-2018'
+4074590 Not Required. Adding all available patches now. Count is: 3
+Downloading..... 	 '' 	 '4074589' in Package 'Package-Feb-2018'
+'' 	 '4074590' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4074590' in Package 'Package-Feb-2018'
+'' 	 '4074590' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4074590' in Package 'Package-Feb-2018'
+Invoke-CMSoftwareUpdateDownload : Unknown error (0x2f76)
+At E:\AdminTools\SCCM_Script\6_Add_Patches_to_SUG\Add_Patches_to_SUG.ps1:163 char:37
++                                     Invoke-CMSoftwareUpdateDownload `
++                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidResult: (Microsoft.Confi...reUpdateCommand:SaveSoftwareUpdateCommand) [Save-CMSoftwareUpdate], Win32Exception
+    + FullyQualifiedErrorId : DownloadContentError,Microsoft.ConfigurationManagement.Cmdlets.Sum.Commands.SaveSoftwareUpdateCommand
+ 
+Invoke-CMSoftwareUpdateDownload : One or more updates failed to download successfully.
+At E:\AdminTools\SCCM_Script\6_Add_Patches_to_SUG\Add_Patches_to_SUG.ps1:163 char:37
++                                     Invoke-CMSoftwareUpdateDownload `
++                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (Microsoft.Confi...reUpdateCommand:SaveSoftwareUpdateCommand) [Save-CMSoftwareUpdate], InvalidOperationEx 
+   ception
+    + FullyQualifiedErrorId : DownloadUpdateFailed,Microsoft.ConfigurationManagement.Cmdlets.Sum.Commands.SaveSoftwareUpdateCommand
+ 
+'' 	 '4074590' 	 Added to 'SUG-Feb-2018'
+4074593 Not Required. Adding all available patches now. Count is: 1
+Downloading..... 	 '' 	 '4074590' in Package 'Package-Feb-2018'
+'' 	 '4074593' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4074593' in Package 'Package-Feb-2018'
+'' 	 '4074594' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4074594' in Package 'Package-Feb-2018'
+'' 	 '4074597' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4074597' in Package 'Package-Feb-2018'
+'' 	 '4074598' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4074598' in Package 'Package-Feb-2018'
+'' 	 '4074598' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4074598' in Package 'Package-Feb-2018'
+'' 	 '4074603' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4074603' in Package 'Package-Feb-2018'
+'' 	 '4074736' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4074736' in Package 'Package-Feb-2018'
+'' 	 '4074736' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4074736' in Package 'Package-Feb-2018'
+'' 	 '4074736' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4074736' in Package 'Package-Feb-2018'
+'' 	 '4074836' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4074836' in Package 'Package-Feb-2018'
+'' 	 '4074851' 	 Added to 'SUG-Feb-2018'
+2538242 Not found
+2538243 Not found
+2565063 Not found
+2901112 Not found
+2898857 Not found
+Downloading..... 	 '' 	 '4074851' in Package 'Package-Feb-2018'
+'MS13-052' 	 '2840629' 	 Added to 'SUG-Feb-2018'
+2835393 Not found
+2832407 Not found
+Downloading..... 	 'MS13-052' 	 '2840629' in Package 'Package-Feb-2018'
+'MS13-052' 	 '2840628' 	 Added to 'SUG-Feb-2018'
+2833947 Not found
+2844287 Not found
+Downloading..... 	 'MS13-052' 	 '2840628' in Package 'Package-Feb-2018'
+'MS13-052' 	 '2833941' 	 Added to 'SUG-Feb-2018'
+'' 	 '4055272' 	 Added to 'SUG-Feb-2018'
+4055270 Not Required. Adding all available patches now. Count is: 1
+'' 	 '4055270' 	 Added to 'SUG-Feb-2018'
+'' 	 '4055267' 	 Added to 'SUG-Feb-2018'
+4055265 Not Required. Adding all available patches now. Count is: 1
+'' 	 '4055265' 	 Added to 'SUG-Feb-2018'
+'' 	 '4041086' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4041086' in Package 'Package-Feb-2018'
+'' 	 '4041083' 	 Added to 'SUG-Feb-2018'
+4041084 Not Required. Adding all available patches now. Count is: 1
+Downloading..... 	 '' 	 '4041083' in Package 'Package-Feb-2018'
+'' 	 '4041084' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4041084' in Package 'Package-Feb-2018'
+'' 	 '4041085' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4041085' in Package 'Package-Feb-2018'
+'MS13-007' 	 '2736428' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-007' 	 '2736428' in Package 'Package-Feb-2018'
+'MS13-007' 	 '2736422' 	 Added to 'SUG-Feb-2018'
+'MS15-048' 	 '3032662' 	 Added to 'SUG-Feb-2018'
+'MS15-048' 	 '3023221' 	 Added to 'SUG-Feb-2018'
+3035485 Not found
+3035488 Not Required. Adding all available patches now. Count is: 3
+'MS15-048' 	 '3035488' 	 Added to 'SUG-Feb-2018'
+'MS15-048' 	 '3035488' 	 Added to 'SUG-Feb-2018'
+'MS15-048' 	 '3035488' 	 Added to 'SUG-Feb-2018'
+3023220 Not Required. Adding all available patches now. Count is: 3
+'MS15-048' 	 '3023220' 	 Added to 'SUG-Feb-2018'
+'MS15-048' 	 '3023220' 	 Added to 'SUG-Feb-2018'
+'MS15-048' 	 '3023220' 	 Added to 'SUG-Feb-2018'
+3023213 Not Required. Adding all available patches now. Count is: 3
+'MS15-048' 	 '3023213' 	 Added to 'SUG-Feb-2018'
+'MS15-048' 	 '3023213' 	 Added to 'SUG-Feb-2018'
+'MS15-048' 	 '3023213' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS15-048' 	 '3023213' in Package 'Package-Feb-2018'
+'MS12-073' 	 '2716513' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS12-073' 	 '2716513' in Package 'Package-Feb-2018'
+'MS12-073' 	 '2719033' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS12-073' 	 '2719033' in Package 'Package-Feb-2018'
+'MS12-073' 	 '2719033' 	 Added to 'SUG-Feb-2018'
+2978116 Not found
+'MS14-072' 	 '2978125' 	 Added to 'SUG-Feb-2018'
+2968292 Not Required. Adding all available patches now. Count is: 3
+'MS14-057' 	 '2968292' 	 Added to 'SUG-Feb-2018'
+'MS14-057' 	 '2968292' 	 Added to 'SUG-Feb-2018'
+'MS14-057' 	 '2968292' 	 Added to 'SUG-Feb-2018'
+2972098 Not Required. Adding all available patches now. Count is: 3
+'MS14-057' 	 '2972098' 	 Added to 'SUG-Feb-2018'
+'MS14-057' 	 '2972098' 	 Added to 'SUG-Feb-2018'
+'MS14-057' 	 '2972098' 	 Added to 'SUG-Feb-2018'
+2979568 Not found
+2979575 Not found
+'MS14-057' 	 '2972106' 	 Added to 'SUG-Feb-2018'
+'MS13-002' 	 '2758694' 	 Added to 'SUG-Feb-2018'
+'MS13-002' 	 '2758694' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-002' 	 '2758694' in Package 'Package-Feb-2018'
+'MS12-083' 	 '2765809' 	 Added to 'SUG-Feb-2018'
+3074541 Not Required. Adding all available patches now. Count is: 3
+'MS15-101' 	 '3074541' 	 Added to 'SUG-Feb-2018'
+'MS15-101' 	 '3074541' 	 Added to 'SUG-Feb-2018'
+'MS15-101' 	 '3074541' 	 Added to 'SUG-Feb-2018'
+'MS15-101' 	 '3074547' 	 Added to 'SUG-Feb-2018'
+2742598 Not Required. Adding all available patches now. Count is: 3
+Downloading..... 	 'MS15-101' 	 '3074547' in Package 'Package-Feb-2018'
+'MS13-004' 	 '2742598' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-004' 	 '2742598' in Package 'Package-Feb-2018'
+Invoke-CMSoftwareUpdateDownload : The SMS Provider reported an error.
+At E:\AdminTools\SCCM_Script\6_Add_Patches_to_SUG\Add_Patches_to_SUG.ps1:163 char:37
++                                     Invoke-CMSoftwareUpdateDownload `
++                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidResult: (Microsoft.Confi...reUpdateCommand:SaveSoftwareUpdateCommand) [Save-CMSoftwareUpdate], WqlQueryException
+    + FullyQualifiedErrorId : DownloadContentError,Microsoft.ConfigurationManagement.Cmdlets.Sum.Commands.SaveSoftwareUpdateCommand
+ 
+Invoke-CMSoftwareUpdateDownload : One or more updates failed to download successfully.
+At E:\AdminTools\SCCM_Script\6_Add_Patches_to_SUG\Add_Patches_to_SUG.ps1:163 char:37
++                                     Invoke-CMSoftwareUpdateDownload `
++                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (Microsoft.Confi...reUpdateCommand:SaveSoftwareUpdateCommand) [Save-CMSoftwareUpdate], InvalidOperationEx 
+   ception
+    + FullyQualifiedErrorId : DownloadUpdateFailed,Microsoft.ConfigurationManagement.Cmdlets.Sum.Commands.SaveSoftwareUpdateCommand
+ 
+'MS13-004' 	 '2742598' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-004' 	 '2742598' in Package 'Package-Feb-2018'
+'MS13-004' 	 '2742598' 	 Added to 'SUG-Feb-2018'
+2756920 Not Required. Adding all available patches now. Count is: 3
+Downloading..... 	 'MS13-004' 	 '2742598' in Package 'Package-Feb-2018'
+'MS13-004' 	 '2756920' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-004' 	 '2756920' in Package 'Package-Feb-2018'
+'MS13-004' 	 '2756920' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-004' 	 '2756920' in Package 'Package-Feb-2018'
+'MS13-004' 	 '2756920' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-004' 	 '2756920' in Package 'Package-Feb-2018'
+'MS13-004' 	 '2742595' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-004' 	 '2742595' in Package 'Package-Feb-2018'
+'MS13-004' 	 '2742599' 	 Added to 'SUG-Feb-2018'
+2756921 Not found
+'MS13-004' 	 '2742595' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-004' 	 '2742595' in Package 'Package-Feb-2018'
+'MS13-004' 	 '2742613' 	 Added to 'SUG-Feb-2018'
+'MS16-001' 	 '3124275' 	 Added to 'SUG-Feb-2018'
+'MS16-001' 	 '3124275' 	 Added to 'SUG-Feb-2018'
+'MS16-001' 	 '3124275' 	 Added to 'SUG-Feb-2018'
+'MS16-001' 	 '3124275' 	 Added to 'SUG-Feb-2018'
+4012215 Not found
+'MS17-008' 	 '4012213' 	 Added to 'SUG-Feb-2018'
+4012216 Not found
+2789644 Not Required. Adding all available patches now. Count is: 3
+Downloading..... 	 'MS17-008' 	 '4012213' in Package 'Package-Feb-2018'
+'MS13-015' 	 '2789644' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-015' 	 '2789644' in Package 'Package-Feb-2018'
+Invoke-CMSoftwareUpdateDownload : The SMS Provider reported an error.
+At E:\AdminTools\SCCM_Script\6_Add_Patches_to_SUG\Add_Patches_to_SUG.ps1:163 char:37
++                                     Invoke-CMSoftwareUpdateDownload `
++                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidResult: (Microsoft.Confi...reUpdateCommand:SaveSoftwareUpdateCommand) [Save-CMSoftwareUpdate], WqlQueryException
+    + FullyQualifiedErrorId : DownloadContentError,Microsoft.ConfigurationManagement.Cmdlets.Sum.Commands.SaveSoftwareUpdateCommand
+ 
+Invoke-CMSoftwareUpdateDownload : One or more updates failed to download successfully.
+At E:\AdminTools\SCCM_Script\6_Add_Patches_to_SUG\Add_Patches_to_SUG.ps1:163 char:37
++                                     Invoke-CMSoftwareUpdateDownload `
++                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (Microsoft.Confi...reUpdateCommand:SaveSoftwareUpdateCommand) [Save-CMSoftwareUpdate], InvalidOperationEx 
+   ception
+    + FullyQualifiedErrorId : DownloadUpdateFailed,Microsoft.ConfigurationManagement.Cmdlets.Sum.Commands.SaveSoftwareUpdateCommand
+ 
+'MS13-015' 	 '2789644' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-015' 	 '2789644' in Package 'Package-Feb-2018'
+'MS13-015' 	 '2789644' 	 Added to 'SUG-Feb-2018'
+2789642 Not found
+958869 Not found
+972580 Not found
+972581 Not found
+972581 Not found
+972581 Not found
+971119 Not found
+'MS16-120' 	 '3192391' 	 Added to 'SUG-Feb-2018'
+'MS16-120' 	 '3192391' 	 Added to 'SUG-Feb-2018'
+3185330 Not found
+3192393 Not Required. Adding all available patches now. Count is: 1
+Downloading..... 	 'MS16-120' 	 '3192391' in Package 'Package-Feb-2018'
+'MS16-120' 	 '3192393' 	 Added to 'SUG-Feb-2018'
+3185332 Not found
+'MS16-120' 	 '3192392' 	 Added to 'SUG-Feb-2018'
+3185331 Not found
+3182373 Not found
+2863253 Not found
+2861190 Not found
+'MS13-082' 	 '2861697' 	 Added to 'SUG-Feb-2018'
+'MS13-082' 	 '2858302' 	 Added to 'SUG-Feb-2018'
+2861188 Not Required. Adding all available patches now. Count is: 2
+Downloading..... 	 'MS13-082' 	 '2858302' in Package 'Package-Feb-2018'
+'MS13-082' 	 '2861188' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-082' 	 '2861188' in Package 'Package-Feb-2018'
+'MS13-082' 	 '2861188' 	 Added to 'SUG-Feb-2018'
+2861193 Not Required. Adding all available patches now. Count is: 2
+Downloading..... 	 'MS13-082' 	 '2861188' in Package 'Package-Feb-2018'
+'MS13-082' 	 '2861193' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-082' 	 '2861193' in Package 'Package-Feb-2018'
+'MS13-082' 	 '2861193' 	 Added to 'SUG-Feb-2018'
+'MS13-082' 	 '2861208' 	 Added to 'SUG-Feb-2018'
+3104002 Not found
+'MS14-026' 	 '2931356' 	 Added to 'SUG-Feb-2018'
+2931365 Not found
+2931368 Not found
+2931368 Not found
+2931358 Not found
+2931366 Not found
+'MS15-050' 	 '3055642' 	 Added to 'SUG-Feb-2018'
+'MS15-050' 	 '3055642' 	 Added to 'SUG-Feb-2018'
+'MS15-050' 	 '3055642' 	 Added to 'SUG-Feb-2018'
+'MS15-050' 	 '3055642' 	 Added to 'SUG-Feb-2018'
+'MS15-050' 	 '3055642' 	 Added to 'SUG-Feb-2018'
+'MS15-050' 	 '3055642' 	 Added to 'SUG-Feb-2018'
+'MS13-027' 	 '2807986' 	 Added to 'SUG-Feb-2018'
+'MS15-005' 	 '3022777' 	 Added to 'SUG-Feb-2018'
+'MS15-005' 	 '3022777' 	 Added to 'SUG-Feb-2018'
+'MS15-005' 	 '3022777' 	 Added to 'SUG-Feb-2018'
+2847311 Not found
+2855844 Not found
+'MS13-081' 	 '2862330' 	 Added to 'SUG-Feb-2018'
+'MS13-081' 	 '2862335' 	 Added to 'SUG-Feb-2018'
+'MS13-081' 	 '2864202' 	 Added to 'SUG-Feb-2018'
+'MS13-081' 	 '2868038' 	 Added to 'SUG-Feb-2018'
+2876284 Not found
+2883150 Not found
+'MS13-081' 	 '2884256' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS13-081' 	 '2884256' in Package 'Package-Feb-2018'
+'MS12-033' 	 '2690533' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS12-033' 	 '2690533' in Package 'Package-Feb-2018'
+'MS12-033' 	 '2690533' 	 Added to 'SUG-Feb-2018'
+2719985 Not found
+2721691 Not found
+2719985 Not found
+973544 Not found
+973551 Not found
+973552 Not found
+3142024 Not found
+3142033 Not found
+3142037 Not found
+3142024 Not found
+3142026 Not found
+3142030 Not found
+3142036 Not found
+'MS13-090' 	 '2900986' 	 Added to 'SUG-Feb-2018'
+2961072 Not Required. Adding all available patches now. Count is: 3
+Downloading..... 	 'MS13-090' 	 '2900986' in Package 'Package-Feb-2018'
+'MS14-040' 	 '2961072' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS14-040' 	 '2961072' in Package 'Package-Feb-2018'
+'MS14-040' 	 '2961072' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS14-040' 	 '2961072' in Package 'Package-Feb-2018'
+'MS14-040' 	 '2961072' 	 Added to 'SUG-Feb-2018'
+3163245 Not found
+3163251 Not found
+3164025 Not found
+3163247 Not found
+3163291 Not found
+3164024 Not found
+2598041 Not found
+2598039 Not found
+2804579 Not found
+2804576 Not found
+2808735 Not found
+2840149 Not found
+2808735 Not found
+2840149 Not found
+2808735 Not found
+2840149 Not found
+Downloading..... 	 'MS14-040' 	 '2961072' in Package 'Package-Feb-2018'
+'MS12-074' 	 '2737019' 	 Added to 'SUG-Feb-2018'
+2698023 Not found
+Downloading..... 	 'MS12-074' 	 '2737019' in Package 'Package-Feb-2018'
+'MS12-074' 	 '2729449' 	 Added to 'SUG-Feb-2018'
+2729453 Not Required. Adding all available patches now. Count is: 3
+Downloading..... 	 'MS12-074' 	 '2729449' in Package 'Package-Feb-2018'
+'MS12-074' 	 '2729453' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS12-074' 	 '2729453' in Package 'Package-Feb-2018'
+'MS12-074' 	 '2729453' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 'MS12-074' 	 '2729453' in Package 'Package-Feb-2018'
+'MS12-074' 	 '2729453' 	 Added to 'SUG-Feb-2018'
+2698023 Not found
+'MS12-074' 	 '2737019' 	 Added to 'SUG-Feb-2018'
+2687441 Not found
+2597986 Not found
+2726929 Not Required. Adding all available patches now. Count is: 1
+Downloading..... 	 'MS12-074' 	 '2737019' in Package 'Package-Feb-2018'
+'MS12-060' 	 '2726929' 	 Added to 'SUG-Feb-2018'
+2687441 Not found
+'' 	 '4023307' 	 Added to 'SUG-Feb-2018'
+'' 	 '4023307' 	 Added to 'SUG-Feb-2018'
+4017094 Not found
+'' 	 '4038779' 	 Added to 'SUG-Feb-2018'
+'' 	 '4038779' 	 Added to 'SUG-Feb-2018'
+4038792 Not found
+4032201 Not Required. Adding all available patches now. Count is: 3
+'' 	 '4032201' 	 Added to 'SUG-Feb-2018'
+'' 	 '4032201' 	 Added to 'SUG-Feb-2018'
+'' 	 '4032201' 	 Added to 'SUG-Feb-2018'
+4034664 Not found
+'' 	 '4048957' 	 Added to 'SUG-Feb-2018'
+'' 	 '4048957' 	 Added to 'SUG-Feb-2018'
+4053440 Not found
+4025336 Not found
+4025341 Not found
+4025397 Not Required. Adding all available patches now. Count is: 3
+'' 	 '4025397' 	 Added to 'SUG-Feb-2018'
+'' 	 '4025397' 	 Added to 'SUG-Feb-2018'
+'' 	 '4025397' 	 Added to 'SUG-Feb-2018'
+4022746 Not Required. Adding all available patches now. Count is: 3
+'' 	 '4022746' 	 Added to 'SUG-Feb-2018'
+'' 	 '4022746' 	 Added to 'SUG-Feb-2018'
+'' 	 '4022746' 	 Added to 'SUG-Feb-2018'
+4025339 Not found
+'' 	 '4025333' 	 Added to 'SUG-Feb-2018'
+'' 	 '4025337' 	 Added to 'SUG-Feb-2018'
+'' 	 '4025337' 	 Added to 'SUG-Feb-2018'
+'' 	 '4054518' 	 Added to 'SUG-Feb-2018'
+'' 	 '4054518' 	 Added to 'SUG-Feb-2018'
+'' 	 '4048958' 	 Added to 'SUG-Feb-2018'
+4048959 Not Required. Adding all available patches now. Count is: 1
+Downloading..... 	 '' 	 '4048958' in Package 'Package-Feb-2018'
+'' 	 '4048959' 	 Added to 'SUG-Feb-2018'
+'' 	 '4048957' 	 Added to 'SUG-Feb-2018'
+'' 	 '4048957' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4048957' in Package 'Package-Feb-2018'
+'' 	 '4019108' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4019108' in Package 'Package-Feb-2018'
+'' 	 '4019111' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4019111' in Package 'Package-Feb-2018'
+Invoke-CMSoftwareUpdateDownload : The SMS Provider reported an error.
+At E:\AdminTools\SCCM_Script\6_Add_Patches_to_SUG\Add_Patches_to_SUG.ps1:101 char:21
++                     Invoke-CMSoftwareUpdateDownload `
++                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidResult: (Microsoft.Confi...reUpdateCommand:SaveSoftwareUpdateCommand) [Save-CMSoftwareUpdate], WqlQueryException
+    + FullyQualifiedErrorId : DownloadContentError,Microsoft.ConfigurationManagement.Cmdlets.Sum.Commands.SaveSoftwareUpdateCommand
+ 
+Invoke-CMSoftwareUpdateDownload : One or more updates failed to download successfully.
+At E:\AdminTools\SCCM_Script\6_Add_Patches_to_SUG\Add_Patches_to_SUG.ps1:101 char:21
++                     Invoke-CMSoftwareUpdateDownload `
++                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (Microsoft.Confi...reUpdateCommand:SaveSoftwareUpdateCommand) [Save-CMSoftwareUpdate], InvalidOperationEx 
+   ception
+    + FullyQualifiedErrorId : DownloadUpdateFailed,Microsoft.ConfigurationManagement.Cmdlets.Sum.Commands.SaveSoftwareUpdateCommand
+ 
+'' 	 '4019109' 	 Added to 'SUG-Feb-2018'
+4019110 Not Required. Adding all available patches now. Count is: 1
+Downloading..... 	 '' 	 '4019109' in Package 'Package-Feb-2018'
+'' 	 '4019110' 	 Added to 'SUG-Feb-2018'
+4019474 Not found
+4019112 Not found
+4019114 Not found
+4019115 Not found
+4019113 Not found
+4019473 Not found
+'' 	 '4041687' 	 Added to 'SUG-Feb-2018'
+'' 	 '4041681' 	 Added to 'SUG-Feb-2018'
+'' 	 '4041681' 	 Added to 'SUG-Feb-2018'
+4041671 Not Required. Adding all available patches now. Count is: 3
+'' 	 '4041671' 	 Added to 'SUG-Feb-2018'
+'' 	 '4041671' 	 Added to 'SUG-Feb-2018'
+'' 	 '4041671' 	 Added to 'SUG-Feb-2018'
+4041690 Not Required. Adding all available patches now. Count is: 1
+'' 	 '4041690' 	 Added to 'SUG-Feb-2018'
+4042121 Not Required. Adding all available patches now. Count is: 3
+'' 	 '4042121' 	 Added to 'SUG-Feb-2018'
+'' 	 '4042121' 	 Added to 'SUG-Feb-2018'
+'' 	 '4042121' 	 Added to 'SUG-Feb-2018'
+4042123 Not Required. Adding all available patches now. Count is: 3
+'' 	 '4042123' 	 Added to 'SUG-Feb-2018'
+'' 	 '4042123' 	 Added to 'SUG-Feb-2018'
+'' 	 '4042123' 	 Added to 'SUG-Feb-2018'
+4041691 Not Required. Adding all available patches now. Count is: 3
+'' 	 '4041691' 	 Added to 'SUG-Feb-2018'
+'' 	 '4041691' 	 Added to 'SUG-Feb-2018'
+'' 	 '4041691' 	 Added to 'SUG-Feb-2018'
+'' 	 '4041693' 	 Added to 'SUG-Feb-2018'
+'' 	 '4041678' 	 Added to 'SUG-Feb-2018'
+'' 	 '4041678' 	 Added to 'SUG-Feb-2018'
+4041679 Not Required. Adding all available patches now. Count is: 1
+Downloading..... 	 '' 	 '4041678' in Package 'Package-Feb-2018'
+'' 	 '4041679' 	 Added to 'SUG-Feb-2018'
+Downloading..... 	 '' 	 '4041679' in Package 'Package-Feb-2018'
+'' 	 '4074595' 	 Added to 'SUG-Feb-2018'

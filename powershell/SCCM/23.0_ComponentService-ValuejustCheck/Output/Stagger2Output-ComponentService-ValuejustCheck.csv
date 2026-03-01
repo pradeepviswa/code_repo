@@ -1,0 +1,71 @@
+Server,Status,BeforeCHG_EnableDCOM,BeforeCHG_LegacyAuthenticationLevel,BEforeCHG_LegacyImpersonationLevel
+CSN-BCN-AFC-01.custhsp.tzghosting.net,No Change required,Y,2,2
+CSN-BCN-APP-18.BCN.tzghosting.net,No Change required,Y,2,2
+CSN-BCN-HPA-53.BCN.tzghosting.net,Change Required,Y,1,3
+CSN-BCN-HPA-60.BCN.tzghosting.net,Change Required,,,
+CSN-BCN-HPA-65.BCN.tzghosting.net,Change Required,,,
+CSN-BCN-HPA-66.BCN.tzghosting.net,Change Required,Y,1,3
+CSN-BCN-HPA-81.BCN.tzghosting.net,Change Required,Y,1,3
+CSN-BCN-HPA-86.BCN.tzghosting.net,Change Required,,,
+CSN-BCN-XEN-30.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-31.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-32.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-33.services.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-34.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-35.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-36.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-37.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-38.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-39.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-40.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-41.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-42.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-43.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-44.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-45.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-46.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-47.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-48.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-49.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-50.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-51.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-52.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-53.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-54.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-55.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-56.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-57.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-58.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BCN-XEN-59.BCN.tzghosting.net,Change Required,Y,1,2
+CSN-BRI-APP-12.BRI.tzghosting.net,No Change required,Y,2,2
+CSN-BRI-APP-18.BRI.tzghosting.net,No Change required,Y,2,2
+CSN-BRI-FXI-07.BRI.tzghosting.net,No Change required,Y,2,2
+CSN-CAM-APP-01.custhsp.tzghosting.net,No Change required,Y,2,2
+CSN-COA-APP-15.COA.tzghosting.net,No Change required,Y,2,2
+CSN-COA-APP-38.COA.tzghosting.net,No Change required,Y,2,2
+CSN-COA-APP-57.COA.tzghosting.net,No Change required,Y,2,2
+CSN-DMS-SQL-01.cust.tzghsp.net,No Change required,Y,2,2
+CSN-EMS-DPE-01.services.tzghosting.net,Change Required,Y,0,2
+CSN-EMS-HCN-001.services.tzghosting.net,No Change required,Y,2,2
+CSN-EMS-SLM-01.services.tzghosting.net,No Change required,Y,2,2
+CSN-KMH-UFT-01.KMH.tzghosting.net,No Change required,Y,2,2
+CSN-MHH-DFS-01.MHH.tzghosting.net,No Change required,Y,2,2
+CSN-MHH-HPA-31.MHH.tzghosting.net,Change Required,Y,1,3
+CSN-MHH-SQL-01.MHH.tzghosting.net,No Change required,Y,2,2
+CSN-MHH-SQL-05.MHH.tzghosting.net,No Change required,Y,2,2
+CSN-NBH-DFS-01.NBH.tzghosting.net,No Change required,Y,2,2
+CSN-NHP-WEB-05.NHP.tzghosting.net,No Change required,Y,2,2
+CSN-OHD-APP-38.OHD.tzghosting.net,No Change required,Y,2,2
+CSN-PHP-APP-63.PHP.tzghosting.net,No Change required,Y,2,2
+CSN-PHP-HPA-27.custhsp.tzghosting.net,No Change required,Y,2,2
+CSN-PHP-HPA-29.custhsp.tzghosting.net,No Change required,Y,2,2
+CSN-PHP-WAS-12.PHP.tzghosting.net,No Change required,Y,2,2
+CSN-QCA-APP-10.QCA.tzghosting.net,No Change required,Y,2,2
+CSN-QIC-DFS-01.QIC.tzghosting.net,No Change required,Y,2,2
+CSN-SHP-DC-02.SHP.tzghosting.net,No Change required,Y,2,2
+CSN-SMH-APP-01.SMH.tzghosting.net,No Change required,Y,2,2
+CSN-THC-SQL-04.custhsp.tzghosting.net,No Change required,Y,2,2
+CSN-THC-ZDC-04.custhsp.tzghosting.net,Change Required,Y,0,3
+CSN-TXC-WAS-01.TXC.tzghosting.net,No Change required,Y,2,2
+CSN-UAM-WEB-02.UAM.tzghosting.net,No Change required,Y,2,2
+CSN-VHP-SQL-02.VHP.tzghosting.net,No Change required,Y,2,2

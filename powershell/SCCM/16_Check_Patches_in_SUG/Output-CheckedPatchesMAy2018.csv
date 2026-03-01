@@ -1,0 +1,26 @@
+BulletinID,ArticleID,Present or Missing,SUG Name,Detail
+4095874,4095874,Not found in SCCM,NA,NA
+4095514,4095514,Not found in SCCM,NA,NA
+4096495,4096495,Not found in SCCM,NA,NA
+4095519,4095519,Not found in SCCM,NA,NA
+4095875,4095875,Not found in SCCM,NA,NA
+4095515,4095515,Not found in SCCM,NA,NA
+4096417,4096417,Not found in SCCM,NA,NA
+4096236,4096236,Not found in SCCM,NA,NA
+4096418,4096418,Not found in SCCM,NA,NA
+4096237,4096237,Not found in SCCM,NA,NA
+4095876,4095876,Not found in SCCM,NA,NA
+4095517,4095517,Not found in SCCM,NA,NA
+4095873,4095873,Not found in SCCM,NA,NA
+4095513,4095513,Not found in SCCM,NA,NA
+,4103712,Present,SUG-May-2018,2018-05 Security Only Quality Update for Windows 7 for x64-based Systems (KB4103712)
+,4103718,Present,SUG-May-2018,2018-05 Security Monthly Quality Rollup for Windows 7 for x64-based Systems (KB4103718)
+,4103725,Present,SUG-May-2018,2018-05 Security Monthly Quality Rollup for Windows Server 2012 R2 for x64-based Systems (KB4103725)
+,4103715,Present,SUG-May-2018,2018-05 Security Only Quality Update for Windows Server 2012 R2 for x64-based Systems (KB4103715)
+4131188,4131188,Missing. Required count is 0,SUG-May-2018,2018-05 Security Update for Windows Server 2008 for x64-based Systems (KB4131188)
+4130944,4130944,Missing. Required count is 0,SUG-May-2018,2018-05 Security Update for Windows Server 2008 for Itanium-based Systems (KB4130944)
+4134651,4134651,Missing. Required count is 67,SUG-May-2018,2018-05 Security Update for Windows Server 2008 for x86-based Systems (KB4134651)
+4101477,4101477,Missing. Required count is 0,SUG-May-2018,2018-05 Security Update for Windows Server 2008 for Itanium-based Systems (KB4101477)
+,4103718,Present,SUG-May-2018,2018-05 Security Monthly Quality Rollup for Windows 7 for x64-based Systems (KB4103718)
+,4103725,Present,SUG-May-2018,2018-05 Security Monthly Quality Rollup for Windows Server 2012 R2 for x64-based Systems (KB4103725)
+,4103768,Present,SUG-May-2018,Cumulative Security Update for Internet Explorer 11 for Windows Server 2012 R2 (KB4103768)

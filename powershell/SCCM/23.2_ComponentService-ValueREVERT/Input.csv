@@ -1,0 +1,17 @@
+Server,Status,BeforeCHG_EnableDCOM,BeforeCHG_LegacyAuthenticationLevel,BEforeCHG_LegacyImpersonationLevel
+CSN-AHW-ZDC-01.AHW.tzghosting.net,Registry Modified. Reboot Required,Y,0,3
+CSN-APW-XEN-05.custhsp.tzghosting.net,Registry Modified. Reboot Required,Y,0,3
+CSN-GHP-ZDC-01.GHP.tzghosting.net,Registry Modified. Reboot Required,Y,0,3
+CSN-GHP-ZDC-02.GHP.tzghosting.net,Registry Modified. Reboot Required,Y,0,3
+CSN-QIC-ZDC-01.QIC.tzghosting.net,Registry Modified. Reboot Required,Y,0,3
+CSN-TZG-ALM-03.services.tzghosting.net,Registry Modified. Reboot Required,,0,0
+CSN-AHW-CSF-01.AHW.tzghosting.net,Registry Modified. Reboot Required,Y,0,2
+CSN-CIG-ZDC-02.CIG.tzghosting.net,Registry Modified. Reboot Required,Y,0,3
+CSN-LAC-TOE-02.LAC.tzghosting.net,Registry Modified. Reboot Required,Y,0,2
+CSN-UHG-SQL-03.UHG.tzghosting.net,Registry Modified. Reboot Required,,,
+CSN-UHG-SQL-04.UHG.tzghosting.net,Registry Modified. Reboot Required,,,
+CSN-MHH-HPA-37.MHH.tzghosting.net,Registry Modified. Reboot Required,Y,1,3
+CSN-MHH-HPA-63.MHH.tzghosting.net,Registry Modified. Reboot Required,Y,1,3
+CSN-MHH-ZDC-02.MHH.tzghosting.net,Registry Modified. Reboot Required,Y,0,3
+CSN-WAE-IXP-C02.services.tzghosting.net,Registry Modified. Reboot Required,Y,0,2
+CSN-WHA-ZDC-01.WHA.tzghosting.net,Registry Modified. Reboot Required,Y,0,3

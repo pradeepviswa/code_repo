@@ -1,0 +1,8 @@
+CSN-DMS-WEB-01.cust.tzghsp.net
+ABN-DMS-WEB-T01.cust.tzghsp.net
+CSN-HZN-WEB-05.hzn.tzghosting.net
+ABN-HZN-WEB-T08.hzn.tzghosting.net
+CSN-DMS-SQL-01.cust.tzghsp.net
+ABN-DMS-SQL-T01.cust.tzghsp.net
+CSN-HZN-SQL-09.hzn.tzghosting.net
+ABN-HZN-SQL-04.hzn.tzghosting.net
