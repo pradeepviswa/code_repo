@@ -1,8 +1,0 @@
-SUG-Jul-2018 on MW non prod - outside MW
-SUG-Jul-2018 on MW Management Servers
-SUG-JulRem-2018 on MW Management Servers
-SUG-Patches-2016 on MW Management Servers
-SUG-Patches-2017 on MW Management Servers
-SUG-Patches-2018 on MW Management Servers
-SUG-Jul-2018 on DEMO Non Prod Servers
-SUG-JulRem-2018 on DEMO Non Prod Servers

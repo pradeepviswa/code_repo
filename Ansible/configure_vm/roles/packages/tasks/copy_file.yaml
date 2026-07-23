@@ -1,5 +1,0 @@
----
-- name: udpate nginx website
-  copy:
-    content: "{{html_content}}"
-    dest: /var/www/html/index.html

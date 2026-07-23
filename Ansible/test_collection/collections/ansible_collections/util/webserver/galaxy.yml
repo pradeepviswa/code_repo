@@ -1,9 +1,0 @@
-namespace: util
-name: webserver
-version: 1.0.0
-readme: README.md
-authors:
-  - Pradeep Viswanathan
-description: Apache2 installation and configuration collection
-license:
-  - MIT

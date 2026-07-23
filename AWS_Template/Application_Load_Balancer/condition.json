@@ -1,8 +1,0 @@
-[
-  {
-    "Field": "path-pattern",
-    "PathPatternConfig": {
-      "Values": ["/vid/*"]
-    }
-  }
-]

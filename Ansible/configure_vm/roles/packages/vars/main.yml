@@ -1,3 +1,0 @@
----
-# vars file for packages
-html_content: "<html> <body> <h1> This is custom website. Home page created from ansible <h1> </body> </html>"

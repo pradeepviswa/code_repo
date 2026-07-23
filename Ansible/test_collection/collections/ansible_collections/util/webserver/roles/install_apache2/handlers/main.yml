@@ -1,6 +1,0 @@
----
-# handlers file for install_apache2
-- name: service restart
-  service:
-    name: apache2
-    state: restarted
