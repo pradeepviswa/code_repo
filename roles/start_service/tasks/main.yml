@@ -1,0 +1,7 @@
+---
+# tasks file for start_service
+- name: start {{ service_name }} service
+  service:
+    name: "{{ service_name }}"
+    state: started
+    enabled: true

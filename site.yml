@@ -1,0 +1,23 @@
+---
+- name: Install apache on Ubuntu
+  hosts: dev
+  become: yes
+
+  
+  
+  tasks:
+    - name: install apache on ubuntu
+      include_role:
+        name: web
+      vars:
+        service_name: apache2
+    - name: stop apache service
+      stop_service:
+        service: apache2  
+    - name: start apache 2
+      include_role:
+        name: start_service
+      vars:
+        service_name: apache2
+
+
