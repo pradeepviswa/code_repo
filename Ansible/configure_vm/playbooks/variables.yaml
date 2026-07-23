@@ -1,0 +1,26 @@
+---
+- name: Configure server using ansible
+  hosts: all
+  become: yes
+
+  environment:
+    EXAMPLE: "Hello World"
+
+  vars:
+    website: my-website
+    measure: "kg"
+    find: ""
+    fruits:
+      - apple
+      - mango
+      - banana
+    prices:
+      apple: 30
+      mango: 50
+      banana: 20
+
+  vars_files:
+    - ../roles/variables/vars/list.yaml
+
+  roles:
+    - roles/variables

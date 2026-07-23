@@ -1,0 +1,224 @@
+Server,RebootStatus
+CSN-NHP-APP-38.NHP.tzghosting.net,Reboot Required
+ABN-AHW-ADC-01.AHW.tzghosting.net,Reboot Required
+ABN-AHW-APP-T11.AHW.tzghosting.net,Reboot Not Required
+CSN-NHP-APP-40.NHP.tzghosting.net,Reboot Required
+ABN-AHW-APP-T15.AHW.tzghosting.net,Reboot Not Required
+ABN-AHW-APP-T16.AHW.tzghosting.net,Reboot Not Required
+ABN-AHW-APP-T18.AHW.tzghosting.net,Reboot Not Required
+ABN-AHW-BIZ-T04.AHW.tzghosting.net,Reboot Not Required
+ABN-AHW-CAE-D05.AHW.tzghosting.net,Reboot Not Required
+CSN-NHP-APP-42.NHP.tzghosting.net,Reboot Required
+CSN-NHP-SQL-06.NHP.tzghosting.net,Reboot Required
+CSN-NHP-SQL-09.NHP.tzghosting.net,Reboot Not Required
+ABN-AHW-CAE-T10.AHW.tzghosting.net,Reboot Not Required
+CSN-OHC-APP-01.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHC-FHG-01.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-CAE-T13.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-01.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-02.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-CAE-T15.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-03.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-CSF-02.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-04.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-HUB-T04.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-06.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-IHM-T05.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-16.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-23.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-24.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-25.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-SQL-99.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-26.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-27.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-SQL-T10.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-29.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-32.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-SQL-T13.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-36.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-37.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-39.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-SQL-T14.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-40.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-SQL-T17.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-46.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-47.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-48.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-49.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-TME-T01.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-50.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-51.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-APP-52.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-FHG-01.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-WAS-D01.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-FXI-01.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-WAS-T03.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-FXI-02.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-WAS-01.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-WAS-T04.AHW.tzghosting.net,Reboot Not Required
+CSN-OHD-WAS-02.custhsp.tzghosting.net,Reboot Not Required
+CSN-OHD-WAS-03.custhsp.tzghosting.net,Reboot Not Required
+ABN-AHW-WEB-T05.AHW.tzghosting.net,Reboot Not Required
+ABN-AHW-WEB-T07.AHW.tzghosting.net,Reboot Not Required
+ABN-AHW-WEB-T09.AHW.tzghosting.net,Reboot Not Required
+CSN-OTS-ADC-01.OTS.tzghosting.net,Connection-Error
+ABN-AHW-WEB-T10.AHW.tzghosting.net,Reboot Not Required
+ABN-AHW-XEN-T01.AHW.tzghosting.net,Reboot Required
+ABN-AMS-DC-02.AMS.tzghosting.net,Reboot Not Required
+ABN-AMS-DFS-01.AMS.tzghosting.net,Reboot Not Required
+ABN-ATR-APP-T01.ATR.tzghosting.net,Reboot Not Required
+ABN-AYE-APP-T02.saas.tzghosting.net,Reboot Not Required
+ABN-AZC-APP-T01.AZC.tzghosting.net,Reboot Not Required
+ABN-AZC-APP-T07.AZC.tzghosting.net,Reboot Not Required
+ABN-AZC-DFS-01.AZC.tzghosting.net,Reboot Not Required
+ABN-AZC-HUB-T01.AZC.tzghosting.net,Reboot Not Required
+ABN-AZC-HUB-T02.AZC.tzghosting.net,Reboot Not Required
+CSN-OTS-ADC-02.OTS.tzghosting.net,Connection-Error
+ABN-BCN-APP-T47.BCN.tzghosting.net,Reboot Not Required
+ABN-BCN-XEN-D05.BCN.tzghosting.net,Reboot Not Required
+ABN-BCN-XEN-D07.BCN.tzghosting.net,Reboot Required
+ABN-BCN-XEN-T23.BCN.tzghosting.net,Reboot Not Required
+ABN-BCN-XEN-T26.BCN.tzghosting.net,Reboot Not Required
+ABN-BCN-XEN-T28.BCN.tzghosting.net,Reboot Not Required
+CSN-OTS-CSF-01.OTS.tzghosting.net,Connection-Error
+ABN-BCN-XEN-T34.BCN.tzghosting.net,Reboot Not Required
+ABN-BCN-XEN-T36.BCN.tzghosting.net,Reboot Not Required
+ABN-BCN-XEN-T37.BCN.tzghosting.net,Reboot Not Required
+ABN-BCN-XEN-T40.BCN.tzghosting.net,Reboot Not Required
+ABN-BNC-WAS-T04.custhsp.tzghosting.net,Reboot Not Required
+ABN-BNC-WAS-T08.custhsp.tzghosting.net,Reboot Not Required
+ABN-BRI-XEN-T02.BRI.tzghosting.net,Reboot Not Required
+ABN-BRI-XEN-T04.BRI.tzghosting.net,Reboot Not Required
+CSN-OTS-CSF-02.OTS.tzghosting.net,Connection-Error
+ABN-BRI-XEN-T05.BRI.tzghosting.net,Reboot Not Required
+ABN-BRI-XEN-T08.BRI.tzghosting.net,Reboot Not Required
+CSN-QCA-CAE-09.QCA.tzghosting.net,Reboot Not Required
+ABN-BRI-XEN-T13.BRI.tzghosting.net,Reboot Not Required
+CSN-RCB-APP-01.custhsp.tzghosting.net,Reboot Not Required
+ABN-BRI-XEN-T16.BRI.tzghosting.net,Reboot Not Required
+ABN-BRI-XEN-T26.BRI.tzghosting.net,Reboot Not Required
+ABN-BRI-XEN-T28.BRI.tzghosting.net,Reboot Not Required
+ABN-BRI-XEN-T29.BRI.tzghosting.net,Reboot Not Required
+ABN-BRI-XEN-T30.BRI.tzghosting.net,Reboot Not Required
+ABN-CES-APP-T01.qic.tzghosting.net,Reboot Not Required
+ABN-CIG-APP-D01.CIG.tzghosting.net,Reboot Not Required
+CSN-SAAS-ADC-01.saas.tzghosting.net,Connection-Error
+ABN-CIG-APP-T01.CIG.tzghosting.net,Reboot Not Required
+ABN-CIG-APP-T02.CIG.tzghosting.net,Reboot Not Required
+ABN-CIG-APP-T04.CIG.tzghosting.net,Reboot Not Required
+ABN-CIG-SQL-D02.CIG.tzghosting.net,Reboot Not Required
+CSN-SAAS-ADC-02.saas.tzghosting.net,Connection-Error
+ABN-CIG-SQL-T03.CIG.tzghosting.net,Reboot Not Required
+ABN-CIG-WEB-D03.CIG.tzghosting.net,Reboot Not Required
+ABN-CIG-WEB-T08.CIG.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-D03.CMB.tzghosting.net,Reboot Not Required
+CSN-SAAS-CSF-01.saas.tzghosting.net,Connection-Error
+ABN-CMB-APP-D09.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-D09.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-D10.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-D11.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T03.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T04.CMB.tzghosting.net,Reboot Not Required
+CSN-SAAS-SQL-99.saas.tzghosting.net,Connection-Error
+ABN-CMB-APP-T13.CMB.tzghosting.net,Reboot Not Required
+CSN-SVC-CXD-01.services.tzghosting.net,Ping-Failed
+ABN-CMB-APP-T51.CMB.tzghosting.net,Reboot Not Required
+CSN-SVC-SQL-12.services.tzghosting.net,Reboot Not Required
+CSN-SVC-UTIL-08.services.tzghosting.net,Reboot Required
+ABN-CMB-APP-T52.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T53.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T54.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T56.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T57.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T58.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T59.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T60.CMB.tzghosting.net,Reboot Not Required
+CSN-THR-APP-01.THR.tzghosting.net,Connection-Error
+ABN-CMB-APP-T61.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T62.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T63.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T64.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T65.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T66.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T67.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T68.CMB.tzghosting.net,Reboot Not Required
+CSN-THR-APP-02.THR.tzghosting.net,Connection-Error
+ABN-CMB-APP-T69.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T70.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T71.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-APP-T72.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-CAE-T09.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-CAE-T11.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-CAE-T16.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-CAE-T20.CMB.tzghosting.net,Reboot Not Required
+CSN-THR-APP-03.THR.tzghosting.net,Connection-Error
+ABN-CMB-CSF-02.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-DC-01.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-DC-02.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-DFS-01.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-D03.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-D04.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T01.CMB.tzghosting.net,Reboot Not Required
+CSN-THR-APP-04.THR.tzghosting.net,Connection-Error
+ABN-CMB-FHG-T02.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T04.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T06.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T07.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T11.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T14.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T15.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T16.CMB.tzghosting.net,Reboot Not Required
+CSN-THR-APP-06.THR.tzghosting.net,Connection-Error
+ABN-CMB-FHG-T17.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T18.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T19.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T20.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T21.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T22.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FHG-T23.CMB.tzghosting.net,Reboot Not Required
+CSN-THR-APP-07.THR.tzghosting.net,Connection-Error
+ABN-CMB-FXI-D01.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-D02.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-D03.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-D03.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T02.CMB.tzghosting.net,Reboot Not Required
+CSN-THR-APP-10.THR.tzghosting.net,Connection-Error
+ABN-CMB-FXI-T03.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T04.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T07.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T10.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T15.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T16.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T17.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T18.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T19.CMB.tzghosting.net,Reboot Not Required
+CSN-THR-BIZ-01.THR.tzghosting.net,Connection-Error
+ABN-CMB-FXI-T20.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T21.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T22.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T23.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T24.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T25.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T26.CMB.tzghosting.net,Reboot Not Required
+CSN-THR-HUB-01.THR.tzghosting.net,Connection-Error
+ABN-CMB-FXI-T27.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-FXI-T28.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-IHM-T05.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-IHM-T06.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-MQI-T04.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-RVR-T01.CMB.tzghosting.net,Reboot Not Required
+CSN-THR-SQL-01.THR.tzghosting.net,Connection-Error
+ABN-CMB-SQL-99.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-SQL-T02.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-SQL-T20.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-SQL-T24.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-WAS-D04.CMB.tzghosting.net,Reboot Not Required
+CSN-THR-SQL-03.THR.tzghosting.net,Connection-Error
+ABN-CMB-WAS-D05.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-WAS-T44.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-WAS-T45.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-WAS-T46.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-WAS-T47.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-WAS-T48.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-WAS-T49.CMB.tzghosting.net,Reboot Not Required
+ABN-CMB-WAS-T50.CMB.tzghosting.net,Reboot Not Required

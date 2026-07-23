@@ -1,0 +1,285 @@
+BulletinID,ArticleID,Present or Missing,SUG Name,Detail
+,3114874,Present,SUG-Feb-2018,Security Updates - Office 2010
+,3172459,Present,SUG-Feb-2018,Security Updates - Office 2013
+,4011143,Present,SUG-Feb-2018,Security Updates - Office 2016
+,4011686,Present,SUG-Feb-2018,Security Updates - Office 2016
+,4011690,Present,SUG-Feb-2018,Security Updates - Office 2013
+,4011707,Present,SUG-Feb-2018,Security Updates - Office 2010
+,4034044,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4058165,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4073079,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4073080,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4074587,Present,SUG-Feb-2018,Security Updates - Windows 7
+,4074589,Present,SUG-Feb-2018,Security Updates - Windows Server 2012
+,4074590,Present,SUG-Feb-2018,Security Updates - Windows Server 2016
+,4074593,Present,SUG-Feb-2018,Security Updates - Windows Server 2012
+,4074594,Present,SUG-Feb-2018,Security Updates - Windows Server 2012 R2
+,4074597,Present,SUG-Feb-2018,Security Updates - Windows Server 2012 R2
+,4074598,Present,SUG-Feb-2018,Security Updates - Windows 7
+,4074603,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4074736,Present,SUG-Feb-2018,Security Updates - Windows 7
+,4074836,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4074851,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+2538242,NA,Not found in SCCM,NA,NA
+,4074851,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008
+2538243,NA,Not found in SCCM,NA,NA
+,4074851,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008
+2565063,NA,Not found in SCCM,NA,NA
+,4074851,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008
+2901112,NA,Not found in SCCM,NA,NA
+,4074851,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008
+2898857,NA,Not found in SCCM,NA,NA
+,4074851,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008
+MS13-052,2840629,Present,SUG-Feb-2018,Security Updates - Windows Server 2003, Datacenter Edition
+2835393,NA,Not found in SCCM,NA,NA
+MS13-052,2840629,Missing,SUG-Feb-2018,Security Updates - Windows Server 2003, Datacenter Edition
+2832407,NA,Not found in SCCM,NA,NA
+MS13-052,2840629,Missing,SUG-Feb-2018,Security Updates - Windows Server 2003, Datacenter Edition
+MS13-052,2840628,Present,SUG-Feb-2018,Security Updates - Windows 7
+2833947,NA,Not found in SCCM,NA,NA
+MS13-052,2840628,Missing,SUG-Feb-2018,Security Updates - Windows 7
+2844287,NA,Not found in SCCM,NA,NA
+MS13-052,2840628,Missing,SUG-Feb-2018,Security Updates - Windows 7
+MS13-052,2833941,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4055272,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4055270,Present,SUG-Feb-2018,Security Updates - Windows Server 2012
+,4055267,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4055265,Present,SUG-Feb-2018,Security Updates - Windows Server 2012
+,4041086,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4041083,Present,SUG-Feb-2018,Security Updates - Windows 7
+,4041084,Present,SUG-Feb-2018,Security Updates - Windows Server 2012
+,4041085,Present,SUG-Feb-2018,Security Updates - Windows 8.1
+MS13-007,2736428,Present,SUG-Feb-2018,Security Updates - Windows 7
+MS13-007,2736422,Present,SUG-Feb-2018,Security Updates - Windows 7
+MS15-048,3032662,Present,SUG-Feb-2018,Security Updates - Windows 7
+MS15-048,3023221,Present,SUG-Feb-2018,Security Updates - Windows 7
+3035485,NA,Not found in SCCM,NA,NA
+MS15-048,3023221,Missing,SUG-Feb-2018,Security Updates - Windows 7
+MS15-048,3035488,Present,SUG-Feb-2018,Security Updates - Windows Server 2003, Datacenter Edition
+MS15-048,3023220,Present,SUG-Feb-2018,Security Updates - Windows Server 2003, Datacenter Edition
+MS15-048,3023213,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+MS12-073,2716513,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS12-073,2719033,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+2978116,NA,Not found in SCCM,NA,NA
+MS12-073,2719033,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS14-072,2978125,Present,SUG-Feb-2018,Security Updates - Windows 7
+MS14-057,2968292,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+MS14-057,2972098,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+2979568,NA,Not found in SCCM,NA,NA
+MS14-057,2972098,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008
+2979575,NA,Not found in SCCM,NA,NA
+MS14-057,2972098,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008
+MS14-057,2972106,Present,SUG-Feb-2018,Security Updates - Windows 7
+MS13-002,2758694,Present,SUG-Feb-2018,Chinese (Traditional, Taiwan) - Chinese (Simplified, PRC)
+MS13-002,2758694,Present,SUG-Feb-2018,Chinese (Traditional, Taiwan) - Chinese (Simplified, PRC)
+MS12-083,2765809,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS15-101,3074541,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+MS15-101,3074547,Present,SUG-Feb-2018,Security Updates - Windows 7
+MS13-004,2742598,Present,SUG-Feb-2018,Security Updates - Windows 7
+MS13-004,2756920,Present,SUG-Feb-2018,Security Updates - Windows 7
+MS13-004,2742595,Present,SUG-Feb-2018,Security Updates - Windows 7
+MS13-004,2742599,Present,SUG-Feb-2018,Security Updates - Windows 7
+2756921,NA,Not found in SCCM,NA,NA
+MS13-004,2742599,Missing,SUG-Feb-2018,Security Updates - Windows 7
+MS13-004,2742595,Present,SUG-Feb-2018,Security Updates - Windows 7
+MS13-004,2742613,Present,SUG-Feb-2018,Security Updates - Windows 7
+MS16-001,3124275,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+4012215,NA,Not found in SCCM,NA,NA
+MS16-001,3124275,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS17-008,4012213,Present,SUG-Feb-2018,Security Updates - Windows Server 2012 R2
+4012216,NA,Not found in SCCM,NA,NA
+MS17-008,4012213,Missing,SUG-Feb-2018,Security Updates - Windows Server 2012 R2
+MS13-015,2789644,Present,SUG-Feb-2018,Security Updates - Windows 7
+2789642,NA,Not found in SCCM,NA,NA
+MS13-015,2789644,Missing,SUG-Feb-2018,Security Updates - Windows 7
+958869,NA,Not found in SCCM,NA,NA
+MS13-015,2789644,Missing,SUG-Feb-2018,Security Updates - Windows 7
+972580,NA,Not found in SCCM,NA,NA
+MS13-015,2789644,Missing,SUG-Feb-2018,Security Updates - Windows 7
+972581,NA,Not found in SCCM,NA,NA
+MS13-015,2789644,Missing,SUG-Feb-2018,Security Updates - Windows 7
+972581,NA,Not found in SCCM,NA,NA
+MS13-015,2789644,Missing,SUG-Feb-2018,Security Updates - Windows 7
+972581,NA,Not found in SCCM,NA,NA
+MS13-015,2789644,Missing,SUG-Feb-2018,Security Updates - Windows 7
+971119,NA,Not found in SCCM,NA,NA
+MS13-015,2789644,Missing,SUG-Feb-2018,Security Updates - Windows 7
+MS16-120,3192391,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+3185330,NA,Not found in SCCM,NA,NA
+MS16-120,3192391,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS16-120,3192393,Present,SUG-Feb-2018,Security Updates - Windows Server 2012
+3185332,NA,Not found in SCCM,NA,NA
+MS16-120,3192393,Missing,SUG-Feb-2018,Security Updates - Windows Server 2012
+MS16-120,3192392,Present,SUG-Feb-2018,Security Updates - Windows Server 2012 R2
+3185331,NA,Not found in SCCM,NA,NA
+MS16-120,3192392,Missing,SUG-Feb-2018,Security Updates - Windows Server 2012 R2
+3182373,NA,Not found in SCCM,NA,NA
+MS16-120,3192392,Missing,SUG-Feb-2018,Security Updates - Windows Server 2012 R2
+2863253,NA,Not found in SCCM,NA,NA
+MS16-120,3192392,Missing,SUG-Feb-2018,Security Updates - Windows Server 2012 R2
+2861190,NA,Not found in SCCM,NA,NA
+MS16-120,3192392,Missing,SUG-Feb-2018,Security Updates - Windows Server 2012 R2
+MS13-082,2861697,Present,SUG-Feb-2018,Security Updates - Windows Server 2003, Datacenter Edition
+MS13-082,2858302,Present,SUG-Feb-2018,Security Updates - Windows 7
+MS13-082,2861188,Present,SUG-Feb-2018,Security Updates - Windows Server 2003, Datacenter Edition
+MS13-082,2861193,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+MS13-082,2861208,Present,SUG-Feb-2018,Security Updates - Windows 7
+3104002,NA,Not found in SCCM,NA,NA
+MS13-082,2861208,Missing,SUG-Feb-2018,Security Updates - Windows 7
+MS14-026,2931356,Present,SUG-Feb-2018,Security Updates - Windows 7
+2931365,NA,Not found in SCCM,NA,NA
+MS14-026,2931356,Missing,SUG-Feb-2018,Security Updates - Windows 7
+2931368,NA,Not found in SCCM,NA,NA
+MS14-026,2931356,Missing,SUG-Feb-2018,Security Updates - Windows 7
+2931368,NA,Not found in SCCM,NA,NA
+MS14-026,2931356,Missing,SUG-Feb-2018,Security Updates - Windows 7
+2931358,NA,Not found in SCCM,NA,NA
+MS14-026,2931356,Missing,SUG-Feb-2018,Security Updates - Windows 7
+2931366,NA,Not found in SCCM,NA,NA
+MS14-026,2931356,Missing,SUG-Feb-2018,Security Updates - Windows 7
+MS15-050,3055642,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS15-050,3055642,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS13-027,2807986,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS15-005,3022777,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+2847311,NA,Not found in SCCM,NA,NA
+MS15-005,3022777,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+2855844,NA,Not found in SCCM,NA,NA
+MS15-005,3022777,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS13-081,2862330,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS13-081,2862335,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS13-081,2864202,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS13-081,2868038,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+2876284,NA,Not found in SCCM,NA,NA
+MS13-081,2868038,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+2883150,NA,Not found in SCCM,NA,NA
+MS13-081,2868038,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS13-081,2884256,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS12-033,2690533,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+2719985,NA,Not found in SCCM,NA,NA
+MS12-033,2690533,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+2721691,NA,Not found in SCCM,NA,NA
+MS12-033,2690533,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+2719985,NA,Not found in SCCM,NA,NA
+MS12-033,2690533,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+973544,NA,Not found in SCCM,NA,NA
+MS12-033,2690533,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+973551,NA,Not found in SCCM,NA,NA
+MS12-033,2690533,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+973552,NA,Not found in SCCM,NA,NA
+MS12-033,2690533,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+3142024,NA,Not found in SCCM,NA,NA
+MS12-033,2690533,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+3142033,NA,Not found in SCCM,NA,NA
+MS12-033,2690533,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+3142037,NA,Not found in SCCM,NA,NA
+MS12-033,2690533,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+3142024,NA,Not found in SCCM,NA,NA
+MS12-033,2690533,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+3142026,NA,Not found in SCCM,NA,NA
+MS12-033,2690533,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+3142030,NA,Not found in SCCM,NA,NA
+MS12-033,2690533,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+3142036,NA,Not found in SCCM,NA,NA
+MS12-033,2690533,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS13-090,2900986,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+MS14-040,2961072,Present,SUG-Feb-2018,English - French
+3163245,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+3163251,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+3164025,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+3163247,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+3163291,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+3164024,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+2598041,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+2598039,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+2804579,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+2804576,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+2808735,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+2840149,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+2808735,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+2840149,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+2808735,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+2840149,NA,Not found in SCCM,NA,NA
+MS14-040,2961072,Missing,SUG-Feb-2018,English - French
+MS12-074,2737019,Present,SUG-Feb-2018,Security Updates - Windows 7
+2698023,NA,Not found in SCCM,NA,NA
+MS12-074,2737019,Missing,SUG-Feb-2018,Security Updates - Windows 7
+MS12-074,2729449,Present,SUG-Feb-2018,Security Updates - Windows 7
+MS12-074,2729453,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+2698023,NA,Not found in SCCM,NA,NA
+MS12-074,2729453,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008
+MS12-074,2737019,Present,SUG-Feb-2018,Security Updates - Windows 7
+2687441,NA,Not found in SCCM,NA,NA
+MS12-074,2737019,Missing,SUG-Feb-2018,Security Updates - Windows 7
+2597986,NA,Not found in SCCM,NA,NA
+MS12-074,2737019,Missing,SUG-Feb-2018,Security Updates - Windows 7
+MS12-060,2726929,Present,SUG-Feb-2018,Security Updates - Office 2003
+2687441,NA,Not found in SCCM,NA,NA
+MS12-060,2726929,Missing,SUG-Feb-2018,Security Updates - Office 2003
+,4023307,Present,SUG-Feb-2018,Feature Packs - Silverlight
+4017094,NA,Not found in SCCM,NA,NA
+,4023307,Missing,SUG-Feb-2018,Feature Packs - Silverlight
+,4038779,Present,SUG-Feb-2018,Security Updates - Windows 7
+4038792,NA,Not found in SCCM,NA,NA
+,4038779,Missing,SUG-Feb-2018,Security Updates - Windows 7
+,4032201,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+4034664,NA,Not found in SCCM,NA,NA
+,4032201,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4048957,Present,SUG-Feb-2018,Security Updates - Windows 7
+4053440,NA,Not found in SCCM,NA,NA
+,4048957,Missing,SUG-Feb-2018,Security Updates - Windows 7
+4025336,NA,Not found in SCCM,NA,NA
+,4048957,Missing,SUG-Feb-2018,Security Updates - Windows 7
+4025341,NA,Not found in SCCM,NA,NA
+,4048957,Missing,SUG-Feb-2018,Security Updates - Windows 7
+,4025397,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4022746,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+4025339,NA,Not found in SCCM,NA,NA
+,4022746,Missing,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4025333,Present,SUG-Feb-2018,Security Updates - Windows Server 2012 R2
+,4025337,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+,4054518,Present,SUG-Feb-2018,Security Updates - Windows Server 2008 R2
+,4048958,Present,SUG-Feb-2018,Security Updates - Windows Server 2012 R2
+,4048959,Present,SUG-Feb-2018,Security Updates - Windows Server 2012
+,4048957,Present,SUG-Feb-2018,Security Updates - Windows 7
+,4019108,Present,SUG-Feb-2018,Security Updates - Windows 7
+,4019111,Present,SUG-Feb-2018,Security Updates - Windows 8.1
+,4019109,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4019110,Present,SUG-Feb-2018,Security Updates - Windows Server 2012
+4019474,NA,Not found in SCCM,NA,NA
+,4019110,Missing,SUG-Feb-2018,Security Updates - Windows Server 2012
+4019112,NA,Not found in SCCM,NA,NA
+,4019110,Missing,SUG-Feb-2018,Security Updates - Windows Server 2012
+4019114,NA,Not found in SCCM,NA,NA
+,4019110,Missing,SUG-Feb-2018,Security Updates - Windows Server 2012
+4019115,NA,Not found in SCCM,NA,NA
+,4019110,Missing,SUG-Feb-2018,Security Updates - Windows Server 2012
+4019113,NA,Not found in SCCM,NA,NA
+,4019110,Missing,SUG-Feb-2018,Security Updates - Windows Server 2012
+4019473,NA,Not found in SCCM,NA,NA
+,4019110,Missing,SUG-Feb-2018,Security Updates - Windows Server 2012
+,4041687,Present,SUG-Feb-2018,Security Updates - Windows Server 2012 R2
+,4041681,Present,SUG-Feb-2018,Security Updates - Windows 7
+,4041671,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4041690,Present,SUG-Feb-2018,Security Updates - Windows Server 2012
+,4042121,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4042123,Present,SUG-Feb-2018,Security Updates - Windows Server 2008
+,4041691,Present,SUG-Feb-2018,Security Updates - Windows 10
+,4041693,Present,SUG-Feb-2018,Security Updates - Windows Server 2012 R2
+,4041678,Present,SUG-Feb-2018,Security Updates - Windows 7
+,4041679,Present,SUG-Feb-2018,Security Updates - Windows Server 2012
+,4074595,Present,SUG-Feb-2018,Security Updates - Windows Server 2012 R2

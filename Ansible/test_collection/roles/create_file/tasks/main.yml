@@ -1,0 +1,5 @@
+- name: Test collection module
+  util.filetools.file_present:
+    path: /tmp/collection_ok.txt
+    content: "Collection works!"
+    state: present

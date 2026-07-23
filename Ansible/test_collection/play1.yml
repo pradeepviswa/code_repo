@@ -1,0 +1,10 @@
+---
+- name: Configure apache2
+  hosts: all
+  gather_facts: no
+  roles:
+  - util.webserver.install_apache2
+  - create_file
+
+
+  

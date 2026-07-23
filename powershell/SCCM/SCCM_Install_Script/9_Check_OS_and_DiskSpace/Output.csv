@@ -1,0 +1,21 @@
+Server,OS,C: Size, C: Free Space, Free Percent
+ABN-SVC-APP-D01.services.tzghosting.net,Microsoft Windows Server 2008 R2 Standard ,39.90,6.03,15.11%
+ABN-TZG-APP-04.services.tzghosting.net,Microsoft Windows Server 2008 R2 Standard ,39.90,5.10,12.78%
+ABN-TZG-APP-T12.services.tzghosting.net,Microsoft Windows Server 2008 R2 Standard ,31.90,3.55,11.13%
+ABN-TZG-SLK-02.services.tzghosting.net,Microsoft Windows Server 2008 R2 Standard ,31.90,2.30,7.21%
+ABN-TZG-SQL-30.services.tzghosting.net,Microsoft Windows Server 2008 R2 Enterprise ,31.90,4.22,13.23%
+ABN-TZG-XPD-02.services.tzghosting.net,Failed
+ABN-TZG-XPD-03.services.tzghosting.net,Failed
+CSN-EMS-SIS-D01.services.tzghosting.net,Microsoft Windows Server 2008 R2 Standard ,49.90,16.56,33.19%
+CSN-SVC-EPO-01.services.tzghosting.net,Failed
+CSN-SVC-SQL-07.services.tzghosting.net,Microsoft Windows Server 2008 R2 Enterprise ,31.90,2.44,7.65%
+CSN-SVC-SQL-23.services.tzghosting.net,Failed
+CSN-SVC-SQL-25.services.tzghosting.net,Failed
+CSN-SVC-SQL-28.services.tzghosting.net,Failed
+CSN-SVC-VUM-02.services.tzghosting.net,Failed
+CSN-SVC-WEB-07.services.tzghosting.net,Failed
+CSN-TZG-SAN-01.services.tzghosting.net,Microsoft Windows Server 2008 R2 Standard ,40.00,2.44,6.10%
+CSN-TZG-SQL-36.services.tzghosting.net,Microsoft Windows Server 2008 R2 Standard ,39.90,2.43,6.09%
+CSN-TZG-WEB-08.services.tzghosting.net,Microsoft Windows Server 2008 R2 Standard ,39.90,15.86,39.75%
+CSN-TZI-NTWW-01.services.tzghosting.net,Microsoft Windows Server 2008 R2 Standard ,39.90,2.67,6.69%
+CSN-TZI-NTWW-02.services.tzghosting.net,Microsoft Windows Server 2008 R2 Standard ,39.90,2.03,5.09%

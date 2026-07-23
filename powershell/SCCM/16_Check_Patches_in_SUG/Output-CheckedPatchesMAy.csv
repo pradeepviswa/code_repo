@@ -1,0 +1,41 @@
+BulletinID,ArticleID,Present or Missing,SUG Name,Detail
+2467173,2467173,Missing. Required count is 105,SUG-May-2018,Security Update for Microsoft Visual C++ 2010 Redistributable Package (KB2467173)
+4025341,4025341,Not found in SCCM,NA,NA
+,4103725,Present,SUG-May-2018,2018-05 Security Monthly Quality Rollup for Windows Server 2012 R2 for x64-based Systems (KB4103725)
+3074228,3074228,Missing. Required count is 68,SUG-May-2018,Security Update for Microsoft .NET Framework 4.5.1 and 4.5.2 on Windows 8.1 and Windows Server 2012 R2 x64-based Systems (KB3074228)
+4284878,4284878,Missing. Required count is 2093,SUG-May-2018,2018-06 Security Only Quality Update for Windows Server 2012 R2 for x64-based Systems (KB4284878)
+4230450,4230450,Missing. Required count is 306,SUG-May-2018,Cumulative Security Update for Internet Explorer 11 for Windows Server 2008 R2 for x64-based Systems (KB4230450)
+4284867,4284867,Missing. Required count is 1811,SUG-May-2018,2018-06 Security Only Quality Update for Windows Server 2008 R2 for x64-based Systems (KB4284867)
+3074545,3074545,Missing. Required count is 105,SUG-May-2018,Security Update for Microsoft .NET Framework 3.5 on Windows 8.1 and Windows Server 2012 R2 for x64-based Systems (KB3074545)
+3023239,3023239,Not found in SCCM,NA,NA
+3097992,3097992,Missing. Required count is 100,SUG-May-2018,Security Update for Microsoft .NET Framework 3.5 on Windows 8.1 and Windows Server 2012 R2 for x64-based Systems (KB3097992)
+4025337,4025337,Missing. Required count is 0,SUG-May-2018,2017-07 Security Only Quality Update for Windows Server 2008 R2 for Itanium-based Systems (KB4025337)
+4034879,4034879,Not found in SCCM,NA,NA
+4025397,4025397,Missing. Required count is 0,SUG-May-2018,Security Update for Windows Server 2008 (KB4025397)
+4025497,4025497,Missing. Required count is 0,SUG-May-2018,Security Update for Windows Server 2008 for Itanium-based Systems (KB4025497)
+4025877,4025877,Not found in SCCM,NA,NA
+4022746,4022746,Missing. Required count is 0,SUG-May-2018,Security Update for Windows Server 2008 for x64-based Systems (KB4022746)
+4025398,4025398,Missing. Required count is 0,SUG-May-2018,Security Update for Windows Server 2008 (KB4025398)
+4025409,4025409,Missing. Required count is 0,SUG-May-2018,Security Update for Windows Server 2008 for x64-based Systems (KB4025409)
+4022748,4022748,Missing. Required count is 0,SUG-May-2018,Security Update for Windows Server 2008 (KB4022748)
+4022914,4022914,Missing. Required count is 0,SUG-May-2018,Security Update for Windows Server 2008 (KB4022914)
+4025674,4025674,Missing. Required count is 0,SUG-May-2018,Security Update for Windows Server 2008 (KB4025674)
+4026061,4026061,Missing. Required count is 0,SUG-May-2018,Security Update for Windows Server 2008 (KB4026061)
+4032955,4032955,Not found in SCCM,NA,NA
+4026059,4026059,Missing. Required count is 0,SUG-May-2018,Security Update for Windows Server 2008 (KB4026059)
+4025240,4025240,Missing. Required count is 0,SUG-May-2018,Security Update for Windows Server 2008 for Itanium-based Systems (KB4025240)
+4025336,4025336,Not found in SCCM,NA,NA
+4025333,4025333,Missing. Required count is 80,SUG-May-2018,2017-07 Security Only Quality Update for Windows Server 2012 R2 for x64-based Systems (KB4025333)
+,4103715,Present,SUG-May-2018,2018-05 Security Only Quality Update for Windows Server 2012 R2 for x64-based Systems (KB4103715)
+,4103712,Present,SUG-May-2018,2018-05 Security Only Quality Update for Windows 7 for x64-based Systems (KB4103712)
+,4103718,Present,SUG-May-2018,2018-05 Security Monthly Quality Rollup for Windows Server 2008 R2 for x64-based Systems (KB4103718)
+4130956,4130956,Missing. Required count is 0,SUG-May-2018,2018-06 Security Update for Windows Server 2008 for Itanium-based Systems (KB4130956)
+4131188,4131188,Missing. Required count is 0,SUG-May-2018,2018-05 Security Update for Windows Server 2008 for x64-based Systems (KB4131188)
+4130944,4130944,Missing. Required count is 0,SUG-May-2018,2018-05 Security Update for Windows Server 2008 for Itanium-based Systems (KB4130944)
+4101477,4101477,Missing. Required count is 0,SUG-May-2018,2018-05 Security Update for Windows Server 2008 for Itanium-based Systems (KB4101477)
+4134651,4134651,Missing. Required count is 62,SUG-May-2018,2018-05 Security Update for Windows Server 2008 for x86-based Systems (KB4134651)
+4284815,4284815,Missing. Required count is 2138,SUG-May-2018,2018-06 Security Monthly Quality Rollup for Windows Server 2012 R2 for x64-based Systems (KB4284815)
+4230467,4230467,Missing. Required count is 0,SUG-May-2018,2018-06 Security Update for Windows Server 2008 for x64-based Systems (KB4230467)
+4294413,4294413,Missing. Required count is 0,SUG-May-2018,2018-06 Security Update for Windows Server 2008 for Itanium-based Systems (KB4294413)
+4234459,4234459,Missing. Required count is 0,SUG-May-2018,2018-06 Security Update for Windows Server 2008 for Itanium-based Systems (KB4234459)
+2542054,2542054,Missing. Required count is 13,SUG-May-2018,Security Update for Microsoft Visual Studio 2010 (KB2542054)

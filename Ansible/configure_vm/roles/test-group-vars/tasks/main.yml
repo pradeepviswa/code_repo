@@ -1,0 +1,10 @@
+---
+# tasks file for test-group-vars
+- name: show hello message
+  debug:
+    msg: "Hello world"
+
+- name: below value is printed from group_vars
+  debug:
+    msg: "Name / post : {{ username }} /  {{ post }}"
+

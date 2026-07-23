@@ -1,0 +1,13 @@
+---
+- name: Test custom Ansible module
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Create a file using custom module
+      file_present:
+        path: /tmp/demo.txt
+        content: "Hello from custom module"
+        state: present
+
+  # roles:
+  #   - roles/custom-module

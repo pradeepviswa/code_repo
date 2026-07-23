@@ -1,0 +1,4045 @@
+<html>
+<head>
+                <title> Server Tool </title>
+<HTA:APPLICATION
+                APPLICATIONNAME="Ticketing Tool"
+                ID="Server Tool"
+                SINGLEINSTANCE="yes"
+                maximizeButton="Yes"
+                minimizeButton="yes"
+                showInTaskbar="yes"
+                innerBorder="yes"
+                navigable="yes"
+                scroll="auto"
+                scrollFlat="yes"
+				WINDOWSTATE="maximize"
+>
+<SCRIPT Language="VBScript">
+
+
+
+ Public w,x,y, MyTitle 
+ '-- w: bar width, x: done items, y: remaining items
+
+'for registy value retrieval
+Const HKEY_CLASSES_ROOT   = &H80000000
+Const HKEY_CURRENT_USER   = &H80000001
+Const HKEY_LOCAL_MACHINE  = &H80000002
+Const HKEY_USERS          = &H80000003
+
+Const REG_SZ = 1 
+Const REG_EXPAND_SZ = 2 
+Const REG_BINARY = 3 
+Const REG_DWORD = 4 
+Const REG_MULTI_SZ = 7
+
+Set fso = CreateObject("Scripting.FileSystemObject")
+
+
+                                
+Function id(o)
+Set id = document.getElementById(o)
+End Function
+
+Function getLocalHostname()
+	Set wshNetwork = CreateObject( "WScript.Network" )
+	getLocalHostname = wshNetwork.ComputerName
+	getLocalHostname = trim(getLocalHostname)
+End Function
+
+Sub Window_Onload
+ 
+	id("ta1").value = getLocalHostname()
+
+document.body.style.fontfamily = "Arial Unicode MS"
+document.body.style.color = "112299"
+document.body.style.fontsize = "10pt"
+'  .fontfamily = "verdana"
+'  .fontsize = "48pt"
+'  .color = "blue"
+
+'window.resizeTo 1000,800
+'w=50
+'y=1352
+MyTitle = " _ Server Tool"
+'window.setInterval "Progress", 150
+
+ 'Progress x,y,w
+End Sub
+  
+ Sub Progress (x,y,w)
+  d = Round( x / (y/w) +1  ,0)
+  document.Title = FormatPercent(x/y, 0) & MyTitle
+  document.all.ProgBarDone.innerText = String(d, "_")
+   If d<w Then
+   document.all.ProgBarToDo.innerText = String(w-d, "_") & "|"
+   Else
+   document.all.ProgBarToDo.innerText = "|"
+   End If
+   If x>=y Then
+   document.all.ProgBarToDo.innerText = ""
+   End If
+End Sub
+
+'get textarea values in array format 
+Function TextareaInArray(objID)
+                Dim myArray, docnos
+                docnos = id(objID).value
+                myArray = Split(docnos, vbCrLf)
+                TextareaInArray = myArray
+End Function
+
+
+Dim mainOutputStr         'public variable
+
+Function showServerNames()
+	id("ta1").value = serverList = ""
+	dim browseServer, serverList
+	browseServer = trim(id("browseServer").value)
+	serverList = readFile(browseServer)
+	id("ta1").value = serverList
+	
+	serverList = ""
+End Function
+
+Function GetInfo()
+Dim ServerArray, ServerCount, ServerStatus
+ServerArray = TextareaInArray("ta1")
+ServerCount = UBound(ServerArray)+1
+
+'-- w: bar width, x: done items, y: remaining items
+                w=100
+                x = 0
+                y=ServerCount-x
+
+                for each strComputer in ServerArray
+
+				'hold the screen for 0.5 ms
+				strCmd = "Timeout /T 0.5 /nobreak"
+				intReturn = objShell.Run(strCmd, 0, true)
+				
+                                ServerStatus = checkComputer(strComputer)
+                                if(ServerStatus="true") then
+                                                x=x+1
+                                                id("ServerinProgress").innerText=strComputer
+                                                id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+
+                                                Progress x,y,w
+
+                                                taskListArray = Split(taskList, vbCrLf)
+                                                for each t in taskListArray
+                                                                t =  trim(t)
+                                                                if not t="" then
+                                                                                                id("TaskinProgress").innerText = t
+                                                                                                Dim a
+                                                                                                a = "Call "& t &"(true)"
+                                                                                                Execute Eval("a")
+                                                                end if
+                                                next 
+                                                writelog mainOutputStr
+                                                mainOutputStr = mainOutputStr & vbNewLine
+												'msgbox mainOutputStr
+                                Else
+                                                writelog strComputer & vbTab & ServerStatus
+                                end if
+
+                                mainOutputStr=""
+								
+		Set objShell = CreateObject("Wscript.shell")
+		strCmd = "Timeout /T 0.3 /nobreak"
+		intReturn = objShell.Run(strCmd, 0, true)
+
+                next
+                w=0
+                x=0
+                y=0
+                mainOutputStr = ""
+                taskList=""
+                msgbox "Done"
+End Function
+
+Function Utility(t)
+Dim retVal, svcName
+
+Dim ServerArray, ServerCount, ServerStatus
+ServerArray = TextareaInArray("ta1")
+ServerCount = UBound(ServerArray)+1
+
+'-- w: bar width, x: done items, y: remaining items
+                w=100
+                x = 0
+                y=ServerCount-x
+                for each strComputer in ServerArray
+                                ServerStatus = checkComputer(strComputer)
+                                if(ServerStatus="true") then
+                                                x=x+1
+                                                id("ServerinProgress").innerText=strComputer
+                                                id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+
+                                                Progress x,y,w
+                                                id("TaskinProgress").innerText = t
+
+                                                if t = "ServiceStatus" then
+                                                                svcName = Trim(id("ServiceName").value)
+                                                                retVal = serviceStatus (svcName)
+                                                                mainOutputStr = x & vbTAB & strComputer & vbTAB & svcName & vbTAB & retVal
+                                                                writelog mainOutputStr
+
+                                                end if
+                                Else
+                                                writelog strComputer & vbTab & ServerStatus
+                                end if
+
+                                mainOutputStr=""
+
+                next
+                w=0
+                x=0
+                y=0
+                mainOutputStr = ""
+                msgbox "Done"
+
+
+End Function
+
+Function getRequiredInfo(t)
+on error resume next
+dim x
+
+End Function
+
+
+Function checkAll(cb, fromSection)
+on error resume next
+Dim checkboxes 
+                Set checkboxes = document.getElementsByName(cb)
+
+                if id(fromSection).checked then
+                                For Each c In checkboxes
+                                                c.checked=true
+                                Next                                                      
+                else
+                                For Each c In checkboxes
+                                                c.checked=false
+                                Next                                                      
+                end if
+updateTaskList()              
+End Function
+
+Dim objWMIService, oReg, objSession, objWMIServiceGrp, strQuery
+Dim publicStrComputer	'for server reboot public variable required
+
+Function checkComputer(strComputer)
+on error resume next
+                Err.Clear
+                On Error Resume Next
+					
+					Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\root\CIMV2")          'create service object                                                     'common for all
+					
+
+                Select Case Err.Number
+                Case 0
+                    checkComputer="true"
+					publicStrComputer = strComputer
+
+					Set oReg=GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & strComputer & "\root\default:StdRegProv")      'to rerieve registry values
+					Set objSession = CreateObject("Microsoft.Update.Session",""& strComputer &"")          'to fetch windows update related information        
+					Set objWMIServiceGrp = GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & strComputer & "\root\cimv2")  'created for admin group detail
+					strQuery = "select * from Win32_GroupUser where GroupComponent = " & chr(34) & "Win32_Group.Domain='" & strComputer & "',Name='Administrators'" & Chr(34)
+ 					
+
+								
+                Case 70
+                                checkComputer = "Error - Permission Denied"
+                Case 462
+                                checkComputer = "Error - The remote server machine does not exist or is unavailable"
+                Case -2147217375
+                                checkComputer = "Unknown/undocumented runtime error"
+                Case Else
+                                checkComputer = "Unhandeled error"
+                End Select
+                Err.Clear
+                On Error GoTo 0		
+				
+
+End Function
+
+Function OperatingSystem(writeInTA)
+on error resume next
+                                                set objOs = objWMIService.ExecQuery("Select * from Win32_OperatingSystem")                                           
+                                                For Each objItem in objOS 
+                                                                OperatingSystem = objItem.Name 
+																s = InStr(OperatingSystem, "|")
+																OperatingSystem = Mid(OperatingSystem,1,s-1) 
+                                                next
+                                                mainOutputStr_Update writeInTA,OperatingSystem
+End Function
+
+Function OSArchitecture(writeInTA)
+on error resume next
+OSArchitecture = "32-bit"
+                                                set objOs = objWMIService.ExecQuery("Select * from Win32_OperatingSystem")                                           
+                                                For Each objItem in objOS 
+                                                                OSArchitecture = objItem.OSArchitecture 
+                                                next
+                mainOutputStr_Update writeInTA, OSArchitecture
+End Function
+
+Function OSArchitecture_SingleServer(strComputer)
+on error resume next
+Set objWMIService_Arc = GetObject("winmgmts:\\" & strComputer & "\root\CIMV2")
+OSArchitecture_SingleServer = "32-bit"
+                                                set objOs = objWMIService_Arc.ExecQuery("Select * from Win32_OperatingSystem")                                           
+                                                For Each objItem in objOS 
+                                                                OSArchitecture_SingleServer = objItem.OSArchitecture 
+                                                next
+
+End Function
+
+Function ServicePackVersion(writeInTA)
+on error resume next
+                set objOs = objWMIService.ExecQuery("Select * from Win32_OperatingSystem")                                           
+                For Each objItem in objOS 
+                                ServicePackVersion = objItem.ServicePackMajorVersion
+                Next
+                mainOutputStr_Update writeInTA,ServicePackVersion
+End Function
+
+Function OSBuild(writeInTA)
+on error resume next
+                                                set objOs = objWMIService.ExecQuery("Select * from Win32_OperatingSystem")                                           
+                                                For Each objItem in objOS 
+                                                                OSBuild = objItem.buildnumber
+                                                Next
+mainOutputStr_Update writeInTA,OSBuild
+End Function
+
+Function RebootServer()
+on error resume next
+
+Dim ServerArray, ServerCount, ServerStatus
+ServerArray = TextareaInArray("ta1")
+ServerCount = UBound(ServerArray)+1
+
+'-- w: bar width, x: done items, y: remaining items
+                w=100
+                x = 0
+                y=ServerCount-x
+                for each strComputer in ServerArray
+				
+					x=x+1
+                    id("ServerinProgress").innerText=strComputer
+                    id("TaskinProgress").innerText="Server Reboot"
+                    id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+                    Progress x,y,w
+				
+					dim strCmd, intReturn
+					strCmd = "hostname"
+					strCmd = "shutdown /m \\"& strComputer &" /r /t 0 /c ""Maintenance_Weekend_Reboot"""
+					Set objShell = CreateObject("Wscript.shell")
+					intReturn = objShell.Run(strCmd, 0, false)	'false mentioned because script shouldn't wait for prev command to complete.
+					
+					RebootServer  = strComputer & vbtab & " - Reboot triggered"
+				
+					writelog RebootServer
+
+					Set objShell = CreateObject("Wscript.shell")
+					strCmd = "Timeout /T 0.2 /nobreak"
+					intReturn = objShell.Run(strCmd, 0, true)
+
+                next
+				
+                w=0
+                x=0
+                y=0
+                mainOutputStr = ""
+                taskList=""
+                msgbox "Done"
+
+End Function
+
+Function getRebootStatus()
+on error resume next
+	id("ta2").value = ""
+	writelog "ComputerName" & vbTAB & "Uptime(hr)" & vbTAB & "LastReboot"
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Check Reboot Status"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+			dim lastReboot,rebootStatus,uptime
+			lastReboot = LastBootUpTime (false)
+			'DateDiff("n",#1/1/2000#,Now)
+			uptime = DateDiff("h",lastReboot,Now)
+			writelog strComputer & vbTAB & uptime & vbTAB & lastReboot
+			
+			lastReboot=""
+			uptime=""
+		else
+			writeLog strComputer & vbTAB & "Error. Unable to connect"
+		end if
+
+		Set objShell = CreateObject("Wscript.shell")
+		strCmd = "Timeout /T 0.2 /nobreak"
+		intReturn = objShell.Run(strCmd, 0, true)		
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+	msgbox "Done"				
+	
+End Function
+
+Function AVTask_ServiceCheck()
+on error resume next
+	id("ta2").value = "ServerName" & vbTAB & "Status"
+	
+	'writelog "ComputerName" & vbTAB & "Uptime(hr)" & vbTAB & "LastReboot"
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	tempPath = "1.csv"
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="AV Service Check"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+			
+			writeLog strComputer & vbTab & getServiceStatus(strComputer, "SpntSvc")
+
+		else
+			writeLog strComputer & vbTAB & ServerStatus
+		end if
+
+		Set objShell = CreateObject("Wscript.shell")
+		strCmd = "Timeout /T 0.2 /nobreak"
+		intReturn = objShell.Run(strCmd, 0, true)		
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+	msgbox "Done"				
+	
+End Function
+
+
+Function AVTask_GetInformationServer()
+'on error resume next
+	id("ta2").value = "Server_Name" & vbTAB & "Information_Server" & VbTAB & "Trend_Service_Status"
+	
+	'writelog "ComputerName" & vbTAB & "Uptime(hr)" & vbTAB & "LastReboot"
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	tempPath = "1.txt"
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="AV Service Check"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+			
+			
+			informationServer = readfromRegistry("SOFTWARE\ATI Technologies\Install\South Bridge\ATI_AHCI_RAID", "Version")
+			writeLog strComputer & vbTab _
+					& informationServer & vbTAB _
+					& getServiceStatus("SpntSvc")
+
+		else
+			writeLog strComputer & vbTAB & ServerStatus
+		end if
+
+		Set objShell = CreateObject("Wscript.shell")
+		strCmd = "Timeout /T 0.2 /nobreak"
+		intReturn = objShell.Run(strCmd, 0, true)		
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+	msgbox "Done"				
+	
+End Function
+
+function readFromRegistry (strKeyPath, strDefault )
+
+
+' Constants (taken from WinReg.h)
+'
+Const HKEY_CLASSES_ROOT   = &H80000000
+Const HKEY_CURRENT_USER   = &H80000001
+Const HKEY_LOCAL_MACHINE  = &H80000002
+Const HKEY_USERS          = &H80000003
+
+
+Const REG_SZ = 1 
+Const REG_EXPAND_SZ = 2 
+Const REG_BINARY = 3 
+Const REG_DWORD = 4 
+Const REG_MULTI_SZ = 7
+
+' Chose computer name, registry tree and key path '
+strComputer = "." ' Use . for current machine 
+hDefKey = HKEY_LOCAL_MACHINE 
+strKeyPath = "SOFTWARE\ATI Technologies\Install\South Bridge"
+
+' Connect to registry provider on target machine with current user ' 
+Set oReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & strComputer & "\root\default:StdRegProv")
+
+' Enum the subkeys of the key path we've chosen ' 
+oReg.EnumKey hDefKey, strKeyPath, arrSubKeys
+
+For Each strSubkey In arrSubKeys
+
+	' Show the subkey ' 
+	msgbox strSubkey
+
+	' Show its value names and types ' 
+	strSubKeyPath = strKeyPath & "\" & strSubkey 
+	oReg.EnumValues hDefKey, strSubKeyPath, arrValueNames, arrTypes
+
+	For i = LBound(arrValueNames) To UBound(arrValueNames) 
+		strValueName = arrValueNames(i) 
+		Select Case arrTypes(i)
+
+			' Show a REG_SZ value ' 
+			Case REG_SZ 
+			
+			oReg.GetStringValue hDefKey, strSubKeyPath, strValueName, strValue 
+			'wscript.echo " " & strValueName & " (REG_SZ) = " & strValue
+		
+			msgbox "REG_SZ: " & REG_SZ & vbNewLine & _
+			"hDefKey: " & hDefKey & vbNewLine & _
+			"strSubKeyPath: " & strSubKeyPath & vbNewLine & _
+			"strValueName: " & strValueName & vbNewLine & _
+			"strValue: " & strValue
+					
+			' Show a REG_EXPAND_SZ value ' 
+			Case REG_EXPAND_SZ 
+			oReg.GetExpandedStringValue hDefKey, strSubKeyPath, strValueName, strValue 
+			msgbox " " & strValueName & " (REG_EXPAND_SZ) = " & strValue
+
+			' Show a REG_BINARY value ' 
+			Case REG_BINARY 
+			oReg.GetBinaryValue hDefKey, strSubKeyPath, strValueName, arrBytes 
+			strBytes = "" 
+				For Each uByte in arrBytes 
+					strBytes = strBytes & Hex(uByte) & " " 
+				Next 
+			wscript.echo " " & strValueName & " (REG_BINARY) = " & strBytes
+
+			' Show a REG_DWORD value ' 
+			Case REG_DWORD oReg.GetDWORDValue hDefKey, strSubKeyPath, strValueName, uValue 
+			msgbox " " & strValueName & " (REG_DWORD) = " & CStr(uValue)
+
+			' Show a REG_MULTI_SZ value ' 
+			Case REG_MULTI_SZ oReg.GetMultiStringValue hDefKey, strSubKeyPath, strValueName, arrValues 
+			wscript.echo " " & strValueName & " (REG_MULTI_SZ) =" 
+				For Each strValue in arrValues 
+					msgbox " " & strValue 
+				Next
+
+	End Select 
+	Next
+
+Next
+
+end function
+
+
+
+
+
+
+
+
+Function getForestComputers()
+on error resume next
+	id("ta2").value = "Domain Name"
+	
+	'writelog "ComputerName" & vbTAB & "Uptime(hr)" & vbTAB & "LastReboot"
+	Dim ServerArray, ServerCount, ServerStatus, DomainList
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+	DomainList = ""
+	
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	tempPath = "1.csv"
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Get Domain List"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+			
+			writeLog "AD" & vbTAB & strComputer
+			writeLog "-------------------------------"
+			DomainList = getDomainList(strComputer)
+			if DomainList = "" then
+				writeLog "No Trust Found. Please check DC's Domains and Trust manually"
+			else
+				writeLog DomainList
+			end if
+			
+
+		else
+			writeLog strComputer & vbTAB & ServerStatus
+		end if
+		
+		writeLog ""
+		
+		Set objShell = CreateObject("Wscript.shell")
+		strCmd = "Timeout /T 0.2 /nobreak"
+		intReturn = objShell.Run(strCmd, 0, true)		
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+	msgbox "Done"				
+	
+End Function
+
+Function getDomainList(strComputer)
+	dim strCmd
+	strCmd = "%comspec% /c  PowerShell.exe get-service"
+End Function
+
+Function getMachineNameOther(strComputer)
+On error resume next
+	dim MachineName
+				Set objWMI = GetObject("winmgmts:\\" & strComputer & "\root\CIMV2")
+                set objComputerSystem = objWMI.ExecQuery("SELECT * FROM Win32_ComputerSystem")
+                For Each objItem in objComputerSystem 
+                                MachineName = objItem.Name
+                Next
+				getMachineNameOther = MachineName
+
+'				Select Case Err.Number
+'
+'				Case 0
+'					getMachineNameOther = MachineName
+'				Case Else
+'					getMachineNameOther = "Error. Unable to connect this server"
+'
+'				End Select
+'				Err.Clear
+'				On Error GoTo 0	
+				
+End Function
+
+Function getServiceStatus(strComputer, serviceName)
+on error resume next
+	dim tmp, cntr
+	tmp=""
+	cntr=0
+	Set objWMI = GetObject("winmgmts:\\" & strComputer & "\root\CIMV2")
+	Set colRunningServices = objWMI.ExecQuery("Select * from Win32_Service Where name = '"& serviceName &"'")
+   
+	For Each objService In colRunningServices
+		tmp = objService.DisplayName &"("& objService.State &")"
+		cntr =cntr+1
+	Next
+   
+	if cntr>0 then
+		getServiceStatus = tmp
+	else
+		getServiceStatus = "Service Not Found"
+	end if
+End Function
+
+Function AVServer_onblur()
+	dim AVServer, AVInstallerPath
+	AVServer = id("AVServer").value
+	if trim(AVServer)="" then
+		id("AVInstallerPath").value = ""
+	else
+		AVInstallerPath = "\\"& AVServer &"\c$\Program Files\Trend\SProtect\SMS"
+		id("AVInstallerPath").value = AVInstallerPath
+	end if
+End Function
+
+
+Function Validate_AVInstall()
+	dim AVServer, AVInstallerPath, AVSavePath
+	AVServer = trim(id("AVServer").value)
+	AVInstallerPath = trim(id("AVInstallerPath").value)
+	AVSavePath = "\\ClientMachine\C$\Software\TRENDAV_SETUP"
+	
+	if AVServer = "" then
+		msgbox "Enter AV Server Name"
+		id("AVServer").focus
+	elseif AVInstallerPath = "" then
+		msgbox "Enter AV Installer Path"
+		id("AVServer").focus
+	else
+		dim ServerStatus
+		id("ta2").value=""
+		ServerStatus = checkComputer(AVServer)
+		if ServerStatus = "true" then
+			writelog "AV Server Exists: " & AVServer
+			writelog "AV OS bit: " & OSArchitecture(false)
+			writelog vbTAB & "Ensure all clients also of " & OSArchitecture(false)
+				if objFSO.FolderExists(AVInstallerPath) then
+					writelog "Installer Path valid: " & AVInstallerPath
+				end if
+			writelog "Installer save path:" & AVSavePath
+			writelog vbTAB & "Destination folder will be created if doesnot exists"
+		else
+			writelog "Error. AV Server Invalid: " & AVServer
+		end if
+		msgbox "Checked. See log"
+	end if
+	
+End Function
+
+
+
+Function AV_Install()
+ if fso.FileExists("PSExec.exe") then
+
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog "Sno" & vbTAB & "ServerName" & vbTAB & "Information_Server" & vbTAB & "AV_Install_Status" & vbTAB & "Trend_Service_Status"
+		'take a break
+		strCmd = "Timeout /T 0.5 /nobreak"
+		intReturn = objShell.Run(strCmd, 0, true)		
+
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Trend AV Installation"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+			'clientBit = OSArchitecture(false)
+				'take a break
+				strCmd = "Timeout /T 0.5 /nobreak"
+				intReturn = objShell.Run(strCmd, 0, true)		
+			
+				dim AV_Install_Status, Trend_Service_Status
+				dim Information_Server, AVInstallerPath, AVSavePath
+				Information_Server = trim(id("AVServer").value)
+				AVInstallerPath = trim(id("AVInstallerPath").value)
+				AVSavePath = "\\"& strComputer &"\C$\Software\TRENDAV_SETUP"
+				
+				Set objShell = CreateObject("Wscript.shell")
+				dim strCmd
+				
+				id("TaskinProgress").innerText="Installer copy in progress"
+				'strCmd = "%comspec% /c cmd.exe xcopy """& AVInstallerPath &""" """& AVSavePath &""" /E /C /I /Q /H /R /Y"
+				strCmd = "xcopy """& AVInstallerPath &""" """& AVSavePath &""" /E /C /I /Q /H /R /Y"
+				intReturn = objShell.Run(strCmd, 0, true)
+				
+				id("TaskinProgress").innerText="AV Instllation in progress"
+				'strCmd = "%comspec% /c  cmd.exe PSExec.exe -accepteula \\"& strComputer &" C:\Software\TRENDAV_SETUP\setup -SMS -s -m""SPNT5"" "
+				'### Install Trend AV
+				strCmd = "PSExec.exe -accepteula \\"& strComputer &" C:\Software\TRENDAV_SETUP\setup -SMS -s -m""SPNT5"" "
+				intReturn = objShell.Run(strCmd, 0, true)
+
+				'### Execute RPC.reg file
+				strCmd = "PSExec.exe -accepteula \\"& strComputer &" regedit.exe /s C:\Software\TRENDAV_SETUP\rpc.reg"
+				intReturn2 = objShell.Run(strCmd, 0, true)
+				
+				'### if 0 returned, that means installation success
+				if intReturn = 0 then
+					AV_Install_Status = "Success"
+				else
+					AV_Install_Status = "Failed"
+				end if
+				
+				
+				'### after AV installation, get service status
+				id("TaskinProgress").innerText="Checking AV Service"
+				Trend_Service_Status = getServiceStatus(strComputer, "SpntSvc")
+				writelog x & vbTAB & strComputer & vbTAB & Information_Server & vbTAB & AV_Install_Status & vbTAB & Trend_Service_Status
+
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Invalid hostname or no connection with client"
+		end if
+
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"				
+ else
+	msgbox "PSExec.exe file not found in present working directory. Operation failed. " & vbNewLine & fso.getabsolutepathname(".")
+ end if	'### End Checked PSExec.exe -accepteula exists or not
+End Function
+
+
+
+
+Function AVTask()
+on error resume next
+Dim ServerArray, ServerCount, ServerStatus
+ServerArray = TextareaInArray("ta1")
+ServerArray = TextareaInArray("ta1")
+ServerCount = UBound(ServerArray)+1
+writeLog "Trend AV Task"
+writeLog "AV_Server" & vbTAB & "AV_Group/Domain" & vbTAB & "AV_Client_Name" & vbTAB & "AV_Client_NetBIOS_Name" & vbTAB & "AV_Service_Status"
+'-- w: bar width, x: done items, y: remaining items
+                w=100
+                x = 0
+                y=ServerCount-x
+                for each strComputer in ServerArray
+				
+					x=x+1
+                    id("ServerinProgress").innerText=strComputer
+                    id("TaskinProgress").innerText="Trend AV Task (in progress)"
+                    id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+                    Progress x,y,w
+				
+				
+					ServerStatus = checkComputer(strComputer)
+					dim bit, strKeyPath, outMsg
+					bit = OSArchitecture(false) '64-bit expected
+					'msgbox bit
+					if trim(bit)="64-bit" then
+						strKeyPath="SOFTWARE\Wow6432Node\TrendMicro\ServerProtect\CurrentVersion\InformationServer"
+					elseif trim(bit)="32-bit" then
+						strKeyPath="SOFTWARE\TrendMicro\ServerProtect\CurrentVersion\InformationServer"
+					end if
+					
+					if (ServerStatus = "true") then
+						'strKeyPath = trim(id("avKeyPath").value)
+						
+						
+						oReg.EnumKey HKEY_LOCAL_MACHINE, strKeyPath, arrSubKeys
+						'writelog strComputer
+						'writelog "---"
+						Set objShell = CreateObject("Wscript.shell")
+						For Each Subkey in arrSubKeys
+							oReg.EnumKey HKEY_LOCAL_MACHINE, strKeyPath&"\"& Subkey, arrDomainKeys
+							For Each Domainkey in arrDomainKeys
+								strLen = Len(Domainkey)
+								serverKey = Mid(Domainkey, 1, strLen-2)
+								
+								if(id("avResovleHost").checked) then
+									hName = getMachineNameOther(serverKey)
+								end if
+								
+								if(id("avCheckService").checked) then
+									sStatus = getServiceStatus(serverKey,"SpntSvc")
+								end if
+
+								outMsg = strComputer & vbTAB _
+										 & Subkey & vbTAB _
+										 & serverKey & vbTAB _
+										 & hName & vbTAB _
+										 & sStatus
+								writeLog outMsg
+
+								strCmd = "Timeout /T 0.2 /nobreak"
+								intReturn = objShell.Run(strCmd, 0, true)								
+							Next
+						Next
+					end if
+					
+					'writeLog""
+
+
+
+                next
+				
+                w=0
+                x=0
+                y=0
+                mainOutputStr = ""
+                taskList=""
+				id("TaskinProgress").innerText="Trend AV Task (Done)"
+                msgbox "Done"
+
+End Function
+
+
+
+Function DiskDetailIndividual(strComputer)
+	Set objDisks = objWMIService.ExecQuery("Select * from Win32_LogicalDisk where drivetype <> 10")
+	For each objDisk in objDisks
+					percentfree = (objDisk.Freespace / objDisk.Size) * 100
+					With objDisk
+									if objDisk.Size > 0 then
+													DiskDetail = DiskDetail & "" & objDisk.DeviceId & ","
+													DiskDetail = DiskDetail & "" & formatnumber(int(objDisk.Size)/(1024*1024*1024)        ,2) & ","
+													DiskDetail = DiskDetail & "" & formatnumber(int(objDisk.Freespace)/(1024*1024*1024),2) & "|"
+									end if
+					End With 
+	Next
+
+End Function
+
+
+
+
+'*****************start
+Function DiskReportCustom()
+	dim outStr, DriveDetail, TotalSpace, Provisioned, unallocatedSpace
+
+	outStr=""
+	DriveDetail=""
+	TotalSpace=0
+	Provisioned=0
+	unallocatedSpace = 0
+
+
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog 	"SNo" _
+				& vbTAB & "ComputerName" _
+				& vbTAB & "DomainName" _
+				& vbTAB & "OS" _
+				& vbTAB & "Server-MakeModel" _
+				& vbTAB & "IPAddress" _
+				& vbTAB & "Provisioned" _
+				& vbTAB & "TOTAL-DISK-SPACE-ALLOCATED (GB)" _
+				& vbTAB & "Unallocated-Space (GB)" _
+				& vbTAB & "Storage(SAN or VM Disk)" _
+				& vbTAB & "DriveLetter" _
+				& vbTAB & "Size (GB)" _
+				& vbTAB & "FreeSpace(GB)" _
+				& vbTAB & "FreePercent (%)" _
+				& vbTAB & "Storage(SAN or VM Disk)" _
+				& vbTAB & "DriveLetter" _
+				& vbTAB & "Size (GB)" _
+				& vbTAB & "FreeSpace(GB)" _
+				& vbTAB & "FreePercent (%)" _
+				& vbTAB & "Storage(SAN or VM Disk)" _
+				& vbTAB & "DriveLetter" _
+				& vbTAB & "Size (GB)" _
+				& vbTAB & "FreeSpace(GB)" _
+				& vbTAB & "FreePercent (%)"
+
+				'hold the screen for 0.5 ms
+				strCmd = "Timeout /T 0.5 /nobreak"
+				intReturn = objShell.Run(strCmd, 0, true)
+				
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Disk Detail"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+			dim os, modl, dn, ipadr
+			os = OperatingSystem("false")
+			modl = Model(false)
+			dn = DomainName(false)
+			ipadr = IPAddress(false)
+			
+			Set colDiskDrives = objWMIService.ExecQuery("Select * from Win32_DiskDrive")
+				
+			For each objDiskDrive in colDiskDrives
+		
+				Provisioned = Provisioned + objDiskDrive.Size	'Mapped disk total size 
+				
+				query = "ASSOCIATORS OF {Win32_DiskDrive.DeviceID='" + objDiskDrive.DeviceID + "'} WHERE AssocClass = Win32_DiskDriveToDiskPartition" ' link the physical drives to the partitions
+				Set partitions = objWMIService.ExecQuery(query) 
+				
+				
+				For Each partition In partitions 
+					query = "ASSOCIATORS OF {Win32_DiskPartition.DeviceID='" + partition.DeviceID + "'} WHERE AssocClass = Win32_LogicalDiskToPartition"  ' link the partitions to the logical disks 
+					Set logicalDisks = objWMIService.ExecQuery (query) 
+				
+					
+					
+					
+
+					For Each logicalDisk In logicalDisks  
+						TotalSpace = TotalSpace + logicalDisk.size		'Drive letter total size
+
+						dim size, Freespace, FreePrecent
+						size = Round(logicalDisk.size/(1024*1024*1024),0)
+						Freespace = Round(logicalDisk.Freespace/(1024*1024*1024),2)
+						FreePrecent = Round(100 -(Freespace/size * 100),2)
+						DriveDetail = DriveDetail _
+							& objDiskDrive.Caption _
+							& vbTAB & logicalDisk.DeviceID _
+							& vbTAB & size _
+							& vbTAB & Freespace _
+							& vbTAB & FreePrecent _
+							& vbTAB
+
+						'hold the screen for 0.5 ms
+						strCmd = "Timeout /T 0.5 /nobreak"
+						intReturn = objShell.Run(strCmd, 0, true)
+							
+					Next
+
+				
+				Next 
+					
+			Next
+			
+				'unallocatedSpace = Provisioned - TotalSpace
+				Provisioned = Round((Provisioned/(1024*1024*1024)),2)
+				TotalSpace = Round((TotalSpace/(1024*1024*1024)),2)
+				unallocatedSpace = Round(Provisioned - TotalSpace,2)
+				
+				outStr = x & _
+						vbTab & strComputer & _
+						vbTAB & dn & _
+						vbTab & os & _
+						vbTAB & modl & _
+						vbTAB & ipadr & _
+						vbTAB & Provisioned & _
+						vbTAB & TotalSpace & _
+						vbTAB & unallocatedSpace & _
+						vbTab & DriveDetail
+				strCmd = "Timeout /T 0.5 /nobreak"
+				intReturn = objShell.Run(strCmd, 0, true)
+		
+
+			writelog outStr
+			outStr = ""		
+			DriveDetail = ""
+			TotalSpace=0
+			Provisioned=0
+			unallocatedSpace = 0
+
+
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Invalid hostname"
+		end if
+
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"				
+
+End Function
+
+'*****************end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Function GetDiskFreeSpace()
+
+
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog 	"SNo" _
+				& vbTAB & "ComputerName" _
+				& vbTAB & "Model" _
+				& vbTAB & "DriveLetter" _
+				& vbTAB & "DiskSize" _
+				& vbTAB & "FreeSpace" _
+				& vbTAB & "FreePercent"
+	
+
+				
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	tempPath = "1.txt"
+	
+	for each strComputer in ServerArray
+		on error resume next
+		dim outStr
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Disk Free Space Report"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+		
+		'disk detail extraction starts here
+		Set objDisks = objWMIService.ExecQuery("Select * from Win32_LogicalDisk where drivetype <> 10")
+		For each objDisk in objDisks
+			dim ComputerName,MakeModel,DriveLetter,DiskSize,FreeSpace,FreePercent
+			
+			
+			outStr = ""
+			percentfree = (objDisk.Freespace / objDisk.Size) * 100
+			With objDisk
+				if objDisk.Size > 0 then
+					ComputerName = strComputer
+					MakeModel = Model(false)
+					DriveLetter = objDisk.DeviceId
+					DiskSize = Round(int(objDisk.Size)/(1024*1024*1024),2)
+					FreeSpace = Round(int(objDisk.Freespace)/(1024*1024*1024),2)
+					dim s
+					s = "GB"
+
+						if (FreeSpace < 1) then
+							FreeSpace = formatnumber(int(objDisk.Freespace)/(1024*1024),2)
+							s = "MB"
+						end if
+					FreePercent = Round(((objDisk.Freespace/objDisk.Size)*100),2)
+					FreeSpace = FreeSpace & s
+					
+					outStr = x _
+							& vbTAB & ComputerName _	
+							& vbTAB & MakeModel _	
+							& vbTAB & DriveLetter _	
+							& vbTAB & DiskSize &"GB" _	
+							& vbTAB & FreeSpace _	
+							& vbTAB & FreePercent &"%"
+							
+					writelog outStr
+					
+					'take a break to update log section :)
+					strCmd = "Timeout /T 0.5 /nobreak"
+					intReturn = objShell.Run(strCmd, 0, true)						
+				end if
+			End With 
+		Next
+		
+		
+				
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Invalid hostname"
+		end if
+
+		'Set objShell = CreateObject("Wscript.shell")
+		strCmd = "Timeout /T 0.5 /nobreak"
+		intReturn = objShell.Run(strCmd, 0, true)		
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"	
+	
+End Function
+
+
+
+Function ExecutePSExecCmd()
+ on error resume next
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog ""
+	writelog 	"SNo" _
+				& vbTAB & "ComputerName" _
+				& vbTAB & "CMD_Exec_Status"
+			
+
+				
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	dim cmdOutput
+	cmdOutput = ""
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="PSExec CMD"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+			dim psExecCmd, outStr, intReturn
+			intReturn = 1
+			psExecCmd = trim(id("psExecCmd").value)
+			
+			
+			id("TaskinProgress").innerText="Executing PSExec CMD"
+			strCmd = "%comspec% /c  PSExec.exe -accepteula \\"& strComputer & " " & psExecCmd & " > 1.txt"
+			intReturn = objShell.Run(strCmd, 0, true)
+			
+			if fso.fileExists("1.txt") then
+				cmdOutput = cmdOutput & "Output of server " & strComputer _
+							& vbNewLine & "----------------------------------" _
+							& vbNewLine & readFile("1.txt") _
+							& vbNewLine _
+							& "**************************Next Server**************************" & vbNewLine
+				deleteFile("1.txt")
+			else
+				cmdOutput = cmdOutput & "Output not captured of server :" & strComputer _
+							& vbNewLine _
+							& "**************************Next Server**************************" & vbNewLine
+			
+			end if
+			
+			
+			'### if 0 returned, that means installation success
+			if intReturn = 0 then
+				outStr = x _
+						& vbTab & strComputer _
+						& vbTab & "Success"
+			else
+				outStr = x _
+						& vbTab & strComputer _
+						& vbTab & "Failed. " & strCmd
+			end if
+			
+			writeLog outStr
+			
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Invalid hostname"
+		end if
+
+	next
+
+	writeLog vbNewLine & "------------------------------------" _
+			& vbNewLine & " PSExec Cmd Output " _
+			& vbNewLine & "------------------------------------"
+	writeLog cmdOutput
+	
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writeLog ""
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"				
+End Function
+
+
+
+Function GetMPIODetail()
+	strCmd = "Timeout /T 0.5 /nobreak"
+	intReturn = objShell.Run(strCmd, 0, true)
+
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Disk Detail"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+			Set colDiskDrives = objWMIService.ExecQuery("Select * from Win32_DiskDrive")
+
+			WriteLog "Computer: " & strComputer
+			
+			For each objDiskDrive in colDiskDrives
+				WriteLog "Disk " & objDiskDrive.Index
+				WriteLog "MPIO Multipath Detail:"
+				WriteLog "----------------------"
+
+				strCmd = "PSExec.exe -accepteula \\"& strComputer &" mpclaim -s -d " & objDiskDrive.Index & " > .\1.txt"
+				writelog strCmd
+				intReturn = objShell.Run(strCmd, 0, true)
+				
+				'### if 0 returned, that means installation success
+				if intReturn = 0 then
+					if fso.fileExists("1.txt") then
+						ab= ReadFile("1.txt")
+						msgbox ab
+						deleteFile("1.txt")
+					end if
+				else
+					WriteLog "mpclaim.exe command failed on Disk " & objDiskDrive.Index
+				end if
+				
+				strCmd = "Timeout /T 0.5 /nobreak"
+				intReturn = objShell.Run(strCmd, 0, true)
+		
+			Next
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Invalid hostname"
+		end if
+		writelog "----------------Next Server--------------------"
+		writelog  ""
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"				
+
+	
+End Function
+
+
+Function GetDiskMakeModelReport()
+
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog 	"SNo" _
+				& vbTAB & "ComputerName" _
+				& vbTAB & "OS" _
+				& vbTAB & "DiskNo" _
+				& vbTAB & "Disk_Size(GB)" _
+				& vbTAB & "DriveLetter" _
+				& vbTAB & "Drive_Size" _
+				& vbTAB & "Partition_Detail" _
+				& vbTAB & "No_of_Partition" _
+				& vbTAB & "Storate_Type"
+
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Disk Detail"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+			dim os
+			os = OperatingSystem("false")
+			Set colDiskDrives = objWMIService.ExecQuery("Select * from Win32_DiskDrive")
+				
+			For each objDiskDrive in colDiskDrives
+				Dim diskDrives
+				dim outStr, logicalDiskDetail
+				outStr=""
+				logicalDiskDetail=""
+				
+				dim diskOut, noOfDrives
+				noOfDrives=0
+				query = "ASSOCIATORS OF {Win32_DiskDrive.DeviceID='" + objDiskDrive.DeviceID + "'} WHERE AssocClass = Win32_DiskDriveToDiskPartition" ' link the physical drives to the partitions
+				Set partitions = objWMIService.ExecQuery(query) 
+
+				'just count the no. of drives loop exeted twice
+				For Each partition In partitions 
+					query = "ASSOCIATORS OF {Win32_DiskPartition.DeviceID='" + partition.DeviceID + "'} WHERE AssocClass = Win32_LogicalDiskToPartition"  ' link the partitions to the logical disks 
+					Set logicalDisks = objWMIService.ExecQuery (query) 
+					For Each logicalDisk2 In logicalDisks
+						noOfDrives = noOfDrives+1
+					Next		
+				next
+				
+				For Each partition In partitions 
+					query = "ASSOCIATORS OF {Win32_DiskPartition.DeviceID='" + partition.DeviceID + "'} WHERE AssocClass = Win32_LogicalDiskToPartition"  ' link the partitions to the logical disks 
+					Set logicalDisks = objWMIService.ExecQuery (query) 
+					
+					For Each logicalDisk In logicalDisks  
+						logicalDiskDetail = logicalDiskDetail & logicalDisk.DeviceID & " - " & partition.Caption _
+						& ", Size: " & (Round(logicalDisk.size/(1024*1024*1024),0)) & "GB"
+							outStr = x & _
+									vbTab & strComputer & _
+									vbTab & os & _
+									vbTab & objDiskDrive.Index & _
+									vbTab & (Round( objDiskDrive.Size/(1024*1024*1024)  ,0)) & "GB"  & _
+									vbTab & logicalDisk.DeviceID & _
+									vbTab & (Round(logicalDisk.size/(1024*1024*1024),0)) & "GB" & _
+									vbTab & partition.Caption & _
+									vbTab & noOfDrives & _
+									vbTab & objDiskDrive.Caption
+							writelog outStr
+									
+							
+					Next
+				Next 
+
+				strCmd = "Timeout /T 0.5 /nobreak"
+				intReturn = objShell.Run(strCmd, 0, true)
+		
+			Next
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Invalid hostname"
+		end if
+
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"				
+End Function
+
+
+
+
+Function AVTask_ServerReport()
+on error resume next
+Dim ServerArray, ServerCount, ServerStatus
+ServerArray = TextareaInArray("ta1")
+ServerArray = TextareaInArray("ta1")
+ServerCount = UBound(ServerArray)+1
+writeLog "Trend AV Server Report"
+dim cols
+cols = "SERVER_NAME" & vbTAB _
+	& "IP_ADDRESS" & vbTAB _
+	& "32/64BIT" & vbTAB _
+	& "OS" & vbTAB _
+	& "SERVERS_SUPPORTED"
+writeLog cols
+
+'-- w: bar width, x: done items, y: remaining items
+                w=100
+                x = 0
+                y=ServerCount-x
+                for each strComputer in ServerArray
+				
+					x=x+1
+                    id("ServerinProgress").innerText=strComputer
+                    id("TaskinProgress").innerText="Trend AV Server Report Generation"
+                    id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+                    Progress x,y,w
+				
+				
+					ServerStatus = checkComputer(strComputer)
+					dim bit, strKeyPath, outMsg
+					bit = OSArchitecture(false)
+					
+					if trim(bit)="64-bit" then
+						strKeyPath="SOFTWARE\Wow6432Node\TrendMicro\ServerProtect\CurrentVersion\InformationServer"
+					elseif trim(bit)="32-bit" then
+						strKeyPath="SOFTWARE\TrendMicro\ServerProtect\CurrentVersion\InformationServer"
+					end if
+					
+					if (ServerStatus = "true") then
+						'strKeyPath = trim(id("avKeyPath").value)
+						
+						
+						oReg.EnumKey HKEY_LOCAL_MACHINE, strKeyPath, arrSubKeys
+						'writelog strComputer
+						'writelog "---"
+						Set objShell = CreateObject("Wscript.shell")
+						
+						dim countList
+						countList = 0
+						For Each Subkey in arrSubKeys
+							oReg.EnumKey HKEY_LOCAL_MACHINE, strKeyPath&"\"& Subkey, arrDomainKeys
+							For Each Domainkey in arrDomainKeys
+								countList = countList + 1	'server count increment by 1
+								strCmd = "Timeout /T 0.2 /nobreak"
+								intReturn = objShell.Run(strCmd, 0, true)								
+							Next
+						Next
+					end if
+					
+					dim outdata
+					outdata = strComputer & vbTAB _
+						& IPAddress(false) & vbTAB _
+						& bit & vbTAB _
+						& OperatingSystem(false) & vbTAB _
+						& countList
+	
+					writeLog outdata
+
+
+
+                next
+				
+                w=0
+                x=0
+                y=0
+                mainOutputStr = ""
+                taskList=""
+				id("TaskinProgress").innerText="Trend AV Task (Done)"
+                msgbox "Done"
+
+End Function
+
+
+
+
+
+Function OSInstallDate(writeInTA)
+on error resume next
+                                                set objOs = objWMIService.ExecQuery("Select * from Win32_OperatingSystem")                                           
+                                                Set dtmInstallDate = CreateObject("WbemScripting.SWbemDateTime")
+                                                For Each objItem in objOS 
+                                                                dtmInstallDate.Value = objItem.InstallDate
+                                                                OSInstallDate = dtmInstallDate.GetVarDate
+                                                Next
+mainOutputStr_Update writeInTA,OSInstallDate
+End Function
+
+Function LastBootUpTime(writeInTA)
+on error resume next
+                                                set objOs = objWMIService.ExecQuery("Select * from Win32_OperatingSystem")                                           
+                                                Set dtmInstallDate = CreateObject("WbemScripting.SWbemDateTime")
+                                                For Each objItem in objOS 
+                                                                dtmInstallDate.Value = objItem.LastBootUpTime
+                                                                LastBootUpTime = dtmInstallDate.GetVarDate
+                                                Next
+mainOutputStr_Update writeInTA,LastBootUpTime
+End Function
+
+Function OSLang(writeInTA)
+on error resume next
+                                                set objOs = objWMIService.ExecQuery("Select * from Win32_OperatingSystem")                                           
+                                                For Each objItem in objOS 
+                                                                OSLang = objItem.OSLanguage
+                                                                OSLang = getLang(OSLang)
+                                                Next
+mainOutputStr_Update writeInTA,OSLang
+End Function
+                                                                                                
+Function MachineName(writeInTA)
+On error resume next
+                set objComputerSystem = objWMIService.ExecQuery("SELECT * FROM Win32_ComputerSystem")
+                For Each objItem in objComputerSystem 
+                                MachineName = objItem.Name
+                Next
+mainOutputStr_Update writeInTA, MachineName
+End Function
+
+
+
+Function Model(writeInTA)
+On Error Resume Next
+                set objComputerSystem = objWMIService.ExecQuery("SELECT * FROM Win32_ComputerSystem")
+                For Each objItem in objComputerSystem 
+                                Model = objItem.Manufacturer & " " & objItem.Model
+                Next
+mainOutputStr_Update writeInTA,Model
+End Function
+
+Function Hyperthread(writeInTA)
+on error resume next
+                Set Plist = objWMIService.ExecQuery("Select * from Win32_Processor")
+                For Each prox in Plist
+                                IF prox.NumberOfLogicalProcessors > prox.NumberOfCores THEN
+                                                Hyperthread = "Enabled"
+                                ELSE
+                                                Hyperthread = "Disabled"
+                                END IF   
+                Next
+mainOutputStr_Update writeInTA,Hyperthread
+End Function
+
+Function ProcessorCount(writeInTA)
+on error resume next
+                set objComputerSystem = objWMIService.ExecQuery("SELECT * FROM Win32_ComputerSystem")
+                For Each objItem in objComputerSystem 
+                                ProcessorCount = objItem.NumberOfProcessors                                             'physical processor count
+                Next
+mainOutputStr_Update writeInTA,ProcessorCount
+End Function
+
+Function mainOutputStr_Update(writeInTA, newValue)
+on error resume next
+                if writeInTA then
+                                mainOutputStr = mainOutputStr & newValue & vbTAB
+                end if
+End Function
+
+Function DomainName(writeInTA)
+On Error Resume Next
+                set objComputerSystem = objWMIService.ExecQuery("SELECT * FROM Win32_ComputerSystem")
+                For Each objItem in objComputerSystem 
+                                DomainName = objItem.Domain
+                Next
+mainOutputStr_Update writeInTA,DomainName
+End Function
+
+Function Manufacturer(writeInTA)
+on error resume next
+                set objComputerSystem = objWMIService.ExecQuery("SELECT * FROM Win32_ComputerSystem")
+                For Each objItem in objComputerSystem 
+                                Manufacturer = objItem.Manufacturer
+                Next
+mainOutputStr_Update writeInTA,Manufacturer
+End Function
+
+Function Memory(writeInTA)
+on error resume next
+                set objComputerSystem = objWMIService.ExecQuery("SELECT * FROM Win32_ComputerSystem")
+                For Each objItem in objComputerSystem 
+                                Memory = round(((objItem.totalphysicalmemory)/(1024*1024)),2)
+                Next
+mainOutputStr_Update writeInTA,Memory
+End Function
+
+
+Function SerialNumber(writeInTA)
+on error resume next
+                                                set objBIOS = objWMIService.ExecQuery("SELECT * FROM Win32_BIOS") 
+                                                For Each objItem in objBIOS
+                                                                SerialNumber = objItem.SerialNumber
+                                                Next
+mainOutputStr_Update writeInTA,SerialNumber
+End Function                                                      
+
+Function CPUName(writeInTA)
+on error resume next
+                                                set objCPU = objWMIService.ExecQuery("SELECT * FROM Win32_Processor") 
+                                                For Each objItem in objCPU 
+                                                                CPUName = objItem.Name & ", " & objItem.Caption
+                                                Next
+mainOutputStr_Update writeInTA,CPUName
+End Function
+
+Function numberofCore(writeInTA)
+on error resume next
+                                                set objCPU = objWMIService.ExecQuery("SELECT * FROM Win32_Processor") 
+                                                For Each objItem in objCPU 
+                                                                numberofCore = objItem.NumberOfCores
+                                                Next
+mainOutputStr_Update writeInTA,numberofCore
+End Function
+
+Function NumberofLogicalProcessors(writeInTA)
+on error resume next
+                                                set objCPU = objWMIService.ExecQuery("SELECT * FROM Win32_Processor") 
+                                                For Each objItem in objCPU 
+                                                                NumberofLogicalProcessors = objItem.NumberOfLogicalProcessors
+                                                Next
+mainOutputStr_Update writeInTA,NumberOfLogicalProcessors
+End Function
+
+Function MaxClockSpeed(writeInTA)
+on error resume next
+                                                set objCPU = objWMIService.ExecQuery("SELECT * FROM Win32_Processor") 
+                                                For Each objItem in objCPU 
+                                                                MaxClockSpeed = objItem.MaxClockSpeed
+                                                Next
+mainOutputStr_Update writeInTA,MaxClockSpeed
+End Function
+
+'get mac & IP address
+Function IPAddress(writeInTA)
+on error resume next
+                                                Set objIPConfigSet = objWMIService.ExecQuery("Select * from Win32_NetworkAdapterConfiguration WHERE IPEnabled = 'True'")
+                                                tmp1 = ""
+                                                For Each objItem in objIPConfigSet
+                                                                tmp1 = tmp1 & "" & objItem.IPAddress(i) & ", "
+                                                Next
+                                                IPAddress = mid(tmp1,1,len(tmp1)-2)
+mainOutputStr_Update writeInTA,IPAddress
+End Function
+
+Function MACAddress(writeInTA)
+on error resume next
+                                                Set objIPConfigSet = objWMIService.ExecQuery("Select * from Win32_NetworkAdapterConfiguration WHERE IPEnabled = 'True'")
+                                                tmp2 = ""
+                                                For Each objItem in objIPConfigSet
+                                                                tmp2 = tmp2 & "" & objItem.MACAddress & ", "
+                                                Next
+                                                MACAddress = mid(tmp2,1,len(tmp2)-2)
+mainOutputStr_Update writeInTA,MACAddress
+End Function
+
+Function InterfaceDescription(writeInTA)
+                                                Set objIPConfigSet = objWMIService.ExecQuery("Select * from Win32_NetworkAdapterConfiguration WHERE IPEnabled = 'True'")
+                                                tmp3 = ""
+                                                For Each objItem in objIPConfigSet
+                                                                tmp3 = tmp3 & "" & objItem.Description & ", "
+                                                Next
+                                                InterfaceDescription = mid(tmp3,1,len(tmp3)-2)
+mainOutputStr_Update writeInTA,InterfaceDescription
+End Function
+
+                                                
+'Disk Detail
+Function DiskDetail(writeInTA)
+                                                Set objDisks = objWMIService.ExecQuery("Select * from Win32_LogicalDisk where drivetype <> 10")
+                                                For each objDisk in objDisks
+                                                                percentfree = (objDisk.Freespace / objDisk.Size) * 100
+                                                                With objDisk
+                                                                                if objDisk.Size > 0 then
+                                                                                                DiskDetail = DiskDetail & "" & objDisk.DeviceId & ","
+                                                                                                DiskDetail = DiskDetail & "" & formatnumber(int(objDisk.Size)/(1024*1024*1024)        ,2) & ","
+                                                                                                DiskDetail = DiskDetail & "" & formatnumber(int(objDisk.Freespace)/(1024*1024*1024),2) & "|"
+                                                                                end if
+                                                                End With 
+                                                Next
+mainOutputStr_Update writeInTA,DiskDetail
+End Function
+
+
+                                                
+                                                
+'                                               Set objProduct = objWMIService.ExecQuery("Select * from Win32_Product") 
+'                                               Set objSession = CreateObject("Microsoft.Update.Session",""& strComputer &"")          'to fetch windows update related information
+'                                               Set objSearcher = objSession.CreateUpdateSearcher   'to fetch windows update related information
+
+                                                
+Function Latency(writeInTA)
+                                                Dim objShell, objExec, strCmd, strTemp 
+                                                strCmd = "ping -n 1 " & strComputer 
+                                                Set objShell = CreateObject("WScript.Shell") 
+                                                Set objExec = objShell.Exec(strCmd) 
+                                                strTemp = UCase(objExec.StdOut.ReadAll) 
+                                                Latency = Trim(Mid(strTemp,InStr(strTemp,"TIME")+5,4))
+mainOutputStr_Update writeInTA,Latency
+End Function
+
+Function TimeZone(writeInTA)
+on error resume next
+                Set colItems = objWMIService.ExecQuery("Select * From Win32_TimeZone")
+                For Each objItem in colItems
+                                TimeZone = objItem.Caption
+                Next      
+mainOutputStr_Update writeInTA,TimeZone
+End Function
+
+Function DOTNet(writeInTA)
+on error resume next
+                Dim strKeyPath
+                                                if OSArchitecture(false) = "64-bit" then
+                                                                strKeyPath = "SOFTWARE\Wow6432Node\Microsoft\NET Framework Setup\NDP"
+                                                else
+                                                                strKeyPath = "SOFTWARE\Microsoft\NET Framework Setup\NDP"
+                                                end if
+
+                                                oReg.EnumKey HKEY_LOCAL_MACHINE, strKeyPath, arrSubKeys
+                                                For Each subkey In arrSubKeys
+                                                                tmp = tmp & subkey & ", "
+                                                Next
+                                                DOTNet = mid(tmp,1,len(tmp)-2)
+mainOutputStr_Update writeInTA,DOTNet
+End Function
+
+Function WSUSServer(writeInTA)
+on error resume next
+                Dim strKeyPath
+                                                if OSArchitecture(false) = "64-bit" then
+                                                                strKeyPath = "SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate"
+                                                else
+                                                                strKeyPath = "SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate"
+                                                end if
+
+                                                oReg.EnumValues HKEY_LOCAL_MACHINE, strKeyPath, arrValueNames, arrValueTypes
+                                                For i=0 To UBound(arrValueNames)
+                                                                if (arrValueNames(i)="WUServer") then 
+                                                                                oReg.GetStringValue HKEY_LOCAL_MACHINE,strKeyPath,arrValueNames(i),strValue
+                                                                                WSUSServer = strValue
+                                                                exit for
+                                                                else
+                                                                                WSUSServer = "No WSUS Server"
+                                                                end if
+                                                Next
+
+                                                if Trim(WSUSServer)="" then
+                                                                WSUSServer = "No WSUS Server"
+                                                end if
+mainOutputStr_Update writeInTA,WSUSServer
+End Function
+
+Function RebootReq(writeInTA)
+on error resume next
+                RebootReq="No"
+                Dim strKeyPath
+
+		oReg.EnumKey &H80000003,"SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired","",regValue
+
+		If IsEmpty(regValue) Then
+		    	'msgbox "The registry key does not exist."
+			RebootReq="No"
+		Else
+		    	'msgbox "The registry key exists."
+			RebootReq="Yes"
+		End If
+mainOutputStr_Update writeInTA,RebootReq
+End Function
+
+                                                
+'get admin group members
+'***********************
+Function Admingroup(writeInTA)
+                                                Dim colItems, Path, strMembers
+                                                Set ColItems = objWMIServiceGrp.ExecQuery(strQuery)
+                                                strQuery = ""
+                                                strMembers = ""
+                                                For Each Path In ColItems
+                                                Dim strMemberName, NamesArray, strDomainName, DomainNameArray
+                                                NamesArray = Split(Path.PartComponent,",")
+                                                strMemberName = Replace(Replace(NamesArray(1),Chr(34),""),"Name=","")
+                                                DomainNameArray = Split(NamesArray(0),"=")
+                                                strDomainName = Replace(DomainNameArray(1),Chr(34),"")
+
+                                                                                strMemberName = strDomainName & "\" & strMemberName
+                                                                                strMembers = strMembers & strMemberName & ", "
+
+                                                                                Next
+                                                Admingroup = mid(strMembers,1,len(strMembers)-2)
+mainOutputStr_Update writeInTA,Admingroup
+End Function
+
+Function LastPatchingDate(writeInTA)
+on error resume next
+                Set objSearcher = objSession.CreateUpdateSearcher   'to fetch windows update related information
+                Set colHistory = objSearcher.QueryHistory(0, 1)
+
+                For Each objEntry in colHistory
+                                LastPatchingDate = objEntry.date
+                Next
+
+                if (Trim(LastPatchingDate) = "") then
+                                LastPatchingDate = "Not yet patched"
+                end if
+mainOutputStr_Update writeInTA,LastPatchingDate
+End Function
+
+
+'*********************** Utility Functions ********************************
+
+Function getLang(OSLang)
+On Error Resume Next
+                Select Case OSLang
+                                Case 1 getLang = "Arabic"
+                                Case 4 getLang = "Chinese (Simplified)– China"
+                                Case 9 getLang = "English"
+                                Case 1025 getLang = "Arabic – Saudi Arabia"
+                                Case 1026 getLang = "Bulgarian"
+                                Case 1027 getLang = "Catalan"
+                                Case 1028 getLang = "Chinese (Traditional) – Taiwan"
+                                Case 1029 getLang = "Czech"
+                                Case 1030 getLang = "Danish"
+                                Case 1031 getLang = "German – Germany"
+                                Case 1032 getLang = "Greek"
+                                Case 1033 getLang = "English – United States"
+                                Case 1034 getLang = "Spanish – Traditional Sort"
+                                Case 1035 getLang = "Finnish"
+                                Case 1036 getLang = "French – France"
+                                Case 1037 getLang = "Hebrew"
+                                Case 1038 getLang = "Hungarian"
+                                Case 1039 getLang = "Icelandic"
+                                Case 1040 getLang = "Italian – Italy"
+                                Case 1041 getLang = "Japanese"
+                                Case 1042 getLang = "Korean"
+                                Case 1043 getLang = "Dutch – Netherlands"
+                                Case 1044 getLang = "Norwegian – Bokmal"
+                                Case 1045 getLang = "Polish"
+                                Case 1046 getLang = "Portuguese – Brazil"
+                                Case 1047 getLang = "Rhaeto-Romanic"
+                                Case 1048 getLang = "Romanian"
+                                Case 1049 getLang = "Russian"
+                                Case 1050 getLang = "Croatian"
+                                Case 1051 getLang = "Slovak"
+                                Case 1052 getLang = "Albanian"
+                                Case 1053 getLang = "Swedish"
+                                Case 1054 getLang = "Thai"
+                                Case 1055 getLang = "Turkish"
+                                Case 1056 getLang = "Urdu"
+                                Case 1057 getLang = "Indonesian"
+                                Case 1058 getLang = "Ukrainian"
+                                Case 1059 getLang = "Belarusian"
+                                Case 1060 getLang = "Slovenian"
+                                Case 1061 getLang = "Estonian"
+                                Case 1062 getLang = "Latvian"
+                                Case 1063 getLang = "Lithuanian"
+                                Case 1065 getLang = "Persian"
+                                Case 1066 getLang = "Vietnamese"
+                                Case 1069 getLang = "Basque (Basque) – Basque"                            
+                                Case 1070 getLang = "Serbian"
+                                Case 1071 getLang = "Macedonian (FYROM)"
+                                Case 1072 getLang = "Sutu"
+                                Case 1073 getLang = "Tsonga"
+                                Case 1074 getLang = "Tswana"
+                                Case 1076 getLang = "Xhosa"
+                                Case 1077 getLang = "Zulu"
+                                Case 1078 getLang = "Afrikaans"
+                                Case 1080 getLang = "Faeroese"
+                                Case 1081 getLang = "Hindi"
+                                Case 1082 getLang = "Maltese"
+                                Case 1084 getLang = "Scottish Gaelic (United Kingdom)"
+                                Case 1085 getLang = "Yiddish"
+                                Case 1086 getLang = "Malay – Malaysia"
+                                Case 2049 getLang = "Arabic – Iraq"
+                                Case 2052 getLang = "Chinese (Simplified) – PRC"
+                                Case 2055 getLang = "German – Switzerland"
+                                Case 2057 getLang = "English – United Kingdom"
+                                Case 2058 getLang = "Spanish – Mexico"
+                                Case 2060 getLang = "French – Belgium"
+                                Case 2064 getLang = "Italian – Switzerland"
+                                Case 2067 getLang = "Dutch – Belgium"
+                                Case 2068 getLang = "Norwegian – Nynorsk"
+                                Case 2070 getLang = "Portuguese – Portugal"
+                                Case 2072 getLang = "Romanian – Moldova"
+                                Case 2073 getLang = "Russian – Moldova"
+                                Case 2074 getLang = "Serbian – Latin"
+                                Case 2077 getLang = "Swedish – Finland"
+                                Case 3073 getLang = "Arabic – Egypt"
+                                Case 3076 getLang = "Chinese (Traditional) – Hong Kong SAR"
+                                Case 3079 getLang = "German – Austria"
+                                Case 3081 getLang = "English – Australia"
+                                Case 3082 getLang = "Spanish – International Sort"
+                                Case 3084 getLang = "French – Canada"
+                                Case 3098 getLang = "Serbian – Cyrillic"
+                                Case 4097 getLang = "Arabic – Libya"
+                                Case 4100 getLang = "Chinese (Simplified) – Singapore"
+                                Case 4103 getLang = "German – Luxembourg"
+                                Case 4105 getLang = "English – Canada"
+                                Case 4106 getLang = "Spanish – Guatemala"
+                                Case 4108 getLang = "French – Switzerland"
+                                Case 5121 getLang = "Arabic – Algeria"
+                                Case 5127 getLang = "German – Liechtenstein"
+                                Case 5129 getLang = "English – New Zealand"
+                                Case 5130 getLang = "Spanish – Costa Rica"
+                                Case 5132 getLang = "French – Luxembourg"
+                                Case 6145 getLang = "Arabic – Morocco"
+                                Case 6153 getLang = "English – Ireland"
+                                Case 6154 getLang = "Spanish – Panama"
+                                Case 7169 getLang = "Arabic – Tunisia"
+                                Case 7177 getLang = "English – South Africa"
+                                Case 7178 getLang = "Spanish – Dominican Republic"
+                                Case 8193 getLang = "Arabic – Oman"
+                                Case 8201 getLang = "English – Jamaica"
+                                Case 8202 getLang = "Spanish – Venezuela"
+                                Case 9217 getLang = "Arabic – Yemen"
+                                Case 9226 getLang = "Spanish – Colombia"
+                                Case 10241 getLang = "Arabic – Syria"
+                                Case 10249 getLang = "English – Belize"
+                                Case 10250 getLang = "Spanish – Peru"
+                                Case 11265 getLang = "Arabic – Jordan"
+                                Case 11273 getLang = "English – Trinidad"
+                                Case 11274 getLang = "Spanish – Argentina"
+                                Case 12289 getLang = "Arabic – Lebanon"
+                                Case 12298 getLang = "Spanish – Ecuador"
+                                Case 13313 getLang = "Arabic – Kuwait"
+                                Case 13322 getLang = "Spanish – Chile"
+                                Case 14337 getLang = "Arabic – U.A.E."
+                                Case 14346 getLang = "Spanish – Uruguay"
+                                Case 15361 getLang = "Arabic – Bahrain"
+                                Case 15370 getLang = "Spanish – Paraguay"
+                                Case 16385 getLang = "Arabic – Qatar"
+                                Case 16394 getLang = "Spanish – Bolivia"
+                                Case 17418 getLang = "Spanish – El Salvador"
+                                Case 18442 getLang = "Spanish – Honduras"
+                                Case 19466 getLang = "Spanish – Nicaragua"
+                                Case 20490 getLang = "Spanish – Puerto Rico"
+
+                                Case Else getLang  = "could not retrieve"
+
+        End Select 
+end Function
+
+
+Set objFSO = CreateObject("Scripting.FileSystemObject")
+Set objShell = CreateObject("Wscript.Shell")
+Function OpenText()
+On Error Resume Next
+                if not objFSO.FolderExists("Log") then
+                                objFSO.CreateFolder("Log")
+                end if
+                z = Replace(now(), "/", ".")
+                z = Replace(z, " ", "_")
+                z = Replace(z, ":", ".")
+                fn = "Log_"& z &".txt"
+                fn = "Log\"&fn
+                Set objFile = objFSO.CreateTextFile(fn, True)
+                
+                z = trim(id("ta2").value)
+                objFile.WriteLine RTrimEx(z)
+                
+                objShell.Run "notepad.exe " & fn
+End Function      
+
+                
+Function writelog(str)
+                                a = id("ta2").value
+								if trim(a) = "" then
+									id("ta2").value = str
+								else
+									id("ta2").value = a & vbNewLine & str
+								end if
+End Function
+
+dim taskList  'public variable
+Function updateHeader(header)
+On Error Resume Next
+x = id("ta2").value
+                if id(header).checked then
+                                if trim(x) = "" then
+                                                id("ta2").value = x & header
+                                else
+                                                id("ta2").value = x & vbTab & header
+                                end if
+
+                                taskList = taskList & header & vbNewLine
+                else
+                                replaceThis1 = header & vbTAB
+                                replaceThis2 = header
+                                if inStr(x, replaceThis1) > 0 then
+                                                id("ta2").value = Replace(x, replaceThis1, "")
+                                elseif inStr(x, replaceThis2) > 0 then
+                                                id("ta2").value = Replace(x, replaceThis2, "")
+                                end if
+
+                                taskList = Replace(taskList, header, "")
+                end if    
+
+                id("ta2").value = RTrimEx(id("ta2").value)
+End Function
+
+Function hideAll()
+                id("1").style.visibility="hidden"
+                id("2").style.visibility="hidden"
+                id("3").style.visibility="hidden"
+End Function
+
+Function showHiddenForm(x)
+	hideAll()
+    id(x).style.visibility="collapse"
+    id(x).style.position="absolute"
+    if x=1 then
+		id("ta1").disabled = false
+	else
+		'id("ta1").value=""
+		'id("ta1").disabled = true
+	end if
+End Function
+
+Function clearTA(ta)
+                id(ta).value=""
+                updateTaskList()
+End Function
+
+Function updateTaskList()
+                taskList=""
+                Set checkboxes = document.getElementsByName("cb1")
+                                For Each c In checkboxes
+                                                if c.checked then
+                                                                id("ta2").value = id("ta2").value & trim(c.id) & vbTAB
+                                                                taskList = taskList & trim(c.id) & vbNewLine
+                                                end if
+                                Next      
+                id("ta2").value = RTrimEx(id("ta2").value)
+
+End Function
+
+Function RTrimEx(str)
+dim x
+x = false
+    Do Until x
+                If Right(str, 1) = Chr(32) Or Right(str, 1) = Chr(9) then
+                                str = Left(str, Len(str) - 1)
+                Else
+                                x = true
+                End If
+    Loop
+    RTrimEx = str
+End Function
+
+Function checkBlankTB(TBname, msgToShow)
+                dim tmp
+                tmp = id(TBname).value
+                tmp = Trim(tmp)
+                if tmp = "" then
+                                id(TBname).value = msgToShow
+                end if
+End Function
+
+'AD-Task section related functions created here
+dim fso
+set fso = CreateObject("Scripting.FileSystemObject")
+
+Function ViewMembership()
+On Error Resume Next
+'SHOW PROGRESS BAR STATUS
+'-- w: bar width, x: done items, y: remaining items
+        w=100
+        x = 0
+        y=1
+	id("ServerinProgress").innerText="-"
+	id("TaskinProgress").innerText="View Membership"
+	id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+	Progress x,y,w
+
+	id("ta2").value  = ""
+
+	dim strCmd, domainName, userName, text, tempPath, cmdOutput, username1, msg
+	tempPath = "1.txt"
+
+	username1 = trim(id("username1").value)
+	if username1 = "" then
+		msgbox "Enter Login ID"
+		id("username1").select
+	else
+	
+	
+	' CHECK WHETHER CmdLet AVAILABLE OR NOT
+	strCmd = "%comspec% /c  PowerShell.exe Get-Command Get-ADPrincipalGroupMembership > " & tempPath
+	cmdOutput = execPS(strCmd)
+
+	if cmdOutput=0 then
+		id("ta2").value = "Group Membership Detail"
+		writelog "Get detail of : "  & username1 
+		writelog 	   "-----------------------"
+
+		'GET USER GROUP MEMBERSHIP INFORMATION
+		if id("memberFullDetail").checked then
+			strCmd = "%comspec% /c  PowerShell.exe ""Get-ADPrincipalGroupMembership "& username1 &""" > " & tempPath
+		else
+			strCmd = "%comspec% /c  PowerShell.exe ""Get-ADPrincipalGroupMembership "& username1 &" | select Name"" > " & tempPath
+		end if
+		cmdOutput = execPS(strCmd)
+		
+		'READ OUTPUT FILE
+		text = readFile(tempPath)
+
+		'CEHCK WHETHER COMAMND OUTPUT VALUE. IF RETURNED '0', THAT MEANS COMMAND EXECUTED SUCCESSFULLY
+		if cmdOutput=0 then
+			writelog text
+			msg = "Success."
+		else
+			text = "Error. Please check domain and username again."
+			writelog text
+			msg = "Error"
+		end if
+
+	else
+			text = "Error. Get-ADPrincipalGroupMembership powershell CmdLet not found"
+			id("ta2").value = text
+			msg = "Error"
+	end if	' END OF cmdOutput=0 then
+	
+	deleteFile(tempPath)
+
+
+	end if	'END OF if username1 = "" then
+
+	'SHOW PROGRESS BAR STATUS CHANGED
+        x = 1
+        y=1
+	id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+	Progress x,y,w
+	
+	msgbox msg
+
+
+End Function
+
+Function execPS(strCmd)
+		Set objShell = CreateObject("Wscript.shell")
+		intReturn = objShell.Run(strCmd, 0, true)
+		execPS = intReturn
+End Function
+
+Function deleteFile(fileName)
+	if fso.FileExists(fileName) then
+		fso.deleteFile(fileName)
+	end if
+End Function
+
+Function readFile(fileName)
+		Set f = fso.OpenTextFile(fileName,1)
+		Do Until f.AtEndOfStream
+			text = text & f.ReadLine & vbNewLine
+		Loop
+		f.Close
+		readFile = text
+End Function
+
+Function hideADTask()
+                id("ad1").style.visibility="hidden"
+                id("ad2").style.visibility="hidden"
+                id("ad3").style.visibility="hidden"
+                id("ad4").style.visibility="hidden"
+                id("ad5").style.visibility="hidden"
+                id("ad6").style.visibility="hidden"
+                id("ad7").style.visibility="hidden"
+                id("ad8").style.visibility="hidden"
+                id("ad9").style.visibility="hidden"
+                id("ad10").style.visibility="hidden"
+                id("ad11").style.visibility="hidden"
+End Function
+
+
+Function showHiddenADTask(x)
+	hideADTask()
+	
+        id(x).style.visibility="collapse"
+        id(x).style.position="absolute"
+
+	id("HelpDiv").InnerText = displayHelp(x)
+	id("HelpDiv").style.color = "blue"
+End Function
+
+Function displayHelp(x)
+dim tmp
+	if x = "ad1" then
+		tmp = "Enter User's login ID (SAM ID)." & vbNewLine _
+			& "This will retrieve 'Member Of' from AD." & vbNewLine _
+			& "Server name info not required for this task."
+	elseif x = "ad2" then
+		tmp = "1. Select search mode, serivce 'Display Name' or 'Service Name'." & vbNewLine _
+			& "   Example:" & vbNewLine _
+			& "   Display Name: 'Windows Update' and " & vbNewLine _
+			& "   Service Name: 'wuauserv'" & vbNewLine _
+			& "2. Type Server Name" & vbNewLine _
+			& "3. Type Display/Service name in textfield." & vbNewLine _
+			& "4. Click on required action button." & vbNewLine _
+			& "" & vbNewLine _
+			& "Note:" & vbNewLine _
+			& "User '*' wild character to search for related service. Example *wmi*"
+			
+			id("serviceServer").value = getLocalHostname()
+	elseif x = "ad3" then
+		tmp = "1. Enter Server name." & vbNewLine _
+			& "2. Click on 'View All' to view all running process." & vbNewLine _
+			& "3. Type Display/Service name in textfield." & vbNewLine _
+			
+			id("processServer").value = getLocalHostname()
+	elseif x = "ad10" then
+		tmp = " \\abn-dhp-dfs-01.dhp.tzghosting.net\s$\GSTST" & vbNewLine _
+			& "   In security, PUBLIC folder should not have user mft.service.test" & vbNewLine _
+			& "   In security, PRIVATE folder should not have user gs.eft.service.test" & vbNewLine & vbNewLine & vbNewLine _
+			& " \\csn-ATR-dfs-01.ATR.TZGHOSTING.NET\s$\GSPRD" & vbNewLine _
+			& "  In security, PUBLIC folder should not have user mft.service.prod" & vbNewLine _
+			& "  In security, PRIVATE folder should not have user gs.eft.service.prod"
+			
+			id("processServer").value = getLocalHostname()
+	elseif x = "ad11" then
+		tmp = " Enter Role or Featreu Name" & vbNewLine _
+			& " Click on 'Check Now' button" & vbNewLine _
+			& " Type 'All' if want to see all roles & features intalled"
+			
+			id("processServer").value = getLocalHostname()
+	end if
+	
+	displayHelp = tmp
+End Function
+
+Function ServiceStatus()
+'R1 radio button for Display Name
+'R2 radio button for Service Name
+
+
+	id("ta2").value  = ""
+
+	dim strCmd, text, tempPath, cmdOutput, msg, serviceServer, serviceName
+	serviceServer = trim(id("serviceServer").value)
+	serviceName = trim(id("serviceName").value)
+	tempPath = "1.txt"
+
+	
+	if serviceServer = "" then
+		msgbox "Enter Server Name"
+		id("serviceServer").select
+	elseif serviceName = "" then
+		msgbox "Enter Service Name"
+		id("serviceName").select
+	else
+'SHOW PROGRESS BAR STATUS
+'-- w: bar width, x: done items, y: remaining items
+        w=100
+        x = 0
+        y=1
+	id("ServerinProgress").innerText=serviceServer
+	id("TaskinProgress").innerText="Get-Service Status"
+	id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+	Progress x,y,w
+	
+	
+		' CHECK WHETHER CmdLet AVAILABLE OR NOT
+		strCmd = "%comspec% /c  PowerShell.exe Get-Command Get-Service > " & tempPath
+		cmdOutput = execPS(strCmd)
+
+		if cmdOutput=0 then
+			id("ta2").value = "Service Status"
+			writelog 	      "--------------"
+
+			'CHECK WHICH RADIO BUTTON IS SELECTED
+			if id("r1").checked then
+				if(id("serviceFormatList").checked) then
+					strCmd = "%comspec% /c  PowerShell.exe ""get-service -ComputerName "& serviceServer &" -Displayname '*"& serviceName &"*' | sort-object status | format-list "" > " & tempPath
+				else
+					strCmd = "%comspec% /c  PowerShell.exe ""get-service -ComputerName "& serviceServer &" -Displayname '*"& serviceName &"*' | sort-object status "" > " & tempPath
+				end if
+			else
+				if(id("serviceFormatList").checked) then
+					strCmd = "%comspec% /c  PowerShell.exe ""get-service -ComputerName "& serviceServer &" -Name '*"& serviceName &"*' | sort-object status | format-list "" > " & tempPath
+				else
+					strCmd = "%comspec% /c  PowerShell.exe ""get-service -ComputerName "& serviceServer &" -Name '*"& serviceName &"*' | sort-object status "" > " & tempPath
+				end if
+			end if
+			cmdOutput = execPS(strCmd)
+			
+			'READ OUTPUT FILE
+			text = readFile(tempPath)
+
+			'CEHCK WHETHER COMAMND OUTPUT VALUE. IF RETURNED '0', THAT MEANS COMMAND EXECUTED SUCCESSFULLY
+			if cmdOutput=0 then
+				writelog text
+				msg = "Success."
+			else
+				
+				text = "Error. Please check server name" & vbNewLine
+				tmp = tmp & "CMD Executed: " & strCmd & vbNewLine
+				tmp = tmp & "Output: " & vbNewLine
+				tmp = tmp & text
+				text = tmp
+				tmp = ""
+				writelog text
+				msg = "Error"
+			end if
+
+		else
+				text = "Error. Get-Service powershell CmdLet not found"
+				id("ta2").value = text
+				msg = "Error"
+		end if	' END OF cmdOutput=0 then
+		
+		deleteFile(tempPath)
+
+		'SHOW PROGRESS BAR STATUS CHANGED
+			x = 1
+			y=1
+		id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+		Progress x,y,w
+		msgbox msg
+	
+	end if	'END OF if serviceServer = "" then
+
+
+	
+
+
+End Function
+
+
+
+Function ServiceStartStop(srvcAction)
+'R1 radio button for Display Name
+'R2 radio button for Service Name
+
+
+	id("ta2").value  = ""
+
+	dim strCmd, strCmd2, text, tempPath, cmdOutput, msg, serviceServer, serviceName
+	serviceServer = trim(id("serviceServer").value)
+	serviceName = trim(id("serviceName").value)
+	tempPath = "1.txt"
+
+	
+	if serviceServer = "" then
+		msgbox "Enter Server Name"
+		id("serviceServer").select
+	elseif serviceName = "" then
+		msgbox "Enter Service Name"
+		id("serviceName").select
+	else
+
+'SHOW PROGRESS BAR STATUS
+'-- w: bar width, x: done items, y: remaining items
+        w=100
+        x = 0
+        y=1
+	id("ServerinProgress").innerText=serviceServer
+	id("TaskinProgress").innerText=srvcAction & "-Service Status"
+	id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+	Progress x,y,w
+	
+	
+		' CHECK WHETHER CmdLet AVAILABLE OR NOT
+		strCmd = "%comspec% /c  PowerShell.exe Get-Command "& srvcAction &"-Service > " & tempPath
+		cmdOutput = execPS(strCmd)
+
+		if cmdOutput=0 then
+			id("ta2").value = "Service Status"
+			writelog 	      "--------------"
+
+			'CHECK WHICH RADIO BUTTON IS SELECTED
+			if id("r1").checked then
+					strCmd = "%comspec% /c  PowerShell.exe "& srvcAction &"-service -inputobject $(get-service -ComputerName "& serviceServer &" -Displayname '"& serviceName &"') > " & tempPath
+					strCmd2 = "%comspec% /c PowerShell.exe ""get-service -ComputerName "& serviceServer &" -Displayname '"& serviceName &"'"" > " & tempPath
+			else
+					strCmd = "%comspec% /c  PowerShell.exe "& srvcAction &"-service -inputobject $(get-service -ComputerName "& serviceServer &" -Name '"& serviceName &"') > " & tempPath
+					strCmd2 = "%comspec% /c PowerShell.exe ""get-service -ComputerName "& serviceServer &" -Name '"& serviceName &"'"" > " & tempPath
+			end if
+			cmdOutput = execPS(strCmd)
+			
+			'READ OUTPUT FILE
+			text = readFile(tempPath)
+
+			'CEHCK WHETHER COMAMND OUTPUT VALUE. IF RETURNED '0', THAT MEANS COMMAND EXECUTED SUCCESSFULLY
+			if cmdOutput=0 then
+				cmdOutput = execPS(strCmd2)	'NOW CHECK CURRENT RUNNING STATUS OF SERVICE
+				text = readFile(tempPath)
+				writelog text
+				if trim(text)="" then
+					msg = "Service not found"
+					writelog "Service not found"
+				else
+					msg = "Success."
+				end if
+			else
+				text = "Error. Ensure you have rights to start/stop service. Check server name entered" & vbNewLine
+				tmp = tmp & "CMD Executed: " & strCmd & vbNewLine
+				tmp = tmp & "Output: " & vbNewLine
+				tmp = tmp & text
+				text = tmp
+				tmp = ""
+				writelog text
+
+
+				msg = "Error"
+			end if
+
+		else
+				text = "Error. "& srvcAction &"-Service powershell CmdLet not found"
+				id("ta2").value = text
+				msg = "Error"
+		end if	' END OF cmdOutput=0 then for CmdLet present or not
+		
+		deleteFile(tempPath)
+
+		'SHOW PROGRESS BAR STATUS CHANGED
+			x = 1
+			y=1
+		id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+		Progress x,y,w
+		
+		msgbox msg
+
+
+	end if	'END OF if serviceServer = "" then
+
+
+
+End Function
+
+
+
+Function processViewAll()
+	id("ta2").value  = ""
+
+	dim strCmd, text, tempPath, cmdOutput, msg, processServer, processName
+	processServer = trim(id("processServer").value)
+	processName = trim(id("processName").value)
+	tempPath = "1.txt"
+
+	
+	if processServer = "" then 'if1 start
+		msgbox "Enter Server Name"
+		id("processServer").select
+	else
+	'SHOW PROGRESS BAR STATUS
+	'-- w: bar width, x: done items, y: remaining items
+        w=100
+        x = 0
+        y=1
+		id("ServerinProgress").innerText=processServer
+		id("TaskinProgress").innerText="View All Process"
+		id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+		Progress x,y,w
+	
+	
+		' CHECK WHETHER CmdLet AVAILABLE OR NOT
+		strCmd = "%comspec% /c  PowerShell.exe Get-Command Get-Process > " & tempPath
+		cmdOutput = execPS(strCmd)
+
+		if cmdOutput=0 then	'if2 start
+			id("ta2").value = "Process Status - ViewAll process"
+			writelog 	      "---------------------------------"
+
+			
+			
+			if(id("processFormatList").checked) then 'if3 start
+					strCmd = "%comspec% /c  PowerShell.exe ""get-process -ComputerName "& processServer &" | sort-object Name | format-list * "" > " & tempPath
+			else
+					strCmd = "%comspec% /c  PowerShell.exe ""get-process -ComputerName "& processServer &" -Name '*"& processName &"*' "" > " & tempPath
+			end if	'if3 end
+			cmdOutput = execPS(strCmd)
+			
+			'READ OUTPUT FILE
+			text = readFile(tempPath)
+
+			'CEHCK WHETHER COMAMND OUTPUT VALUE. IF RETURNED '0', THAT MEANS COMMAND EXECUTED SUCCESSFULLY
+			if cmdOutput=0 then
+				writelog text
+				msg = "Success."
+			else
+				
+				text = "Error. Please check server name" & vbNewLine
+				tmp = tmp & "CMD Executed: " & strCmd & vbNewLine
+				tmp = tmp & "Output: " & vbNewLine
+				tmp = tmp & text
+				text = tmp
+				tmp = ""
+				writelog text
+				msg = "Error"
+			end if
+
+		else
+				text = "Error. Get-Service powershell CmdLet not found"
+				id("ta2").value = text
+				msg = "Error"
+		end if	' if2 end
+		
+		deleteFile(tempPath)
+	
+		'SHOW PROGRESS BAR STATUS CHANGED
+			x = 1
+			y=1
+		id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+		Progress x,y,w
+		msgbox msg
+	end if	'if1 end
+End Function
+
+
+
+
+Function getTrustedDomains()
+
+	id("ta2").value = ""
+	writelog "TrustedDomain" _
+			& vbTAB & "TrustDirection" _
+			& vbTAB & "TrustType" _
+			& vbTAB & "TrustAttributes" _
+			& vbTAB & "TrustedDCName" _
+			& vbTAB & "TrustStatus" _
+			& vbTAB & "TrustIsOK"
+
+
+					
+	strComputer = trim(id("getDomainName").value)
+	Set objWMISer = GetObject("winmgmts:" _
+		& "{impersonationLevel=impersonate}!\\" & strComputer & "\root\MicrosoftActiveDirectory")
+
+	Set colTrustList = objWMISer.ExecQuery("Select * from Microsoft_DomainTrustStatus")
+	dim outStr
+	For each objTrust in colTrustList
+		outStr=""
+		dim TrustDirection, TrustType, TrustAttributes, TrustStatus
+		
+		'check for TrustDirection value meaning, its either 1, 2 or 3
+		if objTrust.TrustDirection = 1 then
+			TrustDirection = "inbound"
+		elseif objTrust.TrustDirection = 2 then
+			TrustDirection = "outbound"
+		elseif objTrust.TrustDirection = 3 then
+			TrustDirection = "two-way"
+		end if
+
+		'check for TrustType value meaning, its either 1, 2, 3 or 4
+		if objTrust.TrustType = 1 then
+			TrustType = "downlevel"
+		elseif objTrust.TrustType = 2 then
+			TrustType = "uplevel"
+		elseif objTrust.TrustType = 3 then
+			TrustType = "realm"
+		elseif objTrust.TrustType = 4 then
+			TrustType = "DCE"
+		end if
+
+		'check for TrustAttributes value meaning, its either 1, 2, 4 or 8
+		if objTrust.TrustAttributes = 1 then
+			TrustAttributes = "nontransitive"
+		elseif objTrust.TrustAttributes = 2 then
+			TrustAttributes = "up-level clients only"
+		elseif objTrust.TrustAttributes = 4 then
+			TrustAttributes = "tree parent"
+		elseif objTrust.TrustAttributes = 8 then
+			TrustAttributes = "tree root"
+		end if
+
+		'check for TrustStatus value meaning, its either 0 or greater that 0
+		if objTrust.TrustStatus = 0 then
+			TrustStatus = "TRUE"
+		elseif objTrust.TrustStatus > 0 then
+			TrustStatus = "FALSE"
+		end if
+		
+		outStr = 	objTrust.TrustedDomain _
+					& vbTAB & TrustDirection _
+					& vbTAB & TrustType _
+					& vbTAB & TrustAttributes _
+					& vbTAB & objTrust.TrustedDCName _
+					& vbTAB & TrustStatus _
+					& vbTAB & objTrust.TrustIsOK
+		 
+		'Wscript.Echo "Trust direction: " & objTrust.TrustedDomain
+		'Wscript.Echo "Trust direction: " & objTrust.TrustDirection
+		'Wscript.Echo "Trust type: " & objTrust.TrustType
+		'Wscript.Echo "Trust attributes: " & objTrust.TrustAttributes
+		'Wscript.Echo "Trusted domain controller name: " & objTrust.TrustedDCName
+		'Wscript.Echo "Trust status: " & objTrust.TrustStatus
+		'Wscript.Echo "Trust is OK: " & objTrust.TrustIsOK
+
+		writelog outStr
+		strCmd = "Timeout /T 0.5 /nobreak"
+		intReturn = objShell.Run(strCmd, 0, true)
+	Next
+
+	msgbox "Done"
+End Function
+
+
+
+'--------------------------- List All Computer Accounts in Selected Domain ---------------------------
+Function getDomainComputer()
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog "SNo" _
+			& vbTAB & "ComputerName" _
+			& vbTAB & "Domainname" _
+			& vbTAB & "OperatingSystem"
+	strCmd = "Timeout /T 0.5 /nobreak"
+	intReturn = objShell.Run(strCmd, 0, true)
+			
+
+				
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Task Detail type here"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+
+		strCmd = "ping -n 1 " & strComputer
+		intReturn = objShell.Run(strCmd, 0, true)
+		
+		if intReturn = 0 then
+
+			Dim LDAPval
+			LDAPval="LDAP://"
+			'a=Split("services.tzghosting.net",".")
+			a=Split(strComputer,".")
+			for each x in a
+				LDAPval = LDAPval & "DC=" & x & ","
+			next
+			ExpVal = "LDAP://DC=services,DC=tzghosting,DC=net"
+			LDAPvalLen = Len(LDAPval)
+			LDAPval = Mid(LDAPval,1,LDAPvalLen-1)
+
+			Const ADS_SCOPE_SUBTREE = 2
+			Set objConnection = CreateObject("ADODB.Connection")
+			Set objCommand = CreateObject("ADODB.Command")
+			objConnection.Provider = "ADsDSOObject"
+			objConnection.Open "Active Directory Provider"
+			Set objCOmmand.ActiveConnection = objConnection
+			dim cmdText
+			cmdText = "Select Name, OperatingSystem from '"& LDAPval &"' " _
+			& "Where objectClass='computer'"
+			objCommand.CommandText = cmdText
+
+			objCommand.Properties("Page Size") = 1000
+			objCommand.Properties("Searchscope") = ADS_SCOPE_SUBTREE
+			Set objRecordSet = objCommand.Execute
+			objRecordSet.MoveFirst
+
+			Do Until objRecordSet.EOF
+				x = x+1
+				writelog x & vbTAB	& objRecordSet.Fields("Name").Value _
+						& vbTAB & strComputer _
+						& vbTAB & objRecordSet.Fields("OperatingSystem").Value
+						
+
+				objRecordSet.MoveNext
+				strCmd = "Timeout /T 0.5 /nobreak"
+				intReturn = objShell.Run(strCmd, 0, true)
+			Loop
+
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Invalid Domain"
+		end if
+
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"				
+
+
+		
+
+
+
+End Function
+
+'**********************end
+
+
+Function getDomainComputerOld()
+	id("ta2").value  = ""
+	id("ta2").value = "Process Status - Domain Computers"
+	writelog 	      "---------------------------------"
+
+	dim strCmd, text, tempPath, cmdOutput, msg, getDomainName
+	getDomainName = trim(id("getDomainName").value)
+	tempPath = "1.txt"
+
+	
+	if getDomainName = "" then 'if1 start
+		msgbox "Enter Domain Name"
+		id("getDomainName").select
+	else
+	'SHOW PROGRESS BAR STATUS
+	'-- w: bar width, x: done items, y: remaining items
+        w=100
+        x = 0
+        y=1
+		id("ServerinProgress").innerText=processServer
+		id("TaskinProgress").innerText="Domain Computer Info"
+		id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+		Progress x,y,w
+	
+
+		'CHECK WHETHER CmdLet AVAILABLE OR NOT
+		strCmd = "%comspec% /c  PowerShell.exe Get-Command Get-ADComputer > " & tempPath
+		cmdOutput = execPS(strCmd)
+
+		if cmdOutput=0 then	
+			
+			'strCmd = "%comspec% /c  PowerShell.exe ""get-process -ComputerName "& processServer &" -Name '*"& processName &"*' "" > " & tempPath
+			strCmd = "%comspec% /c  PowerShell.exe ""Get-ADComputer -Filter * -Properties * | FT Name, LastLogonDate,OperatingSystem,OperatingSystemServicePack,OperatingSystemVersion -wrap -auto"" | Export-Csv " & tempPath
+			writelog strCmd
+			cmdOutput = execPS(strCmd)
+			
+			'READ OUTPUT FILE
+			text = readFile(tempPath)
+
+			'CEHCK WHETHER COMAMND OUTPUT VALUE. IF RETURNED '0', THAT MEANS COMMAND EXECUTED SUCCESSFULLY
+			if cmdOutput=0 then
+				writelog text
+				msg = "Success."
+			else
+				
+				text = "Error. Please check the domain name entered." & vbNewLine
+				tmp = tmp & "CMD Executed: " & strCmd & vbNewLine
+				tmp = tmp & "Output: " & vbNewLine
+				tmp = tmp & text
+				text = tmp
+				tmp = ""
+				writelog text
+				msg = "Error"
+			end if
+
+		else
+				text = "Error. Get-ADComputer powershell CmdLet not found"
+				id("ta2").value = text
+				msg = "Error"
+		end if
+		
+		deleteFile(tempPath)
+	
+		'SHOW PROGRESS BAR STATUS CHANGED
+			x = 1
+			y=1
+		id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+		Progress x,y,w
+		msgbox msg
+	end if
+End Function
+
+Function ViewFolderPermission()
+	Dim strCmd
+	strCmd = "Timeout /T 0.5 /nobreak"
+	intReturn = objShell.Run(strCmd, 0, true)
+
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog 	"SNo" _
+				& vbTAB & "FolerPath" _
+				& vbTAB & "Permission"
+			
+
+				
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Check Folder Permission"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		
+		if objFSO.FolderExists(strComputer) then
+			strCmd = "%comspec% /c icacls.exe "& strComputer &" > 1.txt"
+			intReturn = objShell.Run(strCmd, 0, true)
+		
+			dim users, output
+			output = ""
+			if intReturn = 0 then
+				'myArray = Split(docnos, vbCrLf)
+				users = Split(readfile("1.txt"), vbCrLf)
+				for each user in users
+					user = Replace(user,strComputer,"")
+					output = output & trim(user) & ", "
+				next
+
+				writelog x & vbTAB & strComputer & vbTAB & output
+				deleteFile("1.txt")
+			else
+				writelog x & vbTAB & strComputer & vbTAB & "ICACLS cmd failed"
+			end if
+
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Error, unable to access path"
+		end if
+
+		strCmd = "Timeout /T 0.5 /nobreak"
+		intReturn = objShell.Run(strCmd, 0, true)
+
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"	
+End Function
+
+Function RemoveFolderPermission()
+	Dim strCmd
+	strCmd = "Timeout /T 0.5 /nobreak"
+	intReturn = objShell.Run(strCmd, 0, true)
+
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog 	"SNo" _
+				& vbTAB & "FolerPath" _
+				& vbTAB & "Permission"
+			
+
+				
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Check Folder Permission"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		
+		if objFSO.FolderExists(strComputer) then
+			dim removep
+			removep = trim(id("removep").value)
+			strCmd = "%comspec% /c icacls.exe "& strComputer &" /remove:g " & removep
+			intReturn = objShell.Run(strCmd, 0, true)
+
+			strCmd = "%comspec% /c icacls.exe "& strComputer &" > 1.txt"
+			intReturn = objShell.Run(strCmd, 0, true)
+		
+			dim users, output
+			output = ""
+			if intReturn = 0 then
+				'myArray = Split(docnos, vbCrLf)
+				users = Split(readfile("1.txt"), vbCrLf)
+				for each user in users
+					user = Replace(user,strComputer,"")
+					output = output & trim(user) & ", "
+				next
+
+				writelog x & vbTAB & strComputer & vbTAB & output
+				deleteFile("1.txt")
+			else
+				writelog x & vbTAB & strComputer & vbTAB & "ICACLS cmd failed"
+			end if
+
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Error, unable to access path"
+		end if
+
+		strCmd = "Timeout /T 0.5 /nobreak"
+		intReturn = objShell.Run(strCmd, 0, true)
+
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"	
+End Function
+
+
+Function RemovePermissionFromPublic()
+	Dim strCmd
+	strCmd = "Timeout /T 0.5 /nobreak"
+	intReturn = objShell.Run(strCmd, 0, true)
+
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog 	"SNo" _
+				& vbTAB & "FolerPath" _
+				& vbTAB & "Permission"
+			
+
+				
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Check Folder Permission"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		
+		if objFSO.FolderExists(strComputer) then
+			if InStr(strComputer, "\PUBLIC") then
+				dim domainName, removep
+				
+				domainName = Mid(strComputer,7,3)			
+				removep = domainName & "\mft.service.test"
+				strCmd = "%comspec% /c icacls.exe "& strComputer &" /remove:g " & removep
+				intReturn = objShell.Run(strCmd, 0, true)
+
+				removep = "Services\mft.service.test"
+				strCmd = "%comspec% /c icacls.exe "& strComputer &" /remove:g " & removep
+				intReturn = objShell.Run(strCmd, 0, true)
+				
+				strCmd = "%comspec% /c icacls.exe "& strComputer &" > 1.txt"
+				intReturn = objShell.Run(strCmd, 0, true)
+			
+				dim users, output
+				output = ""
+				if intReturn = 0 then
+					'myArray = Split(docnos, vbCrLf)
+					users = Split(readfile("1.txt"), vbCrLf)
+					for each user in users
+						user = Replace(user,strComputer,"")
+						output = output & trim(user) & ", "
+					next
+
+					writelog x & vbTAB & strComputer & vbTAB & output
+					deleteFile("1.txt")
+				else
+					writelog x & vbTAB & strComputer & vbTAB & "ICACLS cmd failed"
+				end if
+			else
+				writelog x & vbTAB & strComputer & vbTAB & "Its not PUBLIC Folder"
+			end if
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Error, unable to access path"
+		end if
+
+		strCmd = "Timeout /T 0.5 /nobreak"
+		intReturn = objShell.Run(strCmd, 0, true)
+
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"	
+End Function
+
+Function RemovePermissionFromPrivate()
+	Dim strCmd
+	strCmd = "Timeout /T 0.5 /nobreak"
+	intReturn = objShell.Run(strCmd, 0, true)
+
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog 	"SNo" _
+				& vbTAB & "FolerPath" _
+				& vbTAB & "Permission"
+			
+
+				
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Check Folder Permission"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		
+		if objFSO.FolderExists(strComputer) then
+			if InStr(strComputer, "\PUBLIC") then
+		
+				dim removep
+				
+				removep = "Services\gs.eft.service.test"
+				strCmd = "%comspec% /c icacls.exe "& strComputer &" /remove:g " & removep
+				'writelog strCmd
+				intReturn = objShell.Run(strCmd, 0, true)
+				
+				strCmd = "%comspec% /c icacls.exe "& strComputer &" > 1.txt"
+				intReturn = objShell.Run(strCmd, 0, true)
+			
+				dim users, output
+				output = ""
+				if intReturn = 0 then
+					'myArray = Split(docnos, vbCrLf)
+					users = Split(readfile("1.txt"), vbCrLf)
+					for each user in users
+						user = Replace(user,strComputer,"")
+						output = output & trim(user) & ", "
+					next
+
+					writelog x & vbTAB & strComputer & vbTAB & output
+					deleteFile("1.txt")
+				else
+					writelog x & vbTAB & strComputer & vbTAB & "ICACLS cmd failed"
+				end if
+			else
+				writelog x & vbTAB & strComputer & vbTAB & "Its not PRIVATE Folder"
+			end if
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Error, unable to access path"
+		end if
+
+		strCmd = "Timeout /T 0.5 /nobreak"
+		intReturn = objShell.Run(strCmd, 0, true)
+
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"	
+End Function
+
+
+Function CheckRoleFeature()
+	Dim strCmd
+	strCmd = "Timeout /T 0.5 /nobreak"
+	intReturn = objShell.Run(strCmd, 0, true)
+
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog 	"SNo" _
+				& vbTAB & "ComputerName" _
+				& vbTAB & "RoleName" _
+				& vbTAB & "Status"
+
+	strCmd = "Timeout /T 0.5 /nobreak"
+	intReturn = objShell.Run(strCmd, 0, true)
+				
+	dim roleName
+	roleName = trim(id("RoleName").value)
+				
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Task Detail type here"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+
+			'your code here
+
+			if roleName="All" then
+				
+				Set colRoleFeatures = objWMIService.ExecQuery ("Select * from Win32_ServerFeature")
+
+				colrole=isnull(colRoleFeatures) 
+				If colrole=false then 
+					For Each objRoleFeatures in colRoleFeatures 
+					   writelog x _
+								& vbtab & strcomputer _
+								& vbtab & objrolefeatures.name
+
+					Next 
+				Else 
+					msgbox "Blank"
+				End If 				
+			else
+				Set colRoleFeatures = objWMIService.ExecQuery ("Select * from Win32_ServerFeature where Name = '" & roleName & "'")
+
+				colrole=isnull(colRoleFeatures) 
+				If colrole=false then 
+					For Each objRoleFeatures in colRoleFeatures 
+					   writelog x _
+								& vbtab & strcomputer _
+								& vbtab & objrolefeatures.name
+
+					Next 
+				Else 
+
+					   writelog x _
+								& vbtab & strcomputer _
+								& vbtab & "NA"
+
+				End If 				
+				
+				strCmd = "Timeout /T 0.5 /nobreak"
+				intReturn = objShell.Run(strCmd, 0, true)
+				
+			end if
+
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Invalid hostname"
+			
+			strCmd = "Timeout /T 0.5 /nobreak"
+			intReturn = objShell.Run(strCmd, 0, true)
+			
+		end if
+
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"				
+End Function
+
+Function InstallMcAfeeAV()
+	Dim strCmd
+	strCmd = "Timeout /T 0.5 /nobreak"
+	intReturn = objShell.Run(strCmd, 0, true)
+
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog 	"SNo" _
+				& vbTAB & "ComputerName" _
+				& vbTAB & "Status" _
+				& vbTAB & "McAfee_Service"
+			
+
+				
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	
+	for each strComputer in ServerArray
+	dim AV_Install_Status
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="McAfee AV Installation"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+
+			'your code here
+			strCmd = "xcopy \\abn-emb-dfs-01.emb.tzghosting.net\c$\temp\McAfeeDeployment " _
+			& "\\"& strComputer &"\C$\Test\McAfee /E /C /I /Q /H /R /Y"
+			intReturn = objShell.Run(strCmd, 0, true)
+			
+			strCmd = "PSExec.exe -accepteula \\"& strComputer &" C:\Test\McAfee\FramePkg.exe"
+			intReturn = objShell.Run(strCmd, 0, true)
+
+				if intReturn = 0 then
+					AV_Install_Status = "Success"
+				else
+					AV_Install_Status = "Failed"
+				end if
+				
+				
+				'### after AV installation, get service status
+				id("TaskinProgress").innerText="Checking AV Service"
+				Service_Status = getServiceStatus(strComputer, "mcafeeframework")
+				writelog x & vbTAB & strComputer & vbTAB & Information_Server & vbTAB & AV_Install_Status & vbTAB & Service_Status
+			
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Invalid hostname"
+		end if
+
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"				
+
+End Function
+
+Function McAfeeServiceStatus()
+	Dim strCmd
+	strCmd = "Timeout /T 0.5 /nobreak"
+	intReturn = objShell.Run(strCmd, 0, true)
+
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog 	"SNo" _
+				& vbTAB & "ComputerName" _
+				& vbTAB & "Status"
+			
+
+				
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Task Detail type here"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+
+			'your code here
+			Service_Status = getServiceStatus(strComputer, "mcafeeframework")
+			writelog x & vbTAB & strComputer & vbTAB & Service_Status
+
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Invalid hostname"
+		end if
+
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"				
+
+End Function
+'---------------------------Template Start
+Function Template()
+	Dim strCmd
+	strCmd = "Timeout /T 0.5 /nobreak"
+	intReturn = objShell.Run(strCmd, 0, true)
+
+	dim t1, t2, DiffADate
+	t1 = now()
+
+	id("ta2").value = "Start time: " & t1
+	writelog 	"SNo" _
+				& vbTAB & "ComputerName" _
+				& vbTAB & "CMD_Exec_Status"
+			
+
+				
+	Dim ServerArray, ServerCount, ServerStatus
+	ServerArray = TextareaInArray("ta1")
+	ServerCount = UBound(ServerArray)+1
+
+	'-- w: bar width, x: done items, y: remaining items
+	w=100
+	x = 0
+	y=ServerCount-x
+	dim tempPath
+	dim serverBit, clientBit
+	serverBit = OSArchitecture_SingleServer(trim(id("AVServer").value))
+	
+	
+	for each strComputer in ServerArray
+
+		x=x+1
+        id("ServerinProgress").innerText=strComputer
+        id("TaskinProgress").innerText="Task Detail type here"
+        id("PercentDone").innerText=FormatPercent(x/y, 0) &" ("& x & "/" & y&")"
+        Progress x,y,w	
+		
+		ServerStatus = checkComputer(strComputer)
+		if ServerStatus = "true" then
+
+			'your code here
+			msgbox strComputer
+
+		else
+			writelog x & vbTAB & strComputer & vbTAB & "Invalid hostname"
+		end if
+
+	next
+
+	w=0
+	x=0
+	y=0
+	mainOutputStr = ""
+	taskList=""
+
+	t2 = now()
+	writelog "End time: " & t2
+	DiffADate = DateDiff("n", t1, t2)
+	writelog "Time taken (mins): " & DiffADate
+	
+	msgbox "Done"				
+End Function
+
+'-------------------------Template End
+</SCRIPT>
+</head>
+<body bgcolor="#D7D7D7">
+<center> <b>Server Tool</b> </center>
+
+ <table>
+                <tr valign=top>
+                                <td> <br>Server Name </td>
+                                <td> <br>
+                                                <textarea wrap=off col=5 rows=6 id="ta1">Anoop-PC</textarea> <br>
+												<input type=file id="browseServer" onchange="showServerNames()">
+                                </td>
+                                <Td align=center>
+                                                Log <input type=button value="Clear" onclick=clearTA("ta2")>
+                                                <input type=button value="Open" onclick="OpenText()"><br>
+                                                <textarea wrap=off id=ta2 rows=15 cols=80></textarea>
+                                </td>
+                </tr>
+                <tr>
+                                <td></td>
+                                <td></td>
+                                <td>  </td>
+                </tr>
+                </table>
+<center>             
+<table width=75% border=1>
+                <tr>
+                                <td>Server in Progress</td>
+                                <td>Task in Progress</td>
+                                <td>% Done</td>
+                </tr>
+                <tr>
+                                <td><span id="ServerinProgress"></span></td>
+                                <td><span id="TaskinProgress"></span></td>
+                                <td><span id="PercentDone"></span></td>
+                </tr>
+</table>
+<span id="ProgBarDone" style="background-color: #3399FF" style="position:relative"></span>
+<font color="#FFFFFF">
+<span id="ProgBarToDo"style="background-color: #C0C0C0"></span>
+</font>
+</center>
+<!-- Menu names mentioned in this table -->
+<center>
+<table>
+                <tr>
+                                <Td><b><a href="javascript:void(0)" onclick=showHiddenForm("1")>System Info | </a></b> <br></td>
+                                <Td><b><a href="javascript:void(0)" onclick=showHiddenForm("2")>Tools | </a></b> <br></td>
+                                <Td><b><a href="javascript:void(0)" onclick=showHiddenForm("3")>Other</a></b> <br></td>
+                                </tr>
+</table>
+</center>
+
+                                                <!-- System Info tasks mentioned in this table. This table is associated with ID "1" -->
+                                                <span id="1" style="position:absolute; overflow:hidden;visibility:visible">
+                                                <input type=button value="Get Info" onclick="GetInfo()">
+                                                <input type=checkbox onclick="checkAll 'cb1','1all'" id="1all">Check All
+                                                <table border=1>
+                                                                <tr>
+                                                                                <td><input type="checkbox" name="cb1" id = "MachineName" onclick=updateHeader("MachineName")>MachineName</td>
+                                                                                <td><input type="checkbox" name="cb1" id = "DomainName" onclick=updateHeader("DomainName")>DomainName</td>
+                                                                                <td><input type="checkbox" name="cb1" id = "Latency" onclick=updateHeader("Latency")>Latency</td>
+                                                                                <td><input type="checkbox" name="cb1" id = "Model" onclick=updateHeader("Model")>Model</td>
+                                                                </tr>
+                                                                <tr>
+                                                                                <td><input type="checkbox" name="cb1"  id = "SerialNumber" onclick=updateHeader("SerialNumber")>SerialNumber</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "CPUName" onclick=updateHeader("CPUName")>CPUName</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "MaxClockSpeed" onclick=updateHeader("MaxClockSpeed")>MaxClockSpeed</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "ProcessorCount" onclick=updateHeader("ProcessorCount")>ProcessorCount</td>
+                                                                </tr>
+                                                                <tr>
+                                                                                <td><input type="checkbox" name="cb1"  id = "numberofCore" onclick=updateHeader("numberofCore")>numberofCore</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "NumberofLogicalProcessors" onclick=updateHeader("NumberofLogicalProcessors")>NumberofLogicalProcessors</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "Hyperthread" onclick=updateHeader("Hyperthread")>Hyperthread</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "OperatingSystem" onclick=updateHeader("OperatingSystem")>OperatingSystem</td>
+                                                                </tr>
+                                                                <tr>
+                                                                                <td><input type="checkbox" name="cb1"  id = "OSArchitecture" onclick=updateHeader("OSArchitecture")>OSArchitecture(bit)</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "ServicePackVersion" onclick=updateHeader("ServicePackVersion")>ServicePackVersion</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "OSLang" onclick=updateHeader("OSLang")>OSLang</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "OSBuild" onclick=updateHeader("OSBuild")>OSBuild</td>
+                                                                </tr>
+                                                                <tr>
+                                                                                <td><input type="checkbox" name="cb1"  id = "InterfaceDescription" onclick=updateHeader("InterfaceDescription")>InterfaceDescription</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "IPAddress" onclick=updateHeader("IPAddress")>IPAddress</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "MACAddress" onclick=updateHeader("MACAddress")>MACAddress</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "Memory" onclick=updateHeader("Memory")>Memory(mb)</td>
+                                                                </tr>
+                                                                <tr>
+                                                                                <td><input type="checkbox" name="cb1"  id = "OSInstallDate" onclick=updateHeader("OSInstallDate")>OSInstallDate</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "LastBootUpTime" onclick=updateHeader("LastBootUpTime")>LastBootUpTime</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "TimeZone" onclick=updateHeader("TimeZone")>TimeZone</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "DOTNet" onclick=updateHeader("DOTNet")>DOTNet</td>
+                                                                </tr>
+                                                                <tr>
+                                                                                <td><input type="checkbox" name="cb1"  id = "WSUSServer" onclick=updateHeader("WSUSServer")>WSUSServer</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "LastPatchingDate" onclick=updateHeader("LastPatchingDate")>LastPatchingDate</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "RebootReq" onclick=updateHeader("RebootReq")>RebootReq</td>
+                                                                                <td><input type="checkbox" name="cb1"  id = "Admingroup" onclick=updateHeader("Admingroup")>Admingroup</td>
+                                                                </tr>
+                                                                <tr>
+                                                                                <td><input type="checkbox" name="cb1"  id = "DiskDetail" onclick=updateHeader("DiskDetail")>DiskDetail (Drive,total,free)</td>
+                                                                                
+                                                                </tr>
+                                                </table>
+                                                </span>
+                                                <!-- System Info Span close here -->
+
+                                                <!-- AD Task mentioned here -->
+												
+                                                <span id="2" style="position:absolute; overflow:hidden;visibility:hidden">
+                                                <input type=button value="AD Info" onclick="StartWork()">      
+
+
+
+<!-- table 1 start from here. 3 cols only -->
+<table width="100%" border=1>
+<tr align=left>
+	<th width=20%> 
+		Task
+	</th>
+	<th width=40%> 
+		Input
+	</th>
+	<th width=40%> 
+		<u><b>
+			Help
+		</b></u>		
+	</th>
+</tr>
+<tr>
+	<td valign=top>
+	
+	<!-- Task Link mention here -->
+	<ol>
+	<li> <a href="javascript:void(0)" onclick=showHiddenADTask("ad1")> View User Group Membership 	</a> </li> <br>
+	<li> <a href="javascript:void(0)" onclick=showHiddenADTask("ad2")> Service 		      			</a> </li> <br>
+	<li> <a href="javascript:void(0)" onclick=showHiddenADTask("ad3")> Task Manager       			</a> </li> <br>
+	<li> <a href="javascript:void(0)" onclick=showHiddenADTask("ad4")> Get Domain Computer List 	</a> </li> <br>
+	<li> <a href="javascript:void(0)" onclick=showHiddenADTask("ad5")> Reboot Server 	</a> </li> <br>
+	<li> <a href="javascript:void(0)" onclick=showHiddenADTask("ad6")> AV Task 	</a> </li> <br>
+	<li> <a href="javascript:void(0)" onclick=showHiddenADTask("ad7")> AV Install 	</a> </li> <br>
+	<li> <a href="javascript:void(0)" onclick=showHiddenADTask("ad8")> Disk Report 	</a> </li> <br>
+	<li> <a href="javascript:void(0)" onclick=showHiddenADTask("ad9")> Execute PSExec CMD	</a> </li> <br>
+	<li> <a href="javascript:void(0)" onclick=showHiddenADTask("ad10")> MFT Task </a> </li> <br>
+	<li> <a href="javascript:void(0)" onclick=showHiddenADTask("ad11")> Check Server Role & Feature </a> </li> <br>
+	</ol>
+	
+	</td>
+	
+	<td valign=top>
+	<!-- show hidden fileds here -->
+	<!--  Fields for "View User Group Membership"  -->
+	<div id="ad1" style="position:absolute; overflow:hidden;visibility:hidden" value="">
+	<table border=1>
+	<tr>
+		<td> Username </td>
+		<td> <input type="text" id="username1"> </td>
+	</tr>
+	<tr>
+		<td> <input type="button" value="View Membership" onclick="ViewMembership()"> </td>
+		<td> <input type=checkbox id="memberFullDetail"> Full Detail </td>
+	</tr>
+	</table>
+	</div>
+
+	<!--  Start of Fields for "SERVICE"  -->
+	<div id="ad2" style="position:absolute; overflow:hidden;visibility:hidden" value="">
+	<input type=radio id=r1 name=r1 value="r1" checked> Use Service Display Name <br>
+	<input type=radio id=r2 name=r1 value="r2"> Use Service Name <br>
+	<input type=checkbox id="serviceFormatList"> Format-List
+	<table border=0>
+	<tr>
+		<td colspan=2> 
+			<input type="text" id="serviceServer" size="40"> Server  <br>
+			<input type="text" id="serviceName" size="40"> Service
+		</td>
+		
+	</tr>
+	<tr>
+		<td> <input type="button" style="width=100px;" value="Status" onclick=ServiceStatus()> </td>
+	</tr>
+	<tr>
+		<td> <input type="button" style="width=100px;" value="Start" onclick=ServiceStartStop("Start")> </td>
+		<td> <input type="button" style="width=100px;" value="Stop" onclick=ServiceStartStop("Stop")> </td>
+	</tr>
+	</table>
+	</div>
+	<!--  End of Fields for "SERVICE"  -->
+
+	<!--  Start of Fields for "TASK MANAGER" ad3 -->
+	<div id="ad3" style="position:absolute; overflow:hidden;visibility:hidden" value="">
+	<table border=0>
+	<tr>
+		<td colspan=2> 
+			 <input type="button" style="width=100px;" value="View All" onclick=processViewAll()>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2> 
+			<input type=checkbox id="processFormatList"> Format-List
+			<input type="text" id="processServer" size="40"> Server  <br>
+			<input type="text" id="processName" size="40"> Process 
+		</td>
+	</tr>
+	<tr>
+		<td> <input type="button" style="width=110px;" value="Search by Name"> </td>
+		<td> <input type="button" style="width=110px;" value="Kill by Name"> </td>
+	</tr>
+	<tr>
+		<td> <input type="button" style="width=110px;" value="Search by PID"> </td>
+		<td> <input type="button" style="width=110px;" value="Kill by PID"> </td>
+	</tr>
+	<tr>
+		<td> <input type="button" style="width=110px;" value="Search by Username"> </td>
+		<td> <input type="button" style="width=110px;" value="Kill by Username"> </td>
+		
+	</tr>
+	</table>
+	</div>
+	<!--  End of Fields for "TASK MANAGER" ad3 -->
+	
+	<!--  Start of Fields for "Get Domain Computer List" ad4 -->
+	<div id="ad4" style="position:absolute; overflow:hidden;visibility:hidden" value="">
+	<table border=0>
+	<tr>
+		<td> 
+			Enter Domain Name 
+		</td>
+		<td> 
+			<input type="text" id="getDomainName" value="services.tzghosting.net">
+		</td>
+	</tr>
+	</table>
+	<hr>
+	<table border=0>
+	<tr>
+		<td> 
+			<input type="button" value="Get Trusted Domains" onClick="getTrustedDomains()"> 
+		</td>
+		<td>
+			<input type="button" value="Get Trusted Domain Computer Detail" onClick="getTrustedDomainComputerDetail()">
+		</td>
+		
+	</tr>
+		<td>
+			<input type="button" value="Get Computer of this Domain" onClick="getDomainComputer()"> <br>
+			
+		</td>
+		<td> </td>
+	</tr>
+	</table>
+	</div>
+	<!--  End of Fields for "Get Domain Computer List" ad4 -->
+
+		<!--  Start of Fields for "Get Domain Computer List" ad5 -->
+	<div id="ad5" style="position:absolute; overflow:hidden;visibility:hidden" value="">
+	<table border=0>
+	<tr>
+		<td> <input type="button" style="width=110px;" value="Reboot Server" onClick="RebootServer()"> </td>
+	</tr>
+	<tr>
+	<td> <input type="button" value="Get Server Reboot Status" onClick="getRebootStatus()"></td>
+	</tr>
+	</table>
+	</div>
+	<!--  End of Fields for "Get Domain Computer List" ad5 -->
+
+	
+			<!--  Start of Fields for ad6 -->
+	<div id="ad6" style="position:absolute; overflow:hidden;visibility:hidden" value="">
+	<table border=1 bordercolor=black>
+	<tr>
+		<td>
+			<input type=button value="Check AV Server's Group & Client List" onClick="AVTask()"><br>
+			<input type=checkbox id="avResovleHost">Resolve Hostname<br>
+			<input type=checkbox id="avCheckService">Check Trend Service Status<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type=button value="Check Client AV Service" onClick="AVTask_ServiceCheck()">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type=button value="Generate AV Server Report" onClick="AVTask_ServerReport()">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type=button value="Get Information Server" onClick="AVTask_GetInformationServer()">
+		</td>
+	</tr>
+
+	</table>
+	
+	<br>
+	
+	<input type=button value="Get McAfee AV Service Status" onClick="McAfeeServiceStatus()">
+	</div>
+	<!--  End of Fields for ad6 -->
+
+			<!--  Start of Fields for ad7 -->
+	<div id="ad7" style="position:absolute; overflow:hidden;visibility:hidden" value="">
+	<table border=1 bordercolor=black bgcolor="lightgreen">
+	<tr>
+		<td> AV Server: </td>
+		<td> <input type=text id="AVServer">
+	</tr>
+	<tr>
+		<td> Installer Path: </td>
+		<td> <input type=text size=50 id = "AVInstallerPath"> </td>
+	</tr>
+	<tr>
+		<td><input type=button value="Validate" onClick="Validate_AVInstall()">
+	</tr>
+	<tr>
+		<td> <input type=button value="Install" onClick="AV_Install()"></td>	
+	</tr>
+
+	</table>
+	<br>
+	<B> <U> For McAfee AV </U> </B> <br>
+	<input type=button value="Install McAfee AV" onClick="InstallMcAfeeAV()">
+	</div>
+	<!--  End of Fields for ad7 -->
+	
+
+	
+		<!--  Start of Fields for ad8 -->
+	<div id="ad8" style="position:absolute; overflow:hidden;visibility:hidden" value="">
+	<table border=0>
+	<tr>
+		<td>
+			<input type=button value="Disk Report - Make Model detail" onClick="GetDiskMakeModelReport()"> <br>
+			<input type=button value="Disk Report - Free Space Detail" onClick="GetDiskFreeSpace()"> <br>
+			<input type=button value="Disk Report - MPIO Detail" onClick="GetMPIODetail()"> <br> <br>
+			<input type=button value="Disk Report - Custom" onClick="DiskReportCustom()"> <br>
+			
+		</td>
+	</tr>
+
+	</table>
+	</div>
+	<!--  End of Fields for ad8 -->
+
+	<!--  Start of Fields for ad9 -->
+	<div id="ad9" style="position:absolute; overflow:hidden;visibility:hidden" value="">
+	<table border=0>
+	<tr>
+		<td>Enter command to execute Using PSExec.exe -accepteula </td>
+	</tr>
+	<tr>
+		<td>
+			<input type=Text id="psExecCmd" value="powermt display dev=all">
+		</td>
+	<tr>
+		<td>
+			<input type=button value="Execute CMD" onClick="ExecutePSExecCmd()">
+		</td>
+	</tr>
+
+	</table>
+	</div>
+	<!--  End of Fields for ad9 -->
+
+
+	<!--  Start of Fields for ad10 -->
+	<div id="ad10" style="position:absolute; overflow:hidden;visibility:hidden" value="">
+	<table border=0>
+	<tr>
+		<td><input type=button value="View Folder Permission" Onclick="ViewFolderPermission()"> </td>
+	</tr>
+	<tr>
+		<td>
+		<br>
+			Remove Permission <i><u>(be Careful) </u></i> <br>
+			<input type=text id="removep" value="SERVICES\mft.service.test or SERVICES\gs.eft.service.test" size=50><br>
+			<input type=button value="Remove Folder Permission" Onclick="RemoveFolderPermission()"> <br>
+			ELSE <br>
+			<input type=button value="Remove 'mft.service.test' from PUBLIC" Onclick="RemovePermissionFromPublic()"> <br>
+			<input type=button value="Remove 'gs.eft.service.test' from PRIVATE" Onclick="RemovePermissionFromPrivate()"> <br>
+		</td>
+
+	</table>
+	</div>
+	<!--  End of Fields for ad10 -->
+
+
+	<!--  Start of Fields for ad11 -->
+	<div id="ad11" style="position:absolute; overflow:hidden;visibility:hidden" value="">
+	<table border=0>
+	<tr>
+		<td> Role or Feature Name: </td>
+		<td><input type=text value="Cluster/All" id="RoleName"> </td>
+	</tr>
+	<tr>
+		<td>
+			<input type=button value="Check Now" onClick="CheckRoleFeature()">
+		</td>
+
+	</table>
+	</div>
+	<!--  End of Fields for ad11 -->
+
+	
+	
+	</td>
+	
+	<td valign=top>
+
+		<div id="HelpDiv">
+		Select a task, help will be displayed here
+		</div>
+	</td> 
+</tr>
+</table>
+
+
+                                                </span>
+                                                <!-- AD Task close here -->
+
+                                                <!-- Utility -->
+                                                <span id="3" style="position:absolute; overflow:hidden;visibility:hidden">
+                                                <table border=1>
+                                                                <tr>
+                                                                                <td> <input type=text value="Enter Service Name" id="ServiceName" onBlur="checkBlankTB 'ServiceName','Enter Service Name'"> </td>
+                                                                                <td> <input type=button value="Service Status" onClick=Utility("ServiceStatus")> </td>
+                                                                                <td> <input type=button value="Service Stop" onClick=Utility("ServiceStop")> </td>
+                                                                                <td> <input type=button value="Service Start" onClick=Utility("ServiceStart")> </td>
+                                                                                <td> <input type=button value="Service Restart" onClick=Utility("ServiceRestart")> </td>
+                                                                </tr>
+                                                </table>
+                                                </span>
+                                                <!-- AD Task close here -->
+
+</body>
+</html>

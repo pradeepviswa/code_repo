@@ -1,0 +1,115 @@
+BulletinID,ArticleID,Present or Missing,SUG Name,Detail
+MS11-049,2251487,Present,SUG-MayRem-2018,Security Updates - Visual Studio 2008
+MS11-025,2467173,Present,SUG-MayRem-2018,Security Updates - Visual Studio 2010
+MS11-025,2538242,Present,SUG-MayRem-2018,Security Updates - Visual Studio 2005
+MS11-025,2542054,Present,SUG-MayRem-2018,Security Updates - Visual Studio 2010
+,4011610,Missing,SUG-MayRem-2018,Security Updates - Office 2010
+,2553338,Present,SUG-MayRem-2018,Security Updates - Office 2010
+MS12-021,2644980,Present,SUG-MayRem-2018,Security Updates - Visual Studio 2010
+MS12-021,2645410,Present,SUG-MayRem-2018,Security Updates - Visual Studio 2010
+,2837599,Missing,SUG-MayRem-2018,Security Updates - Office 2010
+MS13-081,2862330,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008 R2
+,2871997,Present,SUG-MayRem-2018,Security Updates - Windows 7
+,4055532,Present,SUG-MayRem-2018,Security Updates - Windows 7
+,2977292,Present,SUG-MayRem-2018,Security Updates - Windows 7
+MS15-011,3000483,Present,SUG-MayRem-2018,Security Updates - Windows 7
+MS15-037,3046269,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008 R2
+,3114416,Present,SUG-MayRem-2018,Security Updates - Office 2010
+,3114874,Present,SUG-MayRem-2018,Security Updates - Office 2010
+,3213626,Present,SUG-MayRem-2018,Security Updates - Office 2010
+,4011580,Present,SUG-MayRem-2018,Security Updates - Office 2013
+,3172459,Present,SUG-MayRem-2018,Security Updates - Office 2013
+,3172524,Present,SUG-MayRem-2018,Security Updates - Office 2013
+,3172531,Present,SUG-MayRem-2018,Security Updates - Office 2013
+MS16-120,3192391,Present,SUG-MayRem-2018,Security Updates - Windows 7
+,4011719,Missing,SUG-MayRem-2018,Security Updates - Office 2007
+,4018330,Present,SUG-MayRem-2018,Security Updates - Office 2013
+,4018311,Present,SUG-MayRem-2018,Security Updates - Office 2010
+,3213564,Present,SUG-MayRem-2018,Security Updates - Office 2013
+,3218362,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4011159,Present,SUG-MayRem-2018,Security Updates - Office 2016
+,4011179,Present,SUG-MayRem-2018,Security Updates - Office 2013
+,4011234,Present,SUG-MayRem-2018,Security Updates - Office 2013
+,4018288,Present,SUG-MayRem-2018,Security Updates - Office 2013
+,4011665,Present,SUG-MayRem-2018,Security Updates - Office 2016
+,4018359,Present,SUG-MayRem-2018,Security Updates - Office 2010
+,4018362,Present,SUG-MayRem-2018,Security Updates - Office 2010
+,4018347,Present,SUG-MayRem-2018,Security Updates - Office 2013
+,4018353,Present,SUG-MayRem-2018,Security Updates - Office 2007
+,4018354,Present,SUG-MayRem-2018,Security Updates - Office 2007
+,4018355,Present,SUG-MayRem-2018,Security Updates - Office 2007
+,4018337,Present,SUG-MayRem-2018,Security Updates - Office 2016
+,4018339,Present,SUG-MayRem-2018,Security Updates - Office 2016
+MS17-008,4012212,Present,SUG-MayRem-2018,Security Updates - Windows 7
+MS17-008,4012213,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4093114,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4055266,Present,SUG-MayRem-2018,Security Updates - Windows 8.1
+,4055267,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4014985,Present,SUG-MayRem-2018,Security Updates - Windows 7
+,4014987,Present,SUG-MayRem-2018,Security Updates - Windows 8.1
+,4015546,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008 R2
+,4015547,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4023307,Present,SUG-MayRem-2018,Security Updates - Silverlight
+,4092946,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008 R2
+,4018350,Present,SUG-MayRem-2018,Security Updates - Office 2013
+,4019108,Present,SUG-MayRem-2018,Security Updates - Windows 7
+,4019109,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4019111,Present,SUG-MayRem-2018,Security Updates - Windows 8.1
+,4019213,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4019263,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008 R2
+,4022717,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4022722,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008 R2
+,4022746,Missing,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4022748,Missing,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4022750,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4022914,Missing,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4047211,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4025240,Missing,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4025333,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4025337,Present,SUG-MayRem-2018,Security Updates - Windows 7
+,4025398,Missing,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4025409,Missing,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4025497,Missing,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4025674,Missing,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4048970,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4026059,Missing,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4026061,Missing,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4032201,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4034044,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4034672,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4034679,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008 R2
+,4034744,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4034745,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4034775,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4042122,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4035679,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4038793,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4093110,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4041678,Present,SUG-MayRem-2018,Security Updates - Windows 7
+,4048960,Present,SUG-MayRem-2018,Security Updates - Windows 7
+,4048961,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4052303,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4053473,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4054521,Present,SUG-MayRem-2018,Security Updates - Windows 7
+,4054522,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4056564,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4056897,Present,SUG-MayRem-2018,Security Updates - Windows 7
+,4056898,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4058165,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4073079,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4074587,Present,SUG-MayRem-2018,Security Updates - Windows 7
+,4074597,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4093224,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4074851,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4087398,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4088878,Present,SUG-MayRem-2018,Security Updates - Windows 7
+,4088879,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4089175,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4090450,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008
+,4100480,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008 R2
+MS09-062,972221,Present,SUG-MayRem-2018,Security Updates - Visual Studio 2008
+MS09-062,972222,Present,SUG-MayRem-2018,Security Updates - Visual Studio 2008
+MS16-120,3192392,Present,SUG-MayRem-2018,Security Updates - Windows Server 2012 R2
+,4011628,Present,SUG-MayRem-2018,Security Updates - Office 2016
+,4018319,Present,SUG-MayRem-2018,Security Updates - Office 2016
+,4093108,Present,SUG-MayRem-2018,Security Updates - Windows Server 2008 R2

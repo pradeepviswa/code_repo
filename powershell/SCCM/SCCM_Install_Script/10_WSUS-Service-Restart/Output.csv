@@ -1,0 +1,75 @@
+Server,Status
+CSN-ACC-APP-01.custhsp.tzghosting.net,Done
+CSN-ARC-XEN-03.custhsp.tzghosting.net,Done
+CSN-BNC-SQL-09.custhsp.tzghosting.net,Done
+CSN-BRH-APP-01.custhsp.tzghosting.net,Done
+CSN-CHS-XEN-09.custhsp.tzghosting.net,Done
+CSN-COA-APP-02.custhsp.tzghosting.net,Done
+CSN-COA-APP-04.custhsp.tzghosting.net,Done
+CSN-COA-APP-63.custhsp.tzghosting.net,Done
+CSN-COA-APP-64.custhsp.tzghosting.net,Done
+CSN-COA-SQL-01.custhsp.tzghosting.net,Done
+CSN-COA-SQL-03.custhsp.tzghosting.net,Done
+CSN-CVH-APP-18.CVH.tzghosting.net,Error-The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: Cannot find any service with service name 'wuauserv'.
+CSN-EMS-BSM-D02.EMS.tzghosting.net,Ping Failed
+CSN-EMS-NPH-01.EMS.tzghosting.net,Ping Failed
+CSN-FMB-APP-01.custhsp.tzghosting.net,Done
+CSN-HBS-APP-02.custhsp.tzghosting.net,Done
+CSN-HCP-XEN-03.custhsp.tzghosting.net,Done
+CSN-MAI-APP-01.custhsp.tzghosting.net,Done
+CSN-MHH-HPA-44.MHH.tzghosting.net,Done
+CSN-MHH-HPA-54.MHH.tzghosting.net,Done
+CSN-MHP-APP-03.MHP.tzghosting.net,Error-The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: Cannot find any service with service name 'wuauserv'.
+CSN-MPE-APP-01.custhsp.tzghosting.net,Done
+CSN-NTS-APP-01.custhsp.tzghosting.net,Done
+CSN-OHC-APP-01.custhsp.tzghosting.net,Done
+CSN-OHC-FHG-01.custhsp.tzghosting.net,Done
+CSN-OHD-APP-01.custhsp.tzghosting.net,Done
+CSN-OHD-APP-02.custhsp.tzghosting.net,Done
+CSN-OHD-APP-03.custhsp.tzghosting.net,Done
+CSN-OHD-APP-04.custhsp.tzghosting.net,Done
+CSN-OHD-APP-06.custhsp.tzghosting.net,Done
+CSN-OHD-APP-16.custhsp.tzghosting.net,Done
+CSN-OHD-APP-17.custhsp.tzghosting.net,Done
+CSN-OHD-APP-23.custhsp.tzghosting.net,Done
+CSN-OHD-APP-24.custhsp.tzghosting.net,Done
+CSN-OHD-APP-25.custhsp.tzghosting.net,Done
+CSN-OHD-APP-27.custhsp.tzghosting.net,Done
+CSN-OHD-APP-29.custhsp.tzghosting.net,Done
+CSN-OHD-APP-32.custhsp.tzghosting.net,Done
+CSN-OHD-APP-36.custhsp.tzghosting.net,Done
+CSN-OHD-APP-37.custhsp.tzghosting.net,Done
+CSN-OHD-APP-39.custhsp.tzghosting.net,Done
+CSN-OHD-APP-40.custhsp.tzghosting.net,Done
+CSN-OHD-APP-46.custhsp.tzghosting.net,Done
+CSN-OHD-APP-47.custhsp.tzghosting.net,Done
+CSN-OHD-APP-48.custhsp.tzghosting.net,Done
+CSN-OHD-APP-49.custhsp.tzghosting.net,Done
+CSN-OHD-APP-50.custhsp.tzghosting.net,Done
+CSN-OHD-APP-51.custhsp.tzghosting.net,Done
+CSN-OHD-APP-52.custhsp.tzghosting.net,Done
+CSN-OHD-FHG-01.custhsp.tzghosting.net,Done
+CSN-OHD-FXI-01.custhsp.tzghosting.net,Done
+CSN-OHD-WAS-01.custhsp.tzghosting.net,Done
+CSN-OHD-WAS-02.custhsp.tzghosting.net,Done
+CSN-OHD-WAS-03.custhsp.tzghosting.net,Done
+CSN-PHP-HPA-08.custhsp.tzghosting.net,Done
+CSN-PHP-HPA-69.custhsp.tzghosting.net,Done
+CSN-PHP-HPA-78.custhsp.tzghosting.net,Done
+CSN-PHP-HPA-84.custhsp.tzghosting.net,Done
+CSN-PHP-HPA-86.custhsp.tzghosting.net,Done
+CSN-QQA-APP-03.custhsp.tzghosting.net,Done
+CSN-RCB-APP-01.custhsp.tzghosting.net,Done
+CSN-SMH-DFS-01.SMH.tzghosting.net,Done
+CSN-SVC-APP-03.services.tzghosting.net,Done
+CSN-SVC-CDT-05.services.tzghosting.net,Done
+CSN-SVC-ILM-01.services.tzghosting.net,Done
+CSN-SVC-RBT-15.services.tzghosting.net,Done
+CSN-SVC-SQL-07.services.tzghosting.net,Done
+CSN-TZG-OOC-01.TZG.tzghosting.net,Ping Failed
+CSN-TZG-SQL-36.TZG.tzghosting.net,Ping Failed
+CSN-TZG-UTIL-03.TZG.tzghosting.net,Ping Failed
+CSN-TZG-WAS-03.TZG.tzghosting.net,Ping Failed
+CSN-TZI-NTWW-01.TZI.tzghosting.net,Ping Failed
+CSN-TZI-NTWW-02.TZI.tzghosting.net,Ping Failed
+CSN-UAC-APP-01.custhsp.tzghosting.net,Done

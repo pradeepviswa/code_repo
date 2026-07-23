@@ -1,4 +1,52 @@
+<<<<<<< HEAD
 *.retry
 __pycache__/
 *.pyc
 .ansible/
+=======
+*.pem
+rootkey.csv
+donotupload.txt
+terraform.tfstate.*
+*backup*
+*.pub
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
+.terraform/
+
+# ---- Terraform Local State ----
+terraform.tfstate
+terraform.tfstate.*
+crash.log
+
+# ---- Terraform Plan Files ----
+*.tfplan
+
+# ---- Terraform Override Files ----
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# ---- Terraform Directory (providers, modules, plugins) ----
+.terraform/
+.terraform.lock.hcl
+
+# ---- SSH Keys / Credentials ----
+ubuntu@*
+*.pem
+*.key
+*.pub
+rootkey.csv
+
+# ---- Backup / Temp Files ----
+*backup*
+*.bak
+*.tmp
+
+# ---- OS / Editor Files ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+>>>>>>> 48b73ab901b95fe7ca2afc6d0ec4db22bb6e6ea9

@@ -1,0 +1,14 @@
+---
+- import_tasks: install_pkgs.yaml
+- import_tasks: copy_file.yaml
+
+- name: start nginx service
+  service:
+    name: nginx
+    state: started
+
+- name: general message
+  debug:
+    msg: "pacakges installed and html file copied"
+
+    

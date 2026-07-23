@@ -1,0 +1,49 @@
+BulletinID,ArticleID,Present or Missing,SUG Name,Detail
+,4099633,Present,SUG-May-2018,2018-05 Security and Quality Rollup for .NET Framework 3.5.1, 4.5.2, 4.6, 4.6.1, 4.6.2, 4.7, 4.7.1 on Windows 7 and Server 2008 R2 for x64 (KB4099633)
+,4099637,Present,SUG-May-2018,2018-05 Security Only Update for .NET Framework 3.5.1, 4.5.2, 4.6, 4.6.1, 4.6.2, 4.7, 4.7.1 on Windows 7 and Server 2008 R2 for x64 (KB4099637)
+4099634,4099634,Missing. Required count is 0,SUG-May-2018,2018-05 Security and Quality Rollup for .NET Framework 3.5, 4.5.2, 4.6, 4.6.1, 4.6.2, 4.7, 4.7.1 on Windows Server 2012 for x64 (KB4099634)
+4099638,4099638,Missing. Required count is 0,SUG-May-2018,2018-05 Security Only Update for .NET Framework 3.5, 4.5.2, 4.6, 4.6.1, 4.6.2, 4.7, 4.7.1 on Windows Server 2012 for x64 (KB4099638)
+,4099635,Present,SUG-May-2018,2018-05 Security and Quality Rollup for .NET Framework 3.5, 4.5.2, 4.6, 4.6.1, 4.6.2, 4.7, 4.7.1 on Windows 8.1 and Server 2012 R2 for x64 (KB4099635)
+,4099639,Present,SUG-May-2018,2018-05 Security Only Update for .NET Framework 3.5, 4.5.2, 4.6, 4.6.1, 4.6.2, 4.7, 4.7.1 on Windows 8.1 and Server 2012 R2 for x64 (KB4099639)
+4099636,4099636,Missing. Required count is 0,SUG-May-2018,2018-05 Security and Quality Rollup for .NET Framework 2.0, 3.0, 4.5.2, 4.6 on Windows Server 2008 SP2 (KB4099636)
+4099640,4099640,Missing. Required count is 0,SUG-May-2018,2018-05 Security Only Update for .NET Framework 2.0 on Windows Server 2008 SP2 for Itanium-based Systems (KB4099640)
+,4103729,Present,SUG-May-2018,2018-05 Security Update for Adobe Flash Player for Windows Server 2012 R2 for x64-based Systems (KB4103729)
+4095874,4095874,Not found in SCCM,NA,NA
+4095514,4095514,Not found in SCCM,NA,NA
+4095872,4095872,Not found in SCCM,NA,NA
+4095512,4095512,Not found in SCCM,NA,NA
+4095875,4095875,Not found in SCCM,NA,NA
+4095515,4095515,Not found in SCCM,NA,NA
+4096495,4096495,Not found in SCCM,NA,NA
+4095519,4095519,Not found in SCCM,NA,NA
+4096494,4096494,Not found in SCCM,NA,NA
+4095518,4095518,Not found in SCCM,NA,NA
+4095876,4095876,Not found in SCCM,NA,NA
+4095517,4095517,Not found in SCCM,NA,NA
+4095873,4095873,Not found in SCCM,NA,NA
+4095513,4095513,Not found in SCCM,NA,NA
+4096418,4096418,Not found in SCCM,NA,NA
+4096237,4096237,Not found in SCCM,NA,NA
+,4103768,Present,SUG-May-2018,Cumulative Security Update for Internet Explorer 11 for Windows Server 2012 R2 (KB4103768)
+,4103723,Present,SUG-May-2018,2018-05 Cumulative Update for Windows Server 2016 for x64-based Systems (KB4103723)
+,4103718,Present,SUG-May-2018,2018-05 Security Monthly Quality Rollup for Windows 7 for x64-based Systems (KB4103718)
+,4103712,Present,SUG-May-2018,2018-05 Security Only Quality Update for Windows 7 for x64-based Systems (KB4103712)
+4094079,4094079,Missing. Required count is 0,SUG-May-2018,2018-05 Security Update for Windows Server 2008 for x64-based Systems (KB4094079)
+4103730,4103730,Missing. Required count is 0,SUG-May-2018,2018-05 Security Monthly Quality Rollup for Windows Server 2012 for x64-based Systems (KB4103730)
+4103726,4103726,Missing. Required count is 0,SUG-May-2018,2018-05 Security Only Quality Update for Windows Server 2012 for x64-based Systems (KB4103726)
+,4103725,Present,SUG-May-2018,2018-05 Security Monthly Quality Rollup for Windows Server 2012 R2 for x64-based Systems (KB4103725)
+,4103715,Present,SUG-May-2018,2018-05 Security Only Quality Update for Windows Server 2012 R2 for x64-based Systems (KB4103715)
+4096416,4096416,Not found in SCCM,NA,NA
+4096235,4096235,Not found in SCCM,NA,NA
+4096417,4096417,Not found in SCCM,NA,NA
+4096236,4096236,Not found in SCCM,NA,NA
+4131188,4131188,Missing. Required count is 0,SUG-May-2018,2018-05 Security Update for Windows Server 2008 for x64-based Systems (KB4131188)
+,4093119,Present,SUG-May-2018,2018-04 Cumulative Update for Windows Server 2016 for x64-based Systems (KB4093119)
+,3172436,Present,SUG-May-2018,Security Update for Microsoft Office 2013 (KB3172436) 64-Bit Edition
+,2899590,Present,SUG-May-2018,Security Update for Microsoft Office 2010 (KB2899590) 32-Bit Edition
+,4018327,Present,SUG-May-2018,Security Update for Microsoft Office 2016 (KB4018327) 64-Bit Edition
+,4022137,Present,SUG-May-2018,Security Update for Microsoft Office 2010 (KB4022137) 32-Bit Edition
+4022139,4022139,Missing. Required count is 0,SUG-May-2018,Security Update for Microsoft Office 2010 (KB4022139) 32-Bit Edition
+4130944,4130944,Missing. Required count is 0,SUG-May-2018,2018-05 Security Update for Windows Server 2008 for Itanium-based Systems (KB4130944)
+4134651,4134651,Missing. Required count is 0,SUG-May-2018,2018-05 Security Update for Windows Server 2008 for x86-based Systems (KB4134651)
+4101477,4101477,Missing. Required count is 0,SUG-May-2018,2018-05 Security Update for Windows Server 2008 for Itanium-based Systems (KB4101477)

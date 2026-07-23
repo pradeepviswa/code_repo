@@ -1,0 +1,23 @@
+#!/bin/bash
+# Update and install Apache
+yum update -y
+yum install -y httpd
+
+# Enable and start Apache service
+systemctl enable httpd
+systemctl start httpd
+
+
+# Create second test page (blue background)
+cat <<EOF > /var/www/html/index.html
+<html>
+  <head><title>WEB Server 2</title></head>
+  <body style="background-color:blue; color:white; text-align:center;">
+    <h1>Welcome to WEB Server 2</h1>
+    <p>This page is served from /var/www/html</p>
+  </body>
+</html>
+EOF
+
+# Restart Apache to ensure content is served
+systemctl restart httpd
